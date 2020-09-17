@@ -1,0 +1,17 @@
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: rgb(255, 255, 255);
+}
+/*
+ style="background-image: repeating-linear-gradient(80deg, rgb(5,12,37) 0px, rgb(5,12,37) 10px,transparent 10px, transparent 12px),repeating-linear-gradient(228deg, rgb(5,12,37) 0px, rgb(5,12,37) 10px,transparent 10px, transparent 12px),repeating-linear-gradient(127deg, rgb(5,12,37) 0px, rgb(5,12,37) 10px,transparent 10px, transparent 12px),linear-gradient(90deg, rgb(29,60,129),rgb(96,116,237));"
+*/

@@ -1,0 +1,28 @@
+{
+    "name": "wt",
+    "version": "1.0.0",
+    "description": "wt",
+    "license": "None",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/michael-andreuzza/wtsections"
+    },
+    "main": "postcss.config.js",
+    "dependencies": {
+        "autoprefixer": "^9.6.0",
+        "postcss-cli": "^7.1.1",
+        "rimraf": "^2.6.3",
+        "tailwindcss-gradients": "^3.0.0"
+    },
+    "devDependencies": {
+        "@fullhuman/postcss-purgecss": "^1.2.0",
+        "cssnano": "^4.1.10",
+        "tailwindcss": "^1.8.3"
+    },
+    "scripts": {
+        "del:js": "rimraf tailwind.config.js",
+        "create:js": "./node_modules/.bin/tailwind init tailwind.config.js",
+        "dev:css": "./node_modules/.bin/tailwind build tailwind.config.css -c tailwind.config.js -o dist/css/tailwind.css",
+        "build:css": "postcss tailwind.config.css -o dist/css/tailwind.min.css"
+    }
+}
