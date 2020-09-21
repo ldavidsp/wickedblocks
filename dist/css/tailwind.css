@@ -632,8 +632,9 @@ a {
 }
 
 h1{
-  font-family: 'Dillan Normal';
+  font-family: 'Inter Variable';
   color: #1D3C81;
+  font-weight: 800;
 }
 
 /**

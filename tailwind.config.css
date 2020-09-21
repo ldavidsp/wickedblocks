@@ -25,15 +25,11 @@ a {
         font-family: 'Inter Variable';
 }
 
- @font-face {
-    font-display: swap !important;
-    font-family: 'Dillan Normal';
-    src: url('../fonts/dillan.woff2') format('woff2');
-        font-weight: 1 999;
-}
+
  h1{
-    font-family: 'Dillan Normal';
+        font-family: 'Inter Variable';
     color: #1D3C81;
+    font-weight: 800;
 }
 
 
