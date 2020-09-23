@@ -20,17 +20,12 @@
         /*  font-style: oblique 0deg 10deg; */
     }
 }
-p,
-a {
+* {
         font-family: 'Inter Variable';
 }
 
 
- h1{
-        font-family: 'Inter Variable';
-    color: #1D3C81;
-    font-weight: 800;
-}
+
 
 
  /**
