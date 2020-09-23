@@ -621,16 +621,6 @@ a {
   font-family: 'Inter Variable';
 }
 
-@font-face {
-  font-display: swap !important;
-
-  font-family: 'Dillan Normal';
-
-  src: url('../fonts/dillan.woff2') format('woff2');
-
-  font-weight: 1 999;
-}
-
 h1{
   font-family: 'Inter Variable';
   color: #1D3C81;
@@ -9452,7 +9442,7 @@ h1{
 }
 
 .rounded {
-  border-radius: 0.25rem;
+  border-radius: 1rem;
 }
 
 .rounded-md {
@@ -9508,23 +9498,23 @@ h1{
 }
 
 .rounded-t {
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 .rounded-r {
-  border-top-right-radius: 0.25rem;
-  border-bottom-right-radius: 0.25rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
 }
 
 .rounded-b {
-  border-bottom-right-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  border-bottom-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .rounded-l {
-  border-top-left-radius: 0.25rem;
-  border-bottom-left-radius: 0.25rem;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .rounded-t-md {
@@ -9620,19 +9610,19 @@ h1{
 }
 
 .rounded-tl {
-  border-top-left-radius: 0.25rem;
+  border-top-left-radius: 1rem;
 }
 
 .rounded-tr {
-  border-top-right-radius: 0.25rem;
+  border-top-right-radius: 1rem;
 }
 
 .rounded-br {
-  border-bottom-right-radius: 0.25rem;
+  border-bottom-right-radius: 1rem;
 }
 
 .rounded-bl {
-  border-bottom-left-radius: 0.25rem;
+  border-bottom-left-radius: 1rem;
 }
 
 .rounded-tl-md {
@@ -31276,7 +31266,7 @@ h1{
   }
 
   .sm\:rounded {
-    border-radius: 0.25rem;
+    border-radius: 1rem;
   }
 
   .sm\:rounded-md {
@@ -31332,23 +31322,23 @@ h1{
   }
 
   .sm\:rounded-t {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
   }
 
   .sm\:rounded-r {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .sm\:rounded-b {
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .sm\:rounded-l {
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .sm\:rounded-t-md {
@@ -31444,19 +31434,19 @@ h1{
   }
 
   .sm\:rounded-tl {
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
   }
 
   .sm\:rounded-tr {
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
   }
 
   .sm\:rounded-br {
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .sm\:rounded-bl {
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .sm\:rounded-tl-md {
@@ -53020,7 +53010,7 @@ h1{
   }
 
   .md\:rounded {
-    border-radius: 0.25rem;
+    border-radius: 1rem;
   }
 
   .md\:rounded-md {
@@ -53076,23 +53066,23 @@ h1{
   }
 
   .md\:rounded-t {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
   }
 
   .md\:rounded-r {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .md\:rounded-b {
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .md\:rounded-l {
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .md\:rounded-t-md {
@@ -53188,19 +53178,19 @@ h1{
   }
 
   .md\:rounded-tl {
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
   }
 
   .md\:rounded-tr {
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
   }
 
   .md\:rounded-br {
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .md\:rounded-bl {
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .md\:rounded-tl-md {
@@ -74764,7 +74754,7 @@ h1{
   }
 
   .lg\:rounded {
-    border-radius: 0.25rem;
+    border-radius: 1rem;
   }
 
   .lg\:rounded-md {
@@ -74820,23 +74810,23 @@ h1{
   }
 
   .lg\:rounded-t {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
   }
 
   .lg\:rounded-r {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .lg\:rounded-b {
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .lg\:rounded-l {
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .lg\:rounded-t-md {
@@ -74932,19 +74922,19 @@ h1{
   }
 
   .lg\:rounded-tl {
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
   }
 
   .lg\:rounded-tr {
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
   }
 
   .lg\:rounded-br {
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .lg\:rounded-bl {
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .lg\:rounded-tl-md {
@@ -96508,7 +96498,7 @@ h1{
   }
 
   .xl\:rounded {
-    border-radius: 0.25rem;
+    border-radius: 1rem;
   }
 
   .xl\:rounded-md {
@@ -96564,23 +96554,23 @@ h1{
   }
 
   .xl\:rounded-t {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
   }
 
   .xl\:rounded-r {
-    border-top-right-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .xl\:rounded-b {
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .xl\:rounded-l {
-    border-top-left-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .xl\:rounded-t-md {
@@ -96676,19 +96666,19 @@ h1{
   }
 
   .xl\:rounded-tl {
-    border-top-left-radius: 0.25rem;
+    border-top-left-radius: 1rem;
   }
 
   .xl\:rounded-tr {
-    border-top-right-radius: 0.25rem;
+    border-top-right-radius: 1rem;
   }
 
   .xl\:rounded-br {
-    border-bottom-right-radius: 0.25rem;
+    border-bottom-right-radius: 1rem;
   }
 
   .xl\:rounded-bl {
-    border-bottom-left-radius: 0.25rem;
+    border-bottom-left-radius: 1rem;
   }
 
   .xl\:rounded-tl-md {
