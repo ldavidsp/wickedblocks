@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title> Templates</title>
+        <meta name="author" content="Michael Andreuzza">
+        <meta name="keywords" content="keywords,here">
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="../../css/tailwind.css" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+
+    <body class=" font-sans leading-normal tracking-normal">
+        <div class="flex md:flex-row-reverse flex-wrap">
+            <!--Website Content-->
+            <div class="w-full md:w-4/5">
+                <div class="container h-screen pt-8 ">
+
+                    <div class="flex  w-full sm:flex-row flex-col md:px-8 mb-8">
+                        <div class="relative  lg:ml-auto mt-4 lg:mt-0 mb-8">
+                            <span>
+                                <input id="#"
+                                    class="w-full bg-gray-100 text-primary-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-gray-500 text-base  focus:bg-white py-2 pr-4 pl-10 "
+                                    type="text" placeholder="Search..." autocomplete="off" spellcheck="false" role="combobox"
+                                    aria-autocomplete="list" aria-expanded="false" aria-label="search input" aria-owns="#" dir="auto">
+                                <pre aria-hidden="true"></pre>
+                                <span class="ds-dropdown-menu" role="listbox" id="#">
+                                    <div class="ds-dataset-1"></div>
+                                </span>
+                            </span>
+                            <div class="pointer-events-none absolute inset-y-0 left-0 pl-4 flex items-center">
+                                <svg class="fill-current pointer-events-none text-gray-600 w-4 h-4" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z">
+                                    </path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class=" p-8 lg:flex-grow w-full  lg:pr-24 md:pr-16  pt-0 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-left lg:text-center">
+                        <h1 class="text-center lg:text-left sm:text-3xl text-2xl font-semibold title-font  text-primary-800 mb-4">
+                           FAQ - FREQUENTLY ASKED QUESTIONS.</h1>
+                        <p class="text-center lg:text-left leading-relaxed text-base text-blue-700 lg:text-1xl mb-6">
+                            Last update <span class="text-lg text-primary-800 font-semibold"> 10.22.2020</span>.</p>
+
+                    </div>
+                    <div class="p-8 flex flex-wrap md:flex-no-wrap">
+
+                        <div class="md:flex-grow">
+                            <h2 class="text-3xl font-medium text-primary-900 title-font mb-2">How to get transactions right.</h2>
+                            <p class="leading-relaxed text-gray-600">I'm baby cloud bread poutine coloring book truffaut tattooed shaman tumeric celiac. Authentic snackwave slow-carb,
+                            schlitz woke pok pok irony YOLO tattooed gochujang meditation live-edge kitsch taiyaki. Vaporware PBR&B shaman, la croix
+                            microdosing prism forage af echo park. Woke subway tile listicle cornhole kitsch air plant schlitz gentrify yr godard
+                            squid deep v fingerstache.</p>
+
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-wrap md:flex-no-wrap">
+
+                        <div class="md:flex-grow">
+                            <h2 class="text-3xl font-medium text-primary-900 title-font mb-2">Where do I find the API key for the checkout.
+                            </h2>
+                            <p class="leading-relaxed text-gray-600">Vegan kogi artisan, lo-fi waistcoat 3 wolf moon leggings church-key etsy crucifix activated charcoal cloud bread man
+                            bun. Mixtape coloring book subway tile portland celiac cold-pressed PBR&B authentic next level YOLO adaptogen. Disrupt
+                            roof party tumblr wayfarers swag neutra dreamcatcher tilde prism mumblecore. XOXO skateboard church-key, tousled
+                            jianbing intelligentsia ramps gastropub banjo paleo before they sold out bespoke disrupt.</p>
+
+                        </div>
+                    </div>
+                    <div class="p-8 flex flex-wrap md:flex-no-wrap">
+
+                        <div class="md:flex-grow">
+                            <h2 class="text-3xl font-medium text-primary-900 title-font mb-2">Types of checkout.</h2>
+                            <p class="leading-relaxed text-gray-600">Ramps man braid salvia af unicorn venmo. Coloring book art party leggings, gochujang banh mi celiac kombucha hammock hot
+                            chicken lo-fi kitsch cliche. Squid chartreuse coloring book kale chips authentic etsy small batch PBR&B. Gentrify
+                            artisan poutine bicycle rights pug asymmetrical flexitarian VHS marfa knausgaard. Tumblr offal edison bulb sartorial
+                            viral you probably haven't heard of them thundercats waistcoat ramps fam.</p>
+
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <!--Sidebar-->
+            <div
+                class="w-full md:w-1/5 bg-white px-2 text-center fixed bottom-0 md:pt-8 md:top-0 md:left-0 h-16 md:h-screen shadow-xl">
+                <div class="md:relative mx-auto px-1">
+                    <ul class="list-reset flex flex-row md:flex-col text-center md:text-left">
+                        <li class="lg:mt-2 flex-1  py-2 hover:bg-gray-200 ">
+                            <a
+                                class="lg:inline-flex items-left block py-1 md:py-3 pl-1 align-middle text-gray-800 no-underline ">
+                                <span class="flex-grow flex flex-col pl-3">
+                                    <h2
+                                        class="text-xs font-semibold text-primary-800 tracking-widest title-font mb-1 uppercase">
+                                        Articles in
+                                        this section.</h2>
+                                </span>
+                            </a>
+                            </a>
+                        </li>
+                        <li class="lg:mt-2 flex-1  py-2 hover:bg-gray-100  border rounded-lg ">
+                            <a  href="#"
+                                class="lg:inline-flex items-left block py-1 md:py-3 pl-1 align-middle text-primary-700 no-underline">
+                                <span class="flex-grow flex flex-col pl-3">
+                                    <p class="text-blue-600 font-semibold"> Billing.</p>
+                                </span>
+                            </a>
+                            </a>
+                        </li>
+                        <li class="lg:mt-2 flex-1  py-2 hover:bg-gray-200  border-b">
+                            <a  href="#"
+                                class="lg:inline-flex items-left block py-1 md:py-3 pl-1 align-middle text-gray-800 no-underline">
+                                <span class="flex-grow flex flex-col pl-3">
+                                    <p class="text-blue-600 font-semibold"> Payments.</p>
+                                </span>
+                            </a>
+                            </a>
+                        </li>
+                        <li class="lg:mt-2 flex-1  py-2 hover:bg-gray-200  border-b">
+                            <a  href="#"
+                                class="lg:inline-flex items-left block py-1 md:py-3 pl-1 align-middle text-gray-800 no-underline">
+                                <span class="flex-grow flex flex-col pl-3">
+                                    <p class="text-blue-600 font-semibold">Account.</p>
+                                </span>
+                            </a>
+                            </a>
+                        </li>
+                        <li class="lg:mt-2 flex-1  py-2 hover:bg-gray-200  border-b">
+                            <a  href="#"
+                                class="lg:inline-flex items-left block py-1 md:py-3 pl-1 align-middle text-gray-800 no-underline">
+                                <span class="flex-grow flex flex-col pl-3">
+                                    <p class="text-blue-600 font-semibold"> Docs.</p>
+                                </span>
+                            </a>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+
+</html>
