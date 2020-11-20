@@ -1,21 +1,35 @@
+<!-- component -->
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title> Templates</title>
+        <title>Wicked Templates</title>
         <meta name="author" content="Michael Andreuzza">
         <meta name="keywords" content="keywords,here">
         <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
         <link rel="stylesheet" href="../../css/tailwind.css" type="text/css">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
-    <body class="bg-gray-100">
-        <!-- component -->
-        <section class="flex flex-wrap md items-center h-screen">
-            <div class="container bg-white w-full md:w-1/2 h-screen">
-                <div class="mx-5 lg:mx-32 ">
-                    <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0 mt-32 lg:mt-16">
+
+    <body>
+        <section class="flex flex-col md:flex-row h-screen items-center ">
+            <div class="bg-gray-200 hidden lg:block w-full md:w-1/3 xl:w-1/3 h-screen bg-cover bg-left-bottom">
+                <!--- image will be full heigh and occupy the whole with of the this div.-->
+                <img src="https://res.cloudinary.com/the-unicorns-feed/image/upload/v1601650750/mgp-long-2_gjaee1.svg"
+                    alt="" class="w-full h-full object-cover border-8 border-white">
+            </div>
+            <div class="bg-white w-full md:max-w-md lg:max-w-full   md:w-1/2 xl:w-1/2 h-screen px-6 lg:px-16 xl:px-12
+                flex items-left justify-left">
+                <div class="w-full h-100">
+                    <nav class=" flex flex-wrap items-left text-base justify-left pt-5">
+                        <a class="mr-5  text-gray-600 hover:text-gray-800 text-sm">Pricing</a>
+                        <a class="mr-5  text-gray-600 hover:text-gray-800 text-sm">Contact</a>
+                        <a class="mr-5  text-gray-600 hover:text-gray-800 text-sm">Services</a>
+                        <a class="mr-5  text-gray-600 hover:text-gray-800 text-sm">Now</a>
+                    </nav>
+                    <a class="flex title-font font-medium items-center text-gray-900 mb-20 md:mb-16 mt-32 md:mt-16">
                         <svg width="43" height="57" viewBox="0 0 63 77" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M3.13477 8.07577L30.3984 5.15466L58.6358 8.07577V52.8661L32.3458 69.419L3.13477 52.8661V8.07577Z"
@@ -28,28 +42,49 @@
                                 fill="white" />
                         </svg>
                     </a>
-                    <div class="flex mt-16 font-light text-gray-500">
-                        <div class="pr-4">
-                            <h1 class="sm:text-3xl text-2xl font-semibold title-font  text-purple-800 mb-6">
-                                Super Fast.
-                            </h1>
-                        </div>
+                    <h2 class="text-xs font-semibold text-blue-500 tracking-widest title-font mb-1">More than 100
+                        sections.</h2>
+                    <h1 class="sm:text-3xl text-2xl font-semibold title-font  text-purple-800 mb-12">
+                        Choices, because life is full of them..
+                    </h1>
+                    <p class="text-left leading-relaxed text-base text-gray-900 lg:text-1xl mb-8">Deploy your mvp in
+                        minutes, not days. WT offers you a a wide selection swapable sections for your landing page.</p>
+                    <div class="flex flex-wrap w-full justify-start">
+
+                        <button
+                            class="inline-flex py-2 px-8 font-semibold shadow-xl  bg-gradient-to-r  from-purple-400 hover:from-blue-500 to-blue-500 hover:to-purple-400 transition duration-500 ease-in-out transform  text-white focus:shadow-outline focus:outline-none rounded-lg">Get
+                            Started</button>
                     </div>
-                    <div class="w-full sm:md:w-3/3 mt-16 mb-8leading-relaxed text-base font-medium  text-gray-700">
-                        All you have to do is choose the section you need, remove the one that you do not need for that
-                        project and paste the one you need in that moment. All the section have been given the same
-                        left/right padding. Because consistence is king.
+                    <div class="flex justify-left pt-16">
+                        <span class="inline-flex  sm:mt-0 mt-2 text-left">
+                            <a class="text-purple-800 hover:text-blue-500">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a class="ml-3 text-purple-800 hover:text-blue-500">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a class="ml-3 text-purple-800 hover:text-blue-500">
+                                <svg fill="currentColor" stroke="currentColor" stroke-linecap="round"
+                                    stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path stroke="none"
+                                        d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z">
+                                    </path>
+                                    <circle cx="4" cy="4" r="2" stroke="none"></circle>
+                                </svg>
+                            </a>
+                        </span>
                     </div>
-                    <button
-                        class="flex  mt-5 font-semibold shadow-xl  bg-gradient-to-r  from-purple-400 hover:from-blue-500 to-blue-500 hover:to-purple-400 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110 text-white focus:shadow-outline py-2 px-4 focus:outline-none rounded-lg">
-                        Get Started
-                    </button>
                 </div>
             </div>
-            <div class=" w-full md:w-1/2 h-screen hidden lg:block bg-cover bg-center ">
-                <!----Image will be full height/width-->
-                 <img  src="https://res.cloudinary.com/the-unicorns-feed/image/upload/c_scale,h_1000,w_1000/v1601650224/mgp3_ozduyp.png" class="h-screen w-full object-fill border-8 border-white " alt="" />
-    </div>
-</div>
+        </section>
     </body>
+
 </html>
