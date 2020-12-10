@@ -1,0 +1,130 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title> Templates</title>
+        <meta name="author" content="Michael Andreuzza">
+        <meta name="keywords" content="keywords,here">
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="../../css/tailwind.css" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+    <body>
+        <section class="text-gray-700 body-font">
+            <div class="container px-8 lg:px-4 py-32 mx-auto">
+                <div class="flex flex-col text-left lg:text-center w-full mb-12">
+                    <h1 class="sm:text-3xl text-2xl font-semibold title-font  text-purple-800">
+                        Search For Hotels.
+                    </h1>
+                    <h2 class="text-xs font-semibold text-blue-600 tracking-widest title-font my-1 uppercase">Find your
+                        dream hotel.</h2>
+                </div>
+
+                <form class="w-full bg-white lg:px-32 pt-6 pb-8 mb-4 flex flex-col  " name="" method="POST">
+                    <input type="hidden" name="" value="sponsors">
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                            <input
+                                class="w-full  bg-gray-100 text-purple-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-purple-500 text-base px-4 py-2 mt-2 focus:bg-white"
+                                id="grid-title" type="text" name="title" placeholder="From..." required="">
+                        </div>
+                        <div class="w-full md:w-1/2 px-3">
+                            <input
+                                class="w-full  bg-gray-100 text-purple-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-purple-500 text-base px-4 py-2 mt-2 focus:bg-white"
+                                id="grid-url" type="text" name="url" placeholder="To..." required="">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-2">
+                        <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block appearance-none w-full  bg-gray-100 text-purple-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-purple-500 text-base px-4 py-2 mt-2 focus:bg-white focus:border-0">
+                                    <option>Check In</option>
+                                    <option value="Date 1">Date 1</option>
+                                    <option value="Date 2">Date2 </option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                                <div
+                                    class="pointer-events-none absolute  inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                                    <svg fill="#ffffff" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block appearance-none w-full  bg-gray-100 text-purple-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-purple-500 text-base px-4 py-2 mt-2 focus:bg-white focus:border-0">
+                                    <option>Check Out</option>
+                                    <option value="Date 1">Date 1</option>
+                                    <option value="Date 2">Date2 </option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                                <div
+                                    class="pointer-events-none absolute  inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                                    <svg fill="#ffffff" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block appearance-none w-full  bg-gray-100 text-purple-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-purple-500 text-base px-4 py-2 mt-2 focus:bg-white focus:border-0">
+                                    <option>Adults</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                                <div
+                                    class="pointer-events-none absolute  inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                                    <svg fill="#ffffff" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-1/4 px-3 mb-6 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block appearance-none w-full  bg-gray-100 text-purple-700 rounded-lg  border border-gray-400 focus:outline-none focus:border-purple-500 text-base px-4 py-2 mt-2 focus:bg-white focus:border-0">
+                                    <option>Kids</option>
+                                    <option value="tuesday">1</option>
+                                    <option value="thursday">2</option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                                <div
+                                    class="pointer-events-none absolute  inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                                    <svg fill="#ffffff" class="h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 20 20">
+                                        <path
+                                            d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z">
+                                        </path>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="block justify-center text-center mx-auto ">
+                    <button
+                        class="w-full lg:w-auto font-semibold shadow-xl  bg-gradient-to-r  from-purple-400 hover:from-blue-500 to-blue-500 hover:to-purple-400 transition duration-500 ease-in-out transform  text-white focus:shadow-outline px-4 py-3 focus:outline-none rounded-lg">Find
+                        My Hotel</button>
+                </div>
+            </div>
+        </section>
+    </body>
+</html>
