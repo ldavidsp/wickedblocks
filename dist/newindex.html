@@ -1,0 +1,141 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title>Wicked Templates</title>
+        <meta name="author" content="Michael Andreuzza">
+        <meta name="keywords" content="keywords,here">
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="./css/tailwind.css" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+
+    <body class="bg-blueGray-900 text-blueGray-500">
+        <!-- component -->
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <div class="w-full text-gray-700 border-b bg-blueGray-900 borde-blueGray-700">
+            <div x-data="{ open: false }"
+                class="flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+                <div class="flex flex-row items-center justify-between p-4">
+                    <a href="#"
+                        class="text-lg font-semibold tracking-widest uppercase rounded-lg text-blueGray-900 focus:outline-none focus:shadow-outline">
+                        <img src="./badges/WhiteText.svg" alt="">
+                    </a>
+                    <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline" @click="open = !open">
+                        <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                            <path x-show="!open" fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                            <path x-show="open" fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav :class="{'flex': open, 'hidden': !open}"
+                    class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+                    <a class="px-4 py-2 mt-2 text-sm font-semibold bg-gray-200 rounded-lg text-blueGray-600 md:mt-0 hover:text-lightBlue-500 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        href="#">Blog</a>
+                    <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 text-blueGray-50 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        href="#">Portfolio</a>
+                    <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 text-blueGray-50 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        href="#">About</a>
+                    <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 md:ml-4 text-blueGray-50 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        href="#">Contact</a>
+                    <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                        <button @click="open = !open"
+                            class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:w-auto md:inline md:mt-0 md:ml-4 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline text-blueGray-50">
+                            <span>Dropdown</span>
+                            <svg fill="currentColor" viewBox="0 0 20 20"
+                                :class="{'rotate-180': open, 'rotate-0': !open}"
+                                class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                <path fill-rule="evenodd"
+                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </button>
+                        <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                            x-transition:enter-start="transform opacity-0 scale-95"
+                            x-transition:enter-end="transform opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-75"
+                            x-transition:leave-start="transform opacity-100 scale-100"
+                            x-transition:leave-end="transform opacity-0 scale-95"
+                            class="absolute right-0 w-full mt-2 text-white origin-top-right border rounded-md shadow-lg md:w-48 bg-blueGray-900">
+                            <div class="px-2 py-2 rounded-md sblue-900adow bg-w ">
+                                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline text-blueGray-50"
+                                    href="#">Link #1</a>
+                                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline text-blueGray-50"
+                                    href="#">Link #2</a>
+                                <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-blueGray-900 focus:text-blueGray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline text-blueGray-50"
+                                    href="#">Link #3</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <section class="pt-24 text-left text-white body-font">
+
+        <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 md:flex-row ">
+            <div
+                class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                <h2 class="w-full mb-4 text-xs font-semibold tracking-widest text-white">FOR WHITE
+                        BACKGROUND
+                    </h2>
+                    <h1
+                        class="mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-transparent bg-gradient-to-tr from-pink-1000 from-pink-400 bg-clip-text bg-gradient-t-r via-pink-500 to-pink-1000 to-yellow-400 lg:text-5xl">
+                        White badge with fully rounded corners .</h1>
+                    <p class="mb-8 text-base leading-relaxed text-left text-blueGray-300 lg:text-1xl">A white
+                        badge with a huge border radius and a gradient border. This badge will always go on a white
+                        background, and its background is always white too. The text is dark blue.</p>
+                    <div class="flex justify-center">
+                        <button
+                            class="flex items-center px-8 py-3 mt-auto font-semibold transition duration-500 ease-in-out transform border-2 border-pink-500 rounded-full text-blueGray-100 md:w-auto font-lg bg-gradient-to-tr from-pink-1000 hover:from-pink-400 hover:via-pink-500 to-pink-1000 hover:to-orange-400 focus:outline-none focus:text-blueGray-800 lg:mr-4">
+                            <span><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="mr-2 icon icon-tabler icon-tabler-download" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                    <polyline points="7 11 12 16 17 11"></polyline>
+                                    <line x1="12" y1="4" x2="12" y2="16"></line>
+                                </svg></span>
+                            <a class="font-xs" href="./assets/badges/White_Pink_PNG.zip" download="">
+                                Download .PNG
+                            </a>
+                        </button>
+                        <button
+                            class="flex items-center px-8 py-3 mt-auto font-semibold transition duration-500 ease-in-out transform border-2 border-pink-500 rounded-full text-blueGray-100 md:w-auto font-lg bg-gradient-to-tr from-pink-1000 hover:from-pink-400 hover:via-pink-500 to-pink-1000 hover:to-orange-400 focus:outline-none focus:text-blueGray-800">
+                            <span><svg xmlns="http://www.w3.org/2000/svg"
+                                    class="mr-2 icon icon-tabler icon-tabler-download" width="24" height="24"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                    <polyline points="7 11 12 16 17 11"></polyline>
+                                    <line x1="12" y1="4" x2="12" y2="16"></line>
+                                </svg></span>
+                            <a class="font-xs" href="./assets/badges/WhitePinkSVG.zip" download="">
+                                Download .SVG
+                            </a>
+                        </button>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-xl" alt="badge"
+                        src="./screenshots/header-center-shot.png">
+                </div>
+            </div>
+
+
+
+        </section>
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    </body>
+
+</html>

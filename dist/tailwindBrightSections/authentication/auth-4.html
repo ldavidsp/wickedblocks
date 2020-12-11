@@ -1,0 +1,107 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <title> Templates</title>
+        <meta name="author" content="Michael Andreuzza">
+        <meta name="keywords" content="keywords,here">
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="../../css/tailwind.css" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+
+    <body>
+        <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-32 mx-auto lg:px-4">
+            <div class="flex flex-col w-full mb-12 text-left lg:text-center">
+                <h2 class="mb-4 text-xs font-semibold tracking-widest text-blue-600 uppercase title-font">a great
+                    header right here</h2>
+                <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-5xl title-font">
+                    A centered
+                    <br class="md:hidden">
+                    medium lenght display headline.
+                </h1>
+                <p class="mx-auto text-base font-medium leading-relaxed text-gray-700 lg:w-2/3">Whatever cardigan
+                    tote bag tumblr hexagon brooklyn
+                    asymmetrical gentrify, subway tile poke farm-to-table. Franzen you probably haven't heard of
+                    them man
+                    bun deep.</p>
+            </div>
+
+                <form class="flex flex-col w-full pt-6 pb-8 mb-4 bg-white lg:px-32 " name="" method="POST">
+                    <input type="hidden" name="" value="sponsors">
+                    <div class="flex flex-wrap mb-6 -mx-3">
+                        <div class="w-full px-3 mb-6 md:w-1/2 md:mb-0">
+                            <input
+                                class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg ext-blue-700 focus:border-gray-500"
+                                id="grid-title" type="text" name="title" placeholder="From..." required="">
+                        </div>
+                        <div class="w-full px-3 md:w-1/2">
+                            <input
+                                class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg ext-blue-700 focus:border-gray-500"
+                                id="grid-url" type="text" name="url" placeholder="To..." required="">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap mb-2 -mx-3">
+                        <div class="w-full px-3 mb-6 md:w-1/4 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block w-full px-4 py-2 mt-2 text-base text-gray-500 bg-gray-100 border-transparent rounded-lg appearance-none ext-blue-700 focus:border-gray-500">
+                                    <option>Check In</option>
+                                    <option value="Date 1">Date 1</option>
+                                    <option value="Date 2">Date2 </option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                               
+                            </div>
+                        </div>
+                        <div class="w-full px-3 mb-6 md:w-1/4 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block w-full px-4 py-2 mt-2 text-base text-gray-500 bg-gray-100 border-transparent rounded-lg appearance-none ext-blue-700 focus:border-gray-500">
+                                    <option>Check Out</option>
+                                    <option value="Date 1">Date 1</option>
+                                    <option value="Date 2">Date2 </option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                               
+                            </div>
+                        </div>
+                        <div class="w-full px-3 mb-6 md:w-1/4 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block w-full px-4 py-2 mt-2 text-base text-gray-500 bg-gray-100 border-transparent rounded-lg appearance-none ext-blue-700 focus:border-gray-500">
+                                    <option>Adults</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                               
+                            </div>
+                        </div>
+                        <div class="w-full px-3 mb-6 md:w-1/4 md:mb-0">
+                            <div class="relative ">
+                                <select name="date[]"
+                                    class="block w-full px-4 py-2 mt-2 text-base text-gray-500 bg-gray-100 border-transparent rounded-lg appearance-none ext-blue-700 focus:border-gray-500">
+                                    <option>Kids</option>
+                                    <option value="tuesday">1</option>
+                                    <option value="thursday">2</option>
+                                </select>
+                                <!---pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700-->
+                               
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="flex lg:justify-center">
+                    <button
+                        class="inline-flex px-4 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">Button</button>
+                </div>
+            </div>
+        </section>
+    </body>
+
+</html>
