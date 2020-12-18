@@ -14,14 +14,70 @@
  @supports (font-variation-settings: normal) {
     @font-face {
         font-display: swap;
-    src: url('../fonts/inter.woff2') format('woff2');
-        font-family: 'Inter Variable';
+      src:url("../fonts/IBMPS.woff2") format("woff2"),
+         url("../fonts/IBMPS") format("woff");
+        font-family: 'IBM Variable';
         font-weight: 1 999;
         /*  font-style: oblique 0deg 10deg; */
     }
 }
-* {
-        font-family: 'Inter Variable';
+@font-face {
+    font-display: swap !important;
+    font-family: 'Geo';
+     font-display: swap; /* or block, auto, fallback, optional */
+
+    src:url("../fonts/geomanist-regular-webfont.woff2") format("woff2"),
+         url("../fonts/geomanist-regular-webfont.woff") format("woff");
+}
+@font-face {
+    font-display: swap !important;
+    font-family: 'Geo Bold';
+     font-display: swap; /* or block, auto, fallback, optional */
+
+    src:url("../fonts/geomanist-bold-webfont.woff2") format("woff2"),
+         url("../fonts/geomanist-bold-webfont.woff") format("woff");
+}
+@font-face {
+    font-display: swap !important;
+    font-family: 'Geo Ultra';
+     font-display: swap; /* or block, auto, fallback, optional */
+
+    src:url("../fonts/geomanist-ultra-webfont.woff2") format("woff2"),
+         url("../fonts/geomanist-ultra-webfont.woff") format("woff");
+}
+@font-face {
+    font-display: swap !important;
+    font-family: 'Geo Light';
+     font-display: swap; /* or block, auto, fallback, optional */
+
+    src:url("../fonts/geomanist-light-webfont.woff2") format("woff2"),
+         url("../fonts/geomanist-light-webfont.woff") format("woff");
+}
+@font-face {
+    font-display: swap !important;
+    font-family: 'Geo Extralight';
+     font-display: swap; /* or block, auto, fallback, optional */
+
+    src:url("../fonts/geomanist-extralight-webfont.woff2") format("woff2"),
+         url("../fonts/geomanist-extralight-webfont.woff") format("woff");
+}
+body {
+ font-family: 'Geo';
+
+}
+.font-geo-extralight{
+    font-family: 'Geo Extralight';
+}
+.font-geo-ultra{
+    font-family: 'Geo Ultra';
+}
+h1{
+    font-family: 'Geo Bold';
+}
+
+pre {
+        font-family: 'IBM Variable';
+
 }
 
 
