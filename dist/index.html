@@ -1,6 +1,7 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -12,6 +13,7 @@
         <link rel="stylesheet" href="./css/wt.css" type="text/css">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
+
     <body class="antialiased bg-white">
         <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
         <div class="fixed z-50 w-full text-gray-500 bg-white border-b lg:px-20">
@@ -19,10 +21,11 @@
                 class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
                 <div class="flex flex-row items-center justify-between p-4 ">
                     <a href="./index.html" class=" focus:outline-none">
-                        <h1 class="text-2xl font-bold tracking-tighter uppercase text-blue-1000 lg:text-3xl title-font">
+                        <h1 class="text-2xl font-bold tracking-tighter text-blue-800 uppercase lg:text-3xl title-font">
                             WickedBlocks
                             <span class="text-xs">©</span>
-                            <small class="text-sm italic font-semibold text-blue-600 lowercase"> by <span class="uppercase text-blue-1400">WICKEDTEMPLATES</SPAN> </small>
+                            <small class="text-sm italic font-semibold text-blue-600 lowercase"> by <span
+                                    class="uppercase text-blue-1400">WICKEDTEMPLATES</SPAN> </small>
                         </h1>
                     </a>
                     <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
@@ -38,8 +41,8 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-                    <a class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-cyan-400 hover:text-blue-1000 md:ml-4 md:w-auto font-lg focus:outline-none"
-                        href="#pricing"> Free Templates</a>
+                    <a class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-blue-800 md:ml-4 md:w-auto font-lg focus:outline-none"
+                        href="https://www.wickedtemplates.com/free-templates"> Free Templates</a>
                 </nav>
             </div>
         </div>
@@ -51,7 +54,7 @@
                     </h2>
                     <h1
                         class="text-6xl font-black leading-none tracking-tighter text-blue-1000 lg:text-5xl xl:text-9xl md:text-4xl ">
-                        Tailwind  V2 Blocks!
+                        Tailwind V2 Blocks!
                     </h1>
                 </div>
                 <div class="flex flex-col w-full mb-10 lg:text-center ">
@@ -140,7 +143,7 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         12 Sections
                     </p>
-                    <a  class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="./left-headers.html">
                         <span class="mx-4 font-medium tracking-tighter "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
@@ -1054,71 +1057,74 @@
                 </div>
             </div>
         </section>
-        <footer class=" bg-blue-1400 body-font">
-            <div class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
-                <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
-                    <a class="flex items-center justify-start font-medium text-gray-900 title-font">
-                        <img class="object-cover object-center rounded-lg" alt="badge"
-                            src="https://d33wubrfki0l68.cloudfront.net/a7b72555c81f0c1857ab2fcc8ef600ffeae9ab77/f7d9f/assets/badges/bluecyan.svg">
-                    </a>
+    <footer class="mx-auto bg-blue-1400 body-font">
+        <div
+            class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
+            <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
+                <a class="flex items-center justify-start font-medium text-gray-900 title-font">
+                    <img class="object-cover object-center rounded-lg" alt="badge" src="./assets/Wickedblockswidget.svg">
+                </a>
+            </div>
+            <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
+                <div class="w-1/2 px-3 lg:w-1/2">
+                    <h2
+                        class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
+                        SOCIAL</h2>
+                    <nav class="mb-10 list-none">
+                        <li>
+                            <a href="https://twitter.com/WickedTemplates"
+                                class="text-blueGray-300 hover:text-blue-600">Wickedtemplates
+                                Twitter</a>
+                        </li>
+                        <li>
+                            <a href="https://twitter.com/Mike_Andreuzza"
+                                class="text-blueGray-300 hover:text-blue-600">Mike's
+                                Twitter</a>
+                        </li>
+                    </nav>
                 </div>
-                <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
-                    <div class="w-1/2 px-3 lg:w-1/2">
-                        <h2
-                            class="mb-3 font-semibold tracking-tighter text-transparent text-md bg-clip-text bg-gradient-to-tr from-blue-400 via-blue-600 to-cyan-400 title-font">
-                            SOCIAL</h2>
-                        <nav class="mb-10 list-none">
-                            <li>
-                                <a href="https://twitter.com/WickedTemplates"
-                                    class="text-blueGray-300 hover:text-blue-600">Wickedtemplates Twitter</a>
-                            </li>
-                            <li>
-                                <a href="https://twitter.com/Mike_Andreuzza"
-                                    class="text-blueGray-300 hover:text-blue-600">Mike's Twitter</a>
-                            </li>
-                        </nav>
-                    </div>
-                    <div class="w-1/2 px-3 lg:w-1/2">
-                        <h2
-                            class="mb-3 font-semibold tracking-tighter text-transparent text-md bg-clip-text bg-gradient-to-tr from-blue-400 via-blue-600 to-cyan-400 title-font">
-                            OTHER PROJECTS</h2>
-                        <nav class="mb-10 list-none">
-                            <li>
-                                <a href="https://colorsandfonts.com"
-                                    class="text-blueGray-300 hover:text-blue-600">Colors &amp; fonts</a>
-                            </li>
-                            <li>
-                                <a href="https://unicornsfeed.com"
-                                    class="text-blueGray-300 hover:text-blue-600">TheUnicornsFeed</a>
-                            </li>
-                            <li>
-                                <a href="https://wickedtemplates.com"
-                                    class="text-blueGray-300 hover:text-blue-600">Wickedtemplates</a>
-                            </li>
-                        </nav>
-                    </div>
+                <div class="w-1/2 px-3 lg:w-1/2">
+                    <h2
+                        class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
+                        OTHER PROJECTS</h2>
+                    <nav class="mb-10 list-none">
+                        <li>
+                            <a href="https://colorsandfonts.com" class="text-blueGray-300 hover:text-blue-600">Colors &amp;
+                                fonts</a>
+                        </li>
+                        <li>
+                            <a href="https://unicornsfeed.com"
+                                class="text-blueGray-300 hover:text-blue-600">TheUnicornsFeed</a>
+                        </li>
+                        <li>
+                            <a href="https://wickedtemplates.com"
+                                class="text-blueGray-300 hover:text-blue-600">Wickedtemplates</a>
+                        </li>
+                    </nav>
                 </div>
             </div>
-        </footer>
-        <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
-            <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
-                <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-                    © 2020 WickedBlocks
+        </div>
+    </footer>
+    <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
+        <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
+            <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                © 2020 WickedBlocks
 
-                    <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
-                </p>
-                <img loading="lazy focus:outline-none" alt="team"
-                    class="flex-shrink-0 object-cover object-center w-8 h-8 mx-4 mb-4 rounded-full1b0-blueGray-50 lg:mb-0"
-                    src="./assets/mike.svg">
-                <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-                    <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
-                        MICHAEL ANDREUZZA
-                    </a>
-                </p>
-            </div>
-        </footer>
+                <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+            </p>
+            <img loading="lazy focus:outline-none" alt="team"
+                class="flex-shrink-0 object-cover object-center w-8 h-8 mx-4 mb-4 rounded-full1b0-blueGray-50 lg:mb-0"
+                src="./assets/mike.svg">
+            <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+                    MICHAEL ANDREUZZA
+                </a>
+            </p>
+        </div>
+    </footer>
         <script src="https://cdn.jsdelivr.net/npm/mailgo@0.9.14/dist/mailgo.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         </script>
     </body>
+
 </html>
