@@ -5,7 +5,7 @@
     "license": "None",
     "repository": {
         "type": "git",
-        "url": "https://github.com/michael-andreuzza/wtsections"
+        "url": "https://github.com/michael-andreuzza/wickedblocks"
     },
     "main": "postcss.config.js",
     "dependencies": {
