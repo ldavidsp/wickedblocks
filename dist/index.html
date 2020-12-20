@@ -41,11 +41,176 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-                    <a class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-blue-800 md:ml-4 md:w-auto font-lg focus:outline-none"
+                    <a class="items-center px-8 py-3 font-semibold transition duration-500 ease-in-out transform bg-gray-100 hover:text-white text-blue-1000 rounded-xl hover:bg-gray-600 md:ml-4 md:w-auto font-lg focus:outline-none"
                         href="https://www.wickedtemplates.com/free-templates"> Free Templates</a>
+
+
+                    <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
+                        @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
+                        class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-blue-800 md:ml-4 md:w-auto font-lg focus:outline-none">
+                        More Blocks
+                    </button>
                 </nav>
             </div>
         </div>
+        <!-- Dev tools -->
+        <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
+        </div>
+        <!---- sidebar -->
+        <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+            @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+            <div x-show.transition.opacity.duration.500="open" @click="open = false"
+                class="fixed inset-0 bg-opacity-25 bg-blueGray-900">
+            </div>
+            <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blueGray-900 border-blueGray-500 text-lightBlue-500"
+                :class="{'translate-x-full': !open}">
+                <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+                    class="absolute top-0 right-0 p-2 mt-12 mr-6 transition duration-500 ease-in-out transform border-2 border-lightBlue-500 hover:bg-lightBlue-800 hover:text-white rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="w-auto p-8 ">
+                    <div class="w-64 h-screen mt-8 sm:mt-0">
+                        <nav class="mt-16 font-semibold">
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="./left-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
+                                    <line x1="20" y1="4" x2="20" y2="20" />
+                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                            </a>
+
+                            <a
+
+                            class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                             href="./centered-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="12" y1="4" x2="12" y2="9" />
+                                    <line x1="12" y1="15" x2="12" y2="20" />
+                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="4" y1="4" x2="4" y2="20" />
+                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                    <circle cx="9" cy="9" r="2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="12" cy="7" r="4" />
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Customers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="6" height="5" rx="2" />
+                                    <rect x="4" y="13" width="6" height="7" rx="2" />
+                                    <rect x="14" y="4" width="6" height="7" rx="2" />
+                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#0da5e9" />
+                                    <line x1="15" y1="8" x2="15.01" y2="8" />
+                                    <rect x="4" y="4" width="16" height="16" rx="3" />
+                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#0da5e9" />
+                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#0da5e9" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!----end sidebar -->
         <section class=" body-font">
             <div class="container justify-center px-10 py-8 mx-auto lg:px-24 lg:pt-32">
                 <div class="flex flex-col w-full mb-2 ">
@@ -59,74 +224,86 @@
                 </div>
                 <div class="flex flex-col w-full mb-10 lg:text-center ">
                     <p class="text-xl font-normal leading-relaxed tracking-tight text-left text-blueGray-600 lg:w-1/2">
-                        The sections are a growing collection of more than 120 layout blocks and component buildt with
+                        <span class="font-semibold tracking-tighter text-blue-800 uppercase">WICKEDBLOCKS</span> are a
+                        growing collection
+                        of more than 120 layout blocks and component buildt with
                         Tailwind CSS V2 ready to copy paste on your Tailwind project.
                     </p>
                 </div>
                 <div class="flex flex-wrap justify-start lg:w-3/4">
                     <a class="mr-2" href="#leftheaders">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blue-1000 lg:w-auto hover:bg-blue-800 focus:outline-none">
                             Left Headers
                         </button>
                     </a>
                     <a class="mr-2" href="#centeredheaders">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blue-1000 lg:w-auto hover:bg-blue-800 focus:outline-none "
+                            disabled>
                             Center Headers
                         </button>
                     </a>
                     <a class="mr-2" href="#rightheaders">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Right Headers
                         </button>
                     </a>
                     <a class="mr-2" href="#auth">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Authentication
                         </button>
                     </a>
                     <a class="mr-2" href="#price">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Pricing
                         </button>
                     </a>
                     <a class="mr-2" href="#clients">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Clients
                         </button>
                     </a>
                     <a class="mr-2" href="#grids">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Grids
                         </button>
                     </a>
                     <a class="mr-2" href="#forms">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Forms
                         </button>
                     </a>
                     <a class="mr-2" href="#gallery">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Gallery
                         </button>
                     </a>
                     <a class="mr-2" href="#nav">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Navigation
                         </button>
                     </a>
                     <a class="mr-2" href="#footers">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none disabled:opacity-50 "
+                            disabled>
                             Footers
                         </button>
                     </a>
@@ -143,9 +320,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         12 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="./left-headers.html">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -242,9 +419,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         15 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
-                        href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                        href="./centered-headers.html">
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -359,9 +536,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         12 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -458,9 +635,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         4 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -505,9 +682,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         6 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -557,9 +734,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         7 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -619,9 +796,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         15 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -721,9 +898,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         11 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -803,9 +980,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         13 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -895,9 +1072,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         8 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -962,9 +1139,9 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         10 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                    <a class="flex leading-relaxed text-blue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
                         href="#">
-                        <span class="mx-4 font-medium tracking-tighter "> See All </span>
+                        <span class="mx-4 font-semibold "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -1057,73 +1234,92 @@
                 </div>
             </div>
         </section>
-    <footer class="mx-auto bg-blue-1400 body-font">
-        <div
-            class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
-            <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
-                <a class="flex items-center justify-start font-medium text-gray-900 title-font">
-                    <img class="object-cover object-center rounded-lg" alt="badge" src="./assets/Wickedblockswidget.svg">
-                </a>
-            </div>
-            <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
-                <div class="w-1/2 px-3 lg:w-1/2">
-                    <h2
-                        class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
-                        SOCIAL</h2>
-                    <nav class="mb-10 list-none">
-                        <li>
-                            <a href="https://twitter.com/WickedTemplates"
-                                class="text-blueGray-300 hover:text-blue-600">Wickedtemplates
-                                Twitter</a>
-                        </li>
-                        <li>
-                            <a href="https://twitter.com/Mike_Andreuzza"
-                                class="text-blueGray-300 hover:text-blue-600">Mike's
-                                Twitter</a>
-                        </li>
-                    </nav>
+        <footer class="mx-auto bg-blue-1400 body-font">
+            <div
+                class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
+                <div class="flex-shrink-0 mx-auto text-center lg:w-96 md:mx-0 md:text-left">
+                    <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
+                        <img class="object-cover object-center rounded-lg" alt="badge"
+                            src="./assets/Wickedblockswidget.svg">
+                    </a>
                 </div>
-                <div class="w-1/2 px-3 lg:w-1/2">
-                    <h2
-                        class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
-                        OTHER PROJECTS</h2>
-                    <nav class="mb-10 list-none">
-                        <li>
-                            <a href="https://colorsandfonts.com" class="text-blueGray-300 hover:text-blue-600">Colors &amp;
-                                fonts</a>
-                        </li>
-                        <li>
-                            <a href="https://unicornsfeed.com"
-                                class="text-blueGray-300 hover:text-blue-600">TheUnicornsFeed</a>
-                        </li>
-                        <li>
-                            <a href="https://wickedtemplates.com"
-                                class="text-blueGray-300 hover:text-blue-600">Wickedtemplates</a>
-                        </li>
-                    </nav>
+                <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
+                    <div class="w-1/2 px-3 lg:w-1/2">
+                        <h2
+                            class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
+                            SOCIAL</h2>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a href="https://twitter.com/WickedTemplates"
+                                    class="text-blueGray-300 hover:text-blue-600">Wickedtemplates
+                                    Twitter</a>
+                            </li>
+                            <li>
+                                <a href="https://twitter.com/Mike_Andreuzza"
+                                    class="text-blueGray-300 hover:text-blue-600">Mike's
+                                    Twitter</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-1/2 px-3 lg:w-1/2">
+                        <h2
+                            class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
+                            OTHER PROJECTS</h2>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a href="https://colorsandfonts.com"
+                                    class="text-blueGray-300 hover:text-blue-600">Colors &amp;
+                                    fonts</a>
+                            </li>
+                            <li>
+                                <a href="https://unicornsfeed.com"
+                                    class="text-blueGray-300 hover:text-blue-600">TheUnicornsFeed</a>
+                            </li>
+                            <li>
+                                <a href="https://wickedtemplates.com"
+                                    class="text-blueGray-300 hover:text-blue-600">Wickedtemplates</a>
+                            </li>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
-    <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
-        <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
-            <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-                © 2020 WickedBlocks
+        </footer>
+        <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
+            <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
+                <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                    © 2020 WickedBlocks
 
-                <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
-            </p>
-            <img loading="lazy focus:outline-none" alt="team"
-                class="flex-shrink-0 object-cover object-center w-8 h-8 mx-4 mb-4 rounded-full1b0-blueGray-50 lg:mb-0"
-                src="./assets/mike.svg">
-            <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-                <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
-                    MICHAEL ANDREUZZA
-                </a>
-            </p>
-        </div>
-    </footer>
-        <script src="https://cdn.jsdelivr.net/npm/mailgo@0.9.14/dist/mailgo.min.js"></script>
+                    <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+                </p>
+                <img loading="lazy focus:outline-none" alt="team"
+                    class="flex-shrink-0 object-cover object-center w-8 h-8 mx-4 mb-4 rounded-full1b0-blueGray-50 lg:mb-0"
+                    src="./assets/mike.svg">
+                <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                    <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+                        MICHAEL ANDREUZZA
+                    </a>
+                </p>
+            </div>
+        </footer>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script>
+            // Sidebar
+            function slideout() {
+                return {
+                    open: false,
+                    usedKeyboard: false,
+                    init() {
+                        this.$watch('open', value => {
+                            value && this.$refs.closeButton.focus()
+                            this.toggleOverlay()
+                        })
+                        this.toggleOverlay()
+                    },
+                    toggleOverlay() {
+                        document.body.classList[this.open ? 'add' : 'remove']('h-screen', 'overflow-hidden')
+                    }
+                }
+            }
         </script>
     </body>
 
