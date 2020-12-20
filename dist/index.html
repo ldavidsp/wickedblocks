@@ -1,20 +1,17 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
-        <title>Wicked Templates</title>
+        <title>Wicked Blocks</title>
         <meta name="author" content="Michael Andreuzza">
         <meta name="keywords" content="keywords,here">
         <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
         <link rel="stylesheet" href="./css/tailwind.css" type="text/css">
-
         <link rel="stylesheet" href="./css/wt.css" type="text/css">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
-
     <body class="antialiased bg-white">
         <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
         <div class="fixed z-50 w-full text-gray-500 bg-white border-b lg:px-20">
@@ -23,10 +20,9 @@
                 <div class="flex flex-row items-center justify-between p-4 ">
                     <a href="./index.html" class=" focus:outline-none">
                         <h1 class="text-2xl font-bold tracking-tighter uppercase text-blue-1000 lg:text-3xl title-font">
-                            <small class="text-sm italic font-semibold text-blue-600 lowercase"> by</small>
-
-                            WickedTemplates
+                            WickedBlocks
                             <span class="text-xs">©</span>
+                            <small class="text-sm italic font-semibold text-blue-600 lowercase"> by <span class="uppercase text-blue-1400">WICKEDTEMPLATES</SPAN> </small>
                         </h1>
                     </a>
                     <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
@@ -42,10 +38,8 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-
                     <a class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-cyan-400 hover:text-blue-1000 md:ml-4 md:w-auto font-lg focus:outline-none"
                         href="#pricing"> Free Templates</a>
-
                 </nav>
             </div>
         </div>
@@ -57,7 +51,7 @@
                     </h2>
                     <h1
                         class="text-6xl font-black leading-none tracking-tighter text-blue-1000 lg:text-5xl xl:text-9xl md:text-4xl ">
-                        The Sections!
+                        Tailwind  V2 Blocks!
                     </h1>
                 </div>
                 <div class="flex flex-col w-full mb-10 lg:text-center ">
@@ -67,69 +61,69 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap justify-start lg:w-3/4">
-                    <a href="#leftheaders">
+                    <a class="mr-2" href="#leftheaders">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Left Headers
                         </button>
                     </a>
-                    <a href="#centeredheaders">
+                    <a class="mr-2" href="#centeredheaders">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
-                            Centered Headers
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            Center Headers
                         </button>
                     </a>
-                    <a href="#rightheaders">
+                    <a class="mr-2" href="#rightheaders">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Right Headers
                         </button>
                     </a>
-                    <a href="#auth">
+                    <a class="mr-2" href="#auth">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Authentication
                         </button>
                     </a>
-                    <a href="#price">
+                    <a class="mr-2" href="#price">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Pricing
                         </button>
                     </a>
-                    <a href="#clients">
+                    <a class="mr-2" href="#clients">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Clients
                         </button>
                     </a>
-                    <a href="#grids">
+                    <a class="mr-2" href="#grids">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Grids
                         </button>
                     </a>
-                    <a href="#forms">
+                    <a class="mr-2" href="#forms">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Forms
                         </button>
                     </a>
-                    <a href="#gallery">
+                    <a class="mr-2" href="#gallery">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Gallery
                         </button>
                     </a>
-                    <a href="#nav">
+                    <a class="mr-2" href="#nav">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Navigation
                         </button>
                     </a>
-                    <a href="#footers">
+                    <a class="mr-2" href="#footers">
                         <button
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform bg-gray-200 rounded-lg cursor-pointer hover:text-white text-blueGray-600 lg:w-auto hover:bg-blue-1000 focus:outline-none">
                             Footers
                         </button>
                     </a>
@@ -146,8 +140,8 @@
                     <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
                         12 Sections
                     </p>
-                    <a class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
-                        href="#">
+                    <a  class="flex leading-relaxed text-lightBlue-800 itemscenter text-md lg:text-lg hover:text-blue-600"
+                        href="./left-headers.html">
                         <span class="mx-4 font-medium tracking-tighter "> See All </span>
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -1032,7 +1026,6 @@
                 </div>
             </div>
         </section>
-
         <section class="mt-10 border-t ">
             <div class="container flex flex-wrap items-center px-5 py-24 mx-auto lg:px-20">
                 <div class="flex flex-col w-full p-8 mt-10 lg:w-4/6 md:w-1/2 md:ml-auto md:mt-0 ">
@@ -1062,8 +1055,7 @@
             </div>
         </section>
         <footer class=" bg-blue-1400 body-font">
-            <div
-                class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center lg:items-start md:flex-row md:flex-no-wrap">
+            <div class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
                 <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
                     <a class="flex items-center justify-start font-medium text-gray-900 title-font">
                         <img class="object-cover object-center rounded-lg" alt="badge"
@@ -1071,7 +1063,6 @@
                     </a>
                 </div>
                 <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
-
                     <div class="w-1/2 px-3 lg:w-1/2">
                         <h2
                             class="mb-3 font-semibold tracking-tighter text-transparent text-md bg-clip-text bg-gradient-to-tr from-blue-400 via-blue-600 to-cyan-400 title-font">
@@ -1085,10 +1076,8 @@
                                 <a href="https://twitter.com/Mike_Andreuzza"
                                     class="text-blueGray-300 hover:text-blue-600">Mike's Twitter</a>
                             </li>
-
                         </nav>
                     </div>
-
                     <div class="w-1/2 px-3 lg:w-1/2">
                         <h2
                             class="mb-3 font-semibold tracking-tighter text-transparent text-md bg-clip-text bg-gradient-to-tr from-blue-400 via-blue-600 to-cyan-400 title-font">
@@ -1114,8 +1103,8 @@
         <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
             <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
                 <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-                    © 2020 Wicked
-                    Sections
+                    © 2020 WickedBlocks
+
                     <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
                 </p>
                 <img loading="lazy focus:outline-none" alt="team"
@@ -1131,7 +1120,5 @@
         <script src="https://cdn.jsdelivr.net/npm/mailgo@0.9.14/dist/mailgo.min.js"></script>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         </script>
-
     </body>
-
 </html>

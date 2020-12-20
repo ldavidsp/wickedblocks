@@ -1,0 +1,2149 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Wicked Templates</title>
+    <meta name="author" content="Michael Andreuzza" />
+    <meta name="keywords" content="keywords,here" />
+    <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+    <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
+    <link rel="stylesheet" href="./css/wt.css" type="text/css" />
+    <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+  </head>
+
+  <body class="antialiased bg-white dark:bg-blue-1400">
+    <!----- Snackbar -->
+    <div x-data="noticesHandler()" class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
+      @notice.window="add($event.detail)" style="pointer-events:none">
+      <template x-for="notice of notices" :key="notice.id">
+        <div x-show="visible.includes(notice)" x-transition:enter="transition ease-in duration-200"
+          x-transition:enter-start="transform opacity-0 translate-y-2" x-transition:enter-end="transform opacity-100"
+          x-transition:leave="transition ease-out duration-500"
+          x-transition:leave-start="transform translate-x-0 opacity-100"
+          x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
+          class="flex items-center justify-center w-full h-16 mb-4 mr-6 text-lg font-semibold tracking-tighter text-white cursor-pointer dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
+          :class="{
+    				'bg-blue-600 dark:bg-lightBlue-400  ': notice.type === 'success',
+    			 }" style="pointer-events:all" x-text="notice.text">
+        </div>
+      </template>
+    </div>
+    <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
+    <div class="fixed z-50 w-full text-gray-500 bg-white border-b dark:bg-blue-1400 dark:border-blue-700 lg:px-20">
+      <div x-data="{ open: false }"
+        class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+        <div class="flex flex-row items-center justify-between p-4">
+          <a href="./index.html" class=" focus:outline-none">
+            <h1 class="text-2xl font-bold tracking-tighter uppercase text-blue-1000 lg:text-3xl title-font dark:text-white">
+              WickedBlocks
+              <span class="text-xs">©</span>
+              <small class="text-sm italic font-semibold text-blue-600 lowercase"> by <span
+                  class="uppercase text-blue-1400 dark:text-white">WICKEDTEMPLATES</SPAN> </small>
+            </h1>
+          </a>
+          <button class="rounded-xl md:hidden focus:outline-none" @click="open = !open">
+            <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
+              <path x-show="!open" fill-rule="evenodd"
+                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                clip-rule="evenodd"></path>
+              <path x-show="open" fill-rule="evenodd"
+                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </button>
+        </div>
+        <nav :class="{'flex': open, 'hidden': !open}"
+          class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+          <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
+            @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
+            class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-cyan-400 hover:text-blue-1000 md:ml-4 md:w-auto font-lg focus:outline-none">
+            More Blocks
+          </button>
+          <!--   <div @click.away="open = false" class="relative" x-data="{ open: false }">
+                                                                <button @click="open = !open"
+                                                                    class="flex flex-row items-center w-full px-8 py-3 mt-2 font-semibold text-left text-white transition duration-500 ease-in-out bg-transparent bg-blueGray-900 lg:mr-2 md:w-auto md:inline md:mt-0 md:ml-4 focus:text-lightBlue-500 text-md hover:text-white focus:outline-none rounded-xl">
+                                                                    <span> Products </span>
+                                                                    <svg fill="currentColor" viewBox="0 0 20 20"
+                                                                        :class="{'rotate-180': open, 'rotate-0': !open}"
+                                                                        class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
+                                                                        <path fill-rule="evenodd"
+                                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                                            clip-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </button>
+                                                                <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                                                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                                                    x-transition:leave="transition ease-in duration-75"
+                                                                    x-transition:leave-start="transform opacity-100 scale-100"
+                                                                    x-transition:leave-end="transform opacity-0 scale-95"
+                                                                    class="absolute right-0 z-30 w-full mt-2 origin-top-right bg-transparent md:w-48">
+                                                                    <div class="px-2 py-2 border border-gray-900 bg-blueGray-900 rounded-xl">
+                                                                        <a class="block px-4 py-2 mt-2 text-lg font-normal text-white bg-transparent border-gray-900 rounded-lg md:mt-0 focus:text-lightBlue-500 hover:bg-lightBlueGray-900 focus:bg-blue-1300 focus:outline-none focus:border"
+                                                                            href="#">
+                                                                            Screens
+                                                                        </a>
+                                                                        <a class="block px-4 py-2 mt-2 text-lg font-normal text-white bg-transparent border-gray-900 rounded-lg md:mt-0 focus:text-lightBlue-500 hover:bg-lightBlueGray-900 focus:bg-blue-1300 focus:outline-none focus:border"
+                                                                            href="./templates.html">
+                                                                            Templates
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </div> -->
+        </nav>
+      </div>
+    </div>
+    <!-- Dev tools -->
+    <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
+    </div>
+    <!---- sidebar -->
+    <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+      @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+      <div x-show.transition.opacity.duration.500="open" @click="open = false"
+        class="fixed inset-0 bg-opacity-25 bg-blueGray-900">
+      </div>
+      <div
+        class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blueGray-900 border-blueGray-500 text-lightBlue-500"
+        :class="{'translate-x-full': !open}">
+        <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+          class="absolute top-0 right-0 p-2 mt-12 mr-6 transition duration-500 ease-in-out transform border-2 border-lightBlue-500 hover:bg-lightBlue-800 hover:text-white rounded-xl">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+            class="feather feather-x">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="w-auto p-8 ">
+          <div class="w-64 h-screen mt-8 sm:mt-0">
+            <nav class="mt-16 font-semibold">
+
+              <a
+                class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="12" y1="4" x2="12" y2="9" />
+                  <line x1="12" y1="15" x2="12" y2="20" />
+                  <rect x="6" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Headers Center</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="4" y1="4" x2="4" y2="20" />
+                  <rect x="8" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Headers Right</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                  <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Auth</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                  <circle cx="9" cy="9" r="2" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Customers</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <rect x="4" y="4" width="6" height="5" rx="2" />
+                  <rect x="4" y="13" width="6" height="7" rx="2" />
+                  <rect x="14" y="4" width="6" height="7" rx="2" />
+                  <rect x="14" y="15" width="6" height="5" rx="2" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Grids</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Forms</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#0da5e9" />
+                  <line x1="15" y1="8" x2="15.01" y2="8" />
+                  <rect x="4" y="4" width="16" height="16" rx="3" />
+                  <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#0da5e9" />
+                  <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <line x1="4" y1="9" x2="20" y2="9" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+                href="#">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <rect x="4" y="4" width="16" height="16" rx="2" />
+                  <line x1="4" y1="15" x2="20" y2="15" stroke="#0da5e9" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Footers</span>
+              </a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!----end sidebar -->
+    <!--- header 1-->
+    <section class="p-5 pt-20 lg:pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview1' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview1'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code1'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerOne').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview1'">
+              <img class="rounded-b-xl " loading="lazy" src="./assets/sections/headers-left/headers-left-header-1.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code1'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerOne">
+                    <!---<section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:mr-20 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h2 class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">Your tagline</h2>
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                        Medium lenght display headline.
+                    </h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl">
+                        Deploy your mvp in
+                        minutes, not days. WT offers you a a wide selection swapable sections for your landing page. Is
+                        actually fun to use too.
+                    </p>
+                    <div class="flex justify-center">
+                        <a href="#"
+                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>------>
+                  </div>
+                  <!---- display code goes here.-->
+                  <!-- HTML generated using hilite.me -->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre leading-"><!-- HTML generated using hilite.me -->
+                          &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                                &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:mr-20 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                        &lt;h2 class=<span style="color: #87ceeb">&quot;mb-1 text-xs font-medium tracking-widest text-blue-500 title-font&quot;</span>&gt;Your tagline&lt;/h2&gt;
+                                        &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                                           Medium lenght display headline.
+                                        &lt;/h1&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl&quot;</span>&gt;
+                                            Deploy your mvp in
+                                            minutes, not days. WT offers you a a wide selection swapable sections for your landing page. Is
+                                            actually fun to use too.
+                                        &lt;/p&gt;
+                                        &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center&quot;</span>&gt;
+                                            &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                                class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                                Learn More
+                                                &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;20&quot;</span>
+                                                    height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                    &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                    &lt;path
+                                                        d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                                &lt;/svg&gt;
+                                            &lt;/a&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                        &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                            src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/section&gt;
+  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--- header 2-->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview2' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview2'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code2'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerTwo').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview2'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-2.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code2'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerTwo">
+                    <!----
+ <section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h2 class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">
+                        Your tagline
+                    </h2>
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                        Medium lenght display headline.
+                    </h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl">
+                        Deploy
+                        your mvp in
+                        minutes, not days. WT offers you a a wide selection swapable sections for your landing page.
+                    </p>
+                    <div class="flex justify-center">
+                        <button
+                            class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                        <p class="mt-2 text-sm text-center text-gray-600 md:ml-6 md:mt-0 sm:text-left">
+                            Bitters chicharrones fanny pack
+                            <br class="hidden lg:block">
+                            <a href="#"
+                                class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                Learn More
+                                <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    width="20" height="20" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                </svg>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                      --->
+                  </div>
+                  <!---- display code goes here.-->
+                  <!-- HTML generated using hilite.me -->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre leading-">
+                         &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                                &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                        &lt;h2 class=<span style="color: #87ceeb">&quot;mb-1 text-xs font-medium tracking-widest text-blue-500 title-font&quot;</span>&gt;
+                                            Your tagline
+                                        &lt;/h2&gt;
+                                        &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                                            Medium lenght display headline.
+                                        &lt;/h1&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl&quot;</span>&gt;
+                                            Deploy
+                                            your mvp in
+                                            minutes, not days. WT offers you a a wide selection swapable sections for your landing page.
+                                        &lt;/p&gt;
+                                        &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center&quot;</span>&gt;
+                                            &lt;button
+                                                class=<span style="color: #87ceeb">&quot;flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none&quot;</span>&gt;
+                                                Action
+                                            &lt;/button&gt;
+                                            &lt;p class=<span style="color: #87ceeb">&quot;mt-2 text-sm text-center text-gray-600 md:ml-6 md:mt-0 sm:text-left&quot;</span>&gt;
+                                                Bitters chicharrones fanny pack
+                                                &lt;br class=<span style="color: #87ceeb">&quot;hidden lg:block&quot;</span>&gt;
+                                                &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                                    class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                                    Learn More
+                                                    &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                                        width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                        &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                        &lt;path
+                                                            d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                                    &lt;/svg&gt;
+                                                &lt;/a&gt;
+                                            &lt;/p&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                        &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                            src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/section&gt;
+                    </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 3-->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview3' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview3'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code3'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerThree').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview3'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-3.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code3'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerThree">
+                    <!---- <section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                        Medium lenght display headline.
+                    </h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl">
+                        Deploy your mvp in minutes, not days. WT offers you a a wide selection swapable sections for
+                        your landing page.
+                    </p>
+                    <div class="flex justify-center">
+                        <input class="flex-grow w-full px-4 py-2 mb-4 mr-4 text-base text-purple-700 bg-gray-100 border border-gray-400 rounded-lg focus:outline-none focus:border-purple-500 sm:mb-0 focus:bg-white"
+                               placeholder="Your Email"
+                               type="email">
+                        <button
+                                class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                    <p class="w-full mt-2 mb-8 text-sm text-left text-gray-600">
+                        Neutra shabby chic ramps, viral fixie.
+                    </p>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg "
+                         alt="hero"
+                         src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+        ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre leading-">
+                        &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                                &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                        &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                                            Medium lenght display headline.
+                                        &lt;/h1&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl&quot;</span>&gt;
+                                            Deploy your mvp in minutes, not days. WT offers you a a wide selection swapable sections for
+                                            your landing page.
+                                        &lt;/p&gt;
+                                        &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center&quot;</span>&gt;
+                                            &lt;input class=<span style="color: #87ceeb">&quot;flex-grow w-full px-4 py-2 mb-4 mr-4 text-base text-purple-700 bg-gray-100 border border-gray-400 rounded-lg focus:outline-none focus:border-purple-500 sm:mb-0 focus:bg-white&quot;</span>
+                                                   placeholder=<span style="color: #87ceeb">&quot;Your Email&quot;</span>
+                                                   type=<span style="color: #87ceeb">&quot;email&quot;</span>&gt;
+                                            &lt;button
+                                                    class=<span style="color: #87ceeb">&quot;flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none&quot;</span>&gt;
+                                                Action
+                                            &lt;/button&gt;
+                                        &lt;/div&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;w-full mt-2 mb-8 text-sm text-left text-gray-600&quot;</span>&gt;
+                                            Neutra shabby chic ramps, viral fixie.
+                                        &lt;/p&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                        &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span>
+                                             alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                             src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/section&gt;
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 4 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview4' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview4'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code4'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerFour').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview4'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-4.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code4'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerFour">
+                    <!----
+                    <section class="text-gray-700 body-font">
+                   <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                                            <h2 class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">Your tagline</h2>
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                       Longer medium lenght display headline to convert.</h1>
+                    <div class="flex justify-center">
+                        <a href="#"
+                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+            ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre leading-">
+                      &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                              &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                  &lt;div  class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                      &lt;h2 class=<span style="color: #87ceeb">&quot;mb-1 text-xs font-medium tracking-widest text-blue-500 title-font&quot;</span>&gt;
+                                          Your tagline
+                                      &lt;/h2&gt;
+                                      &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                                          Longer medium lenght display headline to convert.
+                                      &lt;/h1&gt;
+                                      &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center&quot;</span>&gt;
+                                          &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                              class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                              Learn More
+                                              &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;20&quot;</span>
+                                                  height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                  &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                  &lt;path
+                                                      d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                              &lt;/svg&gt;
+                                          &lt;/a&gt;
+                                      &lt;/div&gt;
+                                  &lt;/div&gt;
+                                  &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                      &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                          src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                  &lt;/div&gt;
+                              &lt;/div&gt;
+                          &lt;/section&gt;
+                </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 5 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview5' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview5'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code5' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code5'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerFive').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview5'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-5.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code5'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerFive">
+                    <!----
+<section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h2 class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">Your tagline</h2>
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                        Longer medium lenght display headline to convert.
+                    </h1>
+                    <div class="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
+                        <div class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8                           5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
+                                    Information 1
+                                </h2>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.
+                                </p>
+                                <a href="#"
+                                    class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="20" height="20" fill="currentColor">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
+                                    Information 1</h2>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.</p>
+                                <a href="#"
+                                    class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="20" height="20" fill="currentColor">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                  ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre leading-">
+                        &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                                &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                        &lt;h2 class=<span style="color: #87ceeb">&quot;mb-1 text-xs font-medium tracking-widest text-blue-500 title-font&quot;</span>&gt;Your tagline&lt;/h2&gt;
+                                        &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                                            Longer medium lenght display headline to convert.
+                                        &lt;/h1&gt;
+                                        &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 &quot;</span>&gt;
+                                            &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                                                &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                                    &lt;svg class=<span style="color: #87ceeb">&quot;w-6 h-6&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;18&quot;</span>
+                                                        height=<span style="color: #87ceeb">&quot;18&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                        &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                        &lt;path
+                                                            d=<span style="color: #87ceeb">&quot;M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8                           5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z&quot;</span> /&gt;
+                                                    &lt;/svg&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                                    &lt;h2 class=<span style="color: #87ceeb">&quot;mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font&quot;</span>&gt;
+                                                        Information 1
+                                                    &lt;/h2&gt;
+                                                    &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;Explain 2 great feature here. Information about the
+                                                        feature.
+                                                    &lt;/p&gt;
+                                                    &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                                        class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                                        Learn More
+                                                        &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                                            width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                            &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                            &lt;path
+                                                                d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                                        &lt;/svg&gt;
+                                                    &lt;/a&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                            &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                                                &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                                    &lt;svg class=<span style="color: #87ceeb">&quot;w-6 h-6&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;18&quot;</span>
+                                                        height=<span style="color: #87ceeb">&quot;18&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                        &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                        &lt;path
+                                                            d=<span style="color: #87ceeb">&quot;M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z&quot;</span> /&gt;
+                                                    &lt;/svg&gt;
+                                                &lt;/div&gt;
+                                                &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                                    &lt;h2 class=<span style="color: #87ceeb">&quot;mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font&quot;</span>&gt;
+                                                        Information 1&lt;/h2&gt;
+                                                    &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;Explain 2 great feature here. Information about the
+                                                        feature.&lt;/p&gt;
+                                                    &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                                        class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                                        Learn More
+                                                        &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                                            width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                            &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                            &lt;path
+                                                                d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                                        &lt;/svg&gt;
+                                                    &lt;/a&gt;
+                                                &lt;/div&gt;
+                                            &lt;/div&gt;
+                                        &lt;/div&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                        &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                            src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/section&gt;
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 6 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview6' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview6'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code6' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code6'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerSix').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview6'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-6.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code6'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerSix">
+                    <!----
+<section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 lg:mr-20 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-2xl title-font">
+                       A pretty long lenght display headline ready to convert visitors into users.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl">Deploy
+                        your mvp in
+                        minutes, not days. WT offers you a a wide selection swapable sections for your landing page.You are going to have fun building it, I did..</p>
+                    <div class="flex justify-center">
+                        <button
+                            class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                      ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre leading-">
+               &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                   &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                      &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 lg:mr-20 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                          &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-2xl title-font&quot;</span>&gt;
+                             A pretty long lenght display headline ready to convert visitors into users.
+                          &lt;/h1&gt;
+                          &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl&quot;</span>&gt;
+                              Deploy your mvp in minutes, not days. WT offers you a a wide selection swapable sections for your landing page.You are going to have fun building it, I did..&lt;/p&gt;
+                          &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center&quot;</span>&gt;
+                              &lt;button class=<span style="color: #87ceeb">&quot;flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none&quot;</span>&gt;
+                                  Action
+                              &lt;/button&gt;
+                          &lt;/div&gt;
+                      &lt;/div&gt;
+                      &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                          &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                              src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                      &lt;/div&gt;
+                  &lt;/div&gt;
+              &lt;/section&gt;
+                </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 7 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview7' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview7'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code7' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code7'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerSeven').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview7'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-7.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code7'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerSeven">
+                    <!----
+                      <section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 lg:mr-20 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-2xl title-font">
+                        A pretty long lenght display headline ready to convert visitors into users.
+                    </h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl">
+                        Deploy
+                        your mvp in
+                        minutes, not days. WT offers you a a wide selection swapable sections for your landing page.You
+                        are going to have
+                        fun building it, I did.
+                    </p>
+                    <p class="flex items-center mb-2 text-gray-600"><span
+                            class="inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" />
+                            </svg>
+                        </span>
+                        Vexillologist pitchfork
+                    </p>
+                    <p class="flex items-center mb-2 text-gray-600">
+                        <span class="inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" />
+                            </svg>
+                        </span>
+                        Tumeric plaid portland
+                    </p>
+                    <p class="flex items-center mb-6 text-gray-600">
+                        <span class="inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full">
+                            <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z" />
+                            </svg>
+                        </span>
+                        Mixtape chillwave tumeric
+                    </p>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                          ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
+                  &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                                &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 lg:mr-20 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                        &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-2xl title-font&quot;</span>&gt;
+                                            A pretty long lenght display headline ready to convert visitors into users.
+                                        &lt;/h1&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl&quot;</span>&gt;
+                                            Deploy your mvp in minutes, not days. WT offers you a a wide selection swapable sections for your landing page.You
+                                            are going to have
+                                            fun building it, I did.
+                                        &lt;/p&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;flex items-center mb-2 text-gray-600&quot;</span>&gt;&lt;span
+                                                class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full&quot;</span>&gt;
+                                                &lt;svg fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;24&quot;</span> height=<span style="color: #87ceeb">&quot;24&quot;</span>&gt;
+                                                    &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                    &lt;path d=<span style="color: #87ceeb">&quot;M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z&quot;</span> /&gt;
+                                                &lt;/svg&gt;
+                                            &lt;/span&gt;
+                                            Vexillologist pitchfork
+                                        &lt;/p&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;flex items-center mb-2 text-gray-600&quot;</span>&gt;
+                                            &lt;span class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full&quot;</span>&gt;
+                                                &lt;svg fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;24&quot;</span> height=<span style="color: #87ceeb">&quot;24&quot;</span>&gt;
+                                                    &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                    &lt;path d=<span style="color: #87ceeb">&quot;M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z&quot;</span> /&gt;
+                                                &lt;/svg&gt;
+                                            &lt;/span&gt;
+                                            Tumeric plaid portland
+                                        &lt;/p&gt;
+                                        &lt;p class=<span style="color: #87ceeb">&quot;flex items-center mb-6 text-gray-600&quot;</span>&gt;
+                                            &lt;span class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-6 h-6 mr-2 rounded-full&quot;</span>&gt;
+                                                &lt;svg fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;24&quot;</span> height=<span style="color: #87ceeb">&quot;24&quot;</span>&gt;
+                                                    &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                    &lt;path d=<span style="color: #87ceeb">&quot;M10 15.172l9.192-9.193 1.415 1.414L10 18l-6.364-6.364 1.414-1.414z&quot;</span> /&gt;
+                                                &lt;/svg&gt;
+                                            &lt;/span&gt;
+                                            Mixtape chillwave tumeric
+                                        &lt;/p&gt;
+                                    &lt;/div&gt;
+                                    &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                        &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                            src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                    &lt;/div&gt;
+                                &lt;/div&gt;
+                            &lt;/section&gt;
+                    </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 8 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview8' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview8'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code8' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code8'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerEight').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview8'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-8.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code8'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerEight">
+                    <!----
+<section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 lg:mr-20 md:items-start md:text-left md:mb-0 lg:text-left">
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-2xl title-font">
+                        A pretty long lenght display headline ready to convert visitors into users.
+                    </h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl">
+                        Deploy your mvp in  minutes, not days. WT offers you a a wide selection swapable sections for your landing page.You
+                        are going to have fun building it, I did.
+                    </p>
+                    <div class="flex flex-wrap w-full mt-2 -mx-4 text-center lg:text-left ">
+                        <div class="w-1/4 p-4 mt-4 sm:w-1/4">
+                            <svg width="42" height="42" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0)">
+                                    <path d="M16 32.076L30 24.065V8.05701L16 16.067V32.076Z" fill="#000001" />
+                                    <path d="M19 24.5556V27L25 23.4444V21L19 24.5556Z" fill="white" />
+                                    <path d="M16 0.076004L2 8.057V24.065L16 32.076V16.067L30 8.057L16 0.076004Z"
+                                        fill="url(#paint0_linear)" />
+                                </g>
+                                <defs>
+                                    <linearGradient id="paint0_linear" x1="2.18" y1="23.255" x2="30.041" y2="8.782"
+                                        gradientUnits="userSpaceOnUse">
+                                        <stop offset="0.043" stop-color="#FF8618" />
+                                        <stop offset="0.382" stop-color="#FF246E" />
+                                        <stop offset="0.989" stop-color="#AF1DF5" />
+                                    </linearGradient>
+                                    <clipPath id="clip0">
+                                        <rect width="32" height="32" fill="white" />
+                                    </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="w-1/4 p-4 mt-4 sm:w-1/4">
+                            <svg width="42" height="42" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="16" cy="16" r="14" fill="#FF3366" />
+                                <path d="M11.3594 10.8594C12.3259 10.8594 13.1094 10.0759 13.1094 9.10938C13.1094 8.14288 12.3259 7.35938 11.3594 7.35938C10.3929 7.35938 9.60938 8.14288 9.60938 9.10938C9.60938 10.0759 10.3929 10.8594 11.3594 10.8594Z"
+                                    fill="white" />
+                                <path d="M7.70312 12.3594L7.09375 14.5938H9.09375C8.69271 16.224 7.85312 19.6531 7.70312 20.3281C7.51562 21.1719 7.48433 23.5781 10.0156 23.5781C11.7824 23.5781 12.9093 22.4368 13.5379 21.5048L13.0625 23.4062H15.9062L17.3906 17.3981C17.6016 16.3984 18.0981 14.4688 19.8906 14.4688C22.0225 14.4688 21.2404 16.9933 20.8571 18.2305C20.8415 18.2809 20.8266 18.3291 20.8125 18.375C20.525 19.3125 20.2188 20.4062 20.2188 21.1562C20.2188 22 20.6094 23.5781 22.7969 23.5781C24.9844 23.5781 25.9167 21.4115 26.1094 20.3281L25 19.875C24.9219 20.4531 24.2188 21.7031 23.5625 21.7031C22.6641 21.7031 23.1154 20.1885 23.597 18.5721C23.8106 17.8551 24.0302 17.1181 24.1406 16.4844C24.4198 14.8821 24.1406 12.1562 21.3594 12.1562C19.632 12.1562 18.2756 13.6955 17.6303 14.7641L18.1719 12.3594H13.8438L13.25 14.5938H15.2656C15.2656 14.5938 14.0695 19.4683 13.9922 19.6211C13.1797 21.2266 11.9508 21.7655 11.0312 21.7031C10.2938 21.6531 10.3802 20.7656 10.5156 20.3281L12.5156 12.3594H7.70312Z"
+                                    fill="white" />
+                            </svg>
+                        </div>
+                        <div class="w-1/4 p-4 mt-4 sm:w-1/4">
+                            <svg width="42" height="42" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M16 16C16 13.7909 17.7909 12 20 12C22.2091 12 24 13.7909 24 16C24 18.2091 22.2091 20 20 20C17.7909 20 16 18.2091 16 16Z"
+                                    fill="#1ABCFE" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8 24C8 21.7909 9.79086 20 12 20H16V24C16 26.2091 14.2091 28 12 28C9.79086 28 8 26.2091 8 24Z"
+                                    fill="#0ACF83" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M16 4V12H20C22.2091 12 24 10.2091 24 8C24 5.79086 22.2091 4 20 4H16Z"
+                                    fill="#FF7262" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8 8C8 10.2091 9.79086 12 12 12H16V4H12C9.79086 4 8 5.79086 8 8Z"
+                                    fill="#F24E1E" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M8 16C8 18.2091 9.79086 20 12 20H16V12H12C9.79086 12 8 13.7909 8 16Z"
+                                    fill="#A259FF" />
+                            </svg>
+                        </div>
+                        <div class="w-1/4 p-4 mt-4 sm:w-1/4">
+                            <svg width="42" height="42" viewBox="0 0 32 32" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M5.58991 11C2.5245 11 -0.0510283 13.5306 0.000767908 16.5905C0.0516066 19.5934 2.54027 22 5.59027 22C6.8999 22 8.10608 21.5563 9.06016 20.812C10.0143 21.5562 11.2205 22 12.5302 22C13.8398 22 15.046 21.5563 16.0001 20.812C16.9542 21.5562 18.1604 22 19.4701 22C20.7798 22 21.986 21.5563 22.94 20.812C23.8942 21.5562 25.1004 22 26.4101 22C29.4597 22 31.9484 19.5938 31.9992 16.5905C32.051 13.5304 29.4754 11 26.4099 11C25.1111 11 23.9003 11.4542 22.94 12.2104C21.9795 11.4542 20.7686 11 19.4698 11C18.171 11 16.9603 11.4542 15.9999 12.2104C15.0396 11.4542 13.8288 11 12.53 11C11.2312 11 10.0204 11.4542 9.06004 12.2105C8.09965 11.4542 6.88874 11 5.58991 11ZM12.5302 20.7518C11.5705 20.7518 10.6833 20.4441 9.96546 19.9232C10.7071 19.0067 11.1581 17.8512 11.1794 16.5905C11.2016 15.2766 10.7395 14.0604 9.96228 13.1002C10.686 12.5665 11.578 12.2482 12.53 12.2482C13.4821 12.2482 14.374 12.5665 15.0977 13.1001C14.3204 14.0604 13.8582 15.2768 13.8803 16.5906C13.9018 17.8512 14.3529 19.0068 15.0947 19.9233C14.3769 20.4442 13.4898 20.7518 12.5302 20.7518ZM9.91349 16.5697C9.92973 15.6102 9.60767 14.7149 9.06006 13.9908C8.51245 14.7149 8.19039 15.6102 8.20663 16.5697C8.22228 17.4943 8.5373 18.3464 9.06013 19.0368C9.58286 18.3464 9.89783 17.4944 9.91349 16.5697ZM6.94071 16.5905C6.91847 15.2766 7.38057 14.0604 8.15783 13.1002C7.43411 12.5665 6.54203 12.2482 5.58991 12.2482C3.2229 12.2482 1.22685 14.2162 1.26669 16.5697C1.30595 18.8891 3.2289 20.7518 5.59027 20.7518C6.54983 20.7518 7.43703 20.4442 8.15483 19.9232C7.41304 19.0067 6.96205 17.8512 6.94071 16.5905ZM18.1193 16.5905C18.1416 15.2766 17.6795 14.0604 16.9022 13.1001C17.6258 12.5665 18.5178 12.2482 19.4698 12.2482C20.4219 12.2482 21.314 12.5665 22.0378 13.1002C21.2605 14.0604 20.7984 15.2766 20.8206 16.5905C20.8419 17.8512 21.2929 19.0067 22.0347 19.9232C21.3169 20.4442 20.4297 20.7518 19.4701 20.7518C18.5105 20.7518 17.6233 20.4441 16.9054 19.9232C17.6471 19.0067 18.098 17.8512 18.1193 16.5905ZM22.0865 16.5697C22.0703 15.6102 22.3924 14.7148 22.94 13.9907C23.4877 14.7148 23.8097 15.6102 23.7934 16.5697C23.7777 17.4944 23.4627 18.3464 22.94 19.0368C22.4172 18.3464 22.1022 17.4943 22.0865 16.5697ZM26.4101 20.7518C25.4504 20.7518 24.5632 20.4441 23.8453 19.9232C24.587 19.0068 25.0379 17.8513 25.0593 16.5906C25.0817 15.2765 24.6196 14.0603 23.8423 13.1001C24.5659 12.5665 25.4579 12.2482 26.4099 12.2482C28.7771 12.2482 30.7732 14.216 30.7333 16.5697C30.694 18.8895 28.7711 20.7518 26.4101 20.7518ZM16.8534 16.599C16.8696 15.6395 16.5476 14.7442 15.9999 14.0201C15.4523 14.7442 15.1303 15.6395 15.1465 16.599C15.1622 17.5236 15.4772 18.3757 16 19.0661C16.5227 18.3757 16.8377 17.5237 16.8534 16.599Z"
+                                    fill="black" />
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                              ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
+&lt;section class=<span style="color: #87ceeb">
+  &quot;text-gray-700 body-font&quot;</span>&gt;
+            &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-center lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 lg:mr-20 md:items-start md:text-left md:mb-0 lg:text-left&quot;</span>&gt;
+                    &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-2xl title-font&quot;</span>&gt;
+                        A pretty long lenght display headline ready to convert visitors into users.
+                    &lt;/h1&gt;
+                    &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-1xl&quot;</span>&gt;
+                        Deploy your mvp in  minutes, not days. WT offers you a a wide selection swapable sections for your landing page.You
+                        are going to have fun building it, I did.
+                    &lt;/p&gt;
+                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap w-full mt-2 -mx-4 text-center lg:text-left &quot;</span>&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;w-1/4 p-4 mt-4 sm:w-1/4&quot;</span>&gt;
+                            &lt;svg width=<span style="color: #87ceeb">&quot;42&quot;</span> height=<span style="color: #87ceeb">&quot;42&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 32 32&quot;</span> fill=<span style="color: #87ceeb">&quot;none&quot;</span>
+                                xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span>&gt;
+                                &lt;g clip-path=<span style="color: #87ceeb">&quot;url(#clip0)&quot;</span>&gt;
+                                    &lt;path d=<span style="color: #87ceeb">&quot;M16 32.076L30 24.065V8.05701L16 16.067V32.076Z&quot;</span> fill=<span style="color: #87ceeb">&quot;#000001&quot;</span> /&gt;
+                                    &lt;path d=<span style="color: #87ceeb">&quot;M19 24.5556V27L25 23.4444V21L19 24.5556Z&quot;</span> fill=<span style="color: #87ceeb">&quot;white&quot;</span> /&gt;
+                                    &lt;path d=<span style="color: #87ceeb">&quot;M16 0.076004L2 8.057V24.065L16 32.076V16.067L30 8.057L16 0.076004Z&quot;</span>
+                                        fill=<span style="color: #87ceeb">&quot;url(#paint0_linear)&quot;</span> /&gt;
+                                &lt;/g&gt;
+                                &lt;defs&gt;
+                                    &lt;linearGradient id=<span style="color: #87ceeb">&quot;paint0_linear&quot;</span> x1=<span style="color: #87ceeb">&quot;2.18&quot;</span> y1=<span style="color: #87ceeb">&quot;23.255&quot;</span> x2=<span style="color: #87ceeb">&quot;30.041&quot;</span> y2=<span style="color: #87ceeb">&quot;8.782&quot;</span>
+                                        gradientUnits=<span style="color: #87ceeb">&quot;userSpaceOnUse&quot;</span>&gt;
+                                        &lt;stop offset=<span style="color: #87ceeb">&quot;0.043&quot;</span> stop-color=<span style="color: #87ceeb">&quot;#FF8618&quot;</span> /&gt;
+                                        &lt;stop offset=<span style="color: #87ceeb">&quot;0.382&quot;</span> stop-color=<span style="color: #87ceeb">&quot;#FF246E&quot;</span> /&gt;
+                                        &lt;stop offset=<span style="color: #87ceeb">&quot;0.989&quot;</span> stop-color=<span style="color: #87ceeb">&quot;#AF1DF5&quot;</span> /&gt;
+                                    &lt;/linearGradient&gt;
+                                    &lt;clipPath id=<span style="color: #87ceeb">&quot;clip0&quot;</span>&gt;
+                                        &lt;rect width=<span style="color: #87ceeb">&quot;32&quot;</span> height=<span style="color: #87ceeb">&quot;32&quot;</span> fill=<span style="color: #87ceeb">&quot;white&quot;</span> /&gt;
+                                    &lt;/clipPath&gt;
+                                &lt;/defs&gt;
+                            &lt;/svg&gt;
+                        &lt;/div&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;w-1/4 p-4 mt-4 sm:w-1/4&quot;</span>&gt;
+                            &lt;svg width=<span style="color: #87ceeb">&quot;42&quot;</span> height=<span style="color: #87ceeb">&quot;42&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 32 32&quot;</span> fill=<span style="color: #87ceeb">&quot;none&quot;</span>
+                                xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span>&gt;
+                                &lt;circle cx=<span style="color: #87ceeb">&quot;16&quot;</span> cy=<span style="color: #87ceeb">&quot;16&quot;</span> r=<span style="color: #87ceeb">&quot;14&quot;</span> fill=<span style="color: #87ceeb">&quot;#FF3366&quot;</span> /&gt;
+                                &lt;path d=<span style="color: #87ceeb">&quot;M11.3594 10.8594C12.3259 10.8594 13.1094 10.0759 13.1094 9.10938C13.1094 8.14288 12.3259 7.35938 11.3594 7.35938C10.3929 7.35938 9.60938 8.14288 9.60938 9.10938C9.60938 10.0759 10.3929 10.8594 11.3594 10.8594Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;white&quot;</span> /&gt;
+                                &lt;path d=<span style="color: #87ceeb">&quot;M7.70312 12.3594L7.09375 14.5938H9.09375C8.69271 16.224 7.85312 19.6531 7.70312 20.3281C7.51562 21.1719 7.48433 23.5781 10.0156 23.5781C11.7824 23.5781 12.9093 22.4368 13.5379 21.5048L13.0625 23.4062H15.9062L17.3906 17.3981C17.6016 16.3984 18.0981 14.4688 19.8906 14.4688C22.0225 14.4688 21.2404 16.9933 20.8571 18.2305C20.8415 18.2809 20.8266 18.3291 20.8125 18.375C20.525 19.3125 20.2188 20.4062 20.2188 21.1562C20.2188 22 20.6094 23.5781 22.7969 23.5781C24.9844 23.5781 25.9167 21.4115 26.1094 20.3281L25 19.875C24.9219 20.4531 24.2188 21.7031 23.5625 21.7031C22.6641 21.7031 23.1154 20.1885 23.597 18.5721C23.8106 17.8551 24.0302 17.1181 24.1406 16.4844C24.4198 14.8821 24.1406 12.1562 21.3594 12.1562C19.632 12.1562 18.2756 13.6955 17.6303 14.7641L18.1719 12.3594H13.8438L13.25 14.5938H15.2656C15.2656 14.5938 14.0695 19.4683 13.9922 19.6211C13.1797 21.2266 11.9508 21.7655 11.0312 21.7031C10.2938 21.6531 10.3802 20.7656 10.5156 20.3281L12.5156 12.3594H7.70312Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;white&quot;</span> /&gt;
+                            &lt;/svg&gt;
+                        &lt;/div&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;w-1/4 p-4 mt-4 sm:w-1/4&quot;</span>&gt;
+                            &lt;svg width=<span style="color: #87ceeb">&quot;42&quot;</span> height=<span style="color: #87ceeb">&quot;42&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 32 32&quot;</span> fill=<span style="color: #87ceeb">&quot;none&quot;</span>
+                                xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span>&gt;
+                                &lt;path fill-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span> clip-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span>
+                                    d=<span style="color: #87ceeb">&quot;M16 16C16 13.7909 17.7909 12 20 12C22.2091 12 24 13.7909 24 16C24 18.2091 22.2091 20 20 20C17.7909 20 16 18.2091 16 16Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;#1ABCFE&quot;</span> /&gt;
+                                &lt;path fill-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span> clip-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span>
+                                    d=<span style="color: #87ceeb">&quot;M8 24C8 21.7909 9.79086 20 12 20H16V24C16 26.2091 14.2091 28 12 28C9.79086 28 8 26.2091 8 24Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;#0ACF83&quot;</span> /&gt;
+                                &lt;path fill-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span> clip-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span>
+                                    d=<span style="color: #87ceeb">&quot;M16 4V12H20C22.2091 12 24 10.2091 24 8C24 5.79086 22.2091 4 20 4H16Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;#FF7262&quot;</span> /&gt;
+                                &lt;path fill-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span> clip-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span>
+                                    d=<span style="color: #87ceeb">&quot;M8 8C8 10.2091 9.79086 12 12 12H16V4H12C9.79086 4 8 5.79086 8 8Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;#F24E1E&quot;</span> /&gt;
+                                &lt;path fill-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span> clip-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span>
+                                    d=<span style="color: #87ceeb">&quot;M8 16C8 18.2091 9.79086 20 12 20H16V12H12C9.79086 12 8 13.7909 8 16Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;#A259FF&quot;</span> /&gt;
+                            &lt;/svg&gt;
+                        &lt;/div&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;w-1/4 p-4 mt-4 sm:w-1/4&quot;</span>&gt;
+                            &lt;svg width=<span style="color: #87ceeb">&quot;42&quot;</span> height=<span style="color: #87ceeb">&quot;42&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 32 32&quot;</span> fill=<span style="color: #87ceeb">&quot;none&quot;</span>
+                                xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span>&gt;
+                                &lt;path fill-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span> clip-rule=<span style="color: #87ceeb">&quot;evenodd&quot;</span>
+                                    d=<span style="color: #87ceeb">&quot;M5.58991 11C2.5245 11 -0.0510283 13.5306 0.000767908 16.5905C0.0516066 19.5934 2.54027 22 5.59027 22C6.8999 22 8.10608 21.5563 9.06016 20.812C10.0143 21.5562 11.2205 22 12.5302 22C13.8398 22 15.046 21.5563 16.0001 20.812C16.9542 21.5562 18.1604 22 19.4701 22C20.7798 22 21.986 21.5563 22.94 20.812C23.8942 21.5562 25.1004 22 26.4101 22C29.4597 22 31.9484 19.5938 31.9992 16.5905C32.051 13.5304 29.4754 11 26.4099 11C25.1111 11 23.9003 11.4542 22.94 12.2104C21.9795 11.4542 20.7686 11 19.4698 11C18.171 11 16.9603 11.4542 15.9999 12.2104C15.0396 11.4542 13.8288 11 12.53 11C11.2312 11 10.0204 11.4542 9.06004 12.2105C8.09965 11.4542 6.88874 11 5.58991 11ZM12.5302 20.7518C11.5705 20.7518 10.6833 20.4441 9.96546 19.9232C10.7071 19.0067 11.1581 17.8512 11.1794 16.5905C11.2016 15.2766 10.7395 14.0604 9.96228 13.1002C10.686 12.5665 11.578 12.2482 12.53 12.2482C13.4821 12.2482 14.374 12.5665 15.0977 13.1001C14.3204 14.0604 13.8582 15.2768 13.8803 16.5906C13.9018 17.8512 14.3529 19.0068 15.0947 19.9233C14.3769 20.4442 13.4898 20.7518 12.5302 20.7518ZM9.91349 16.5697C9.92973 15.6102 9.60767 14.7149 9.06006 13.9908C8.51245 14.7149 8.19039 15.6102 8.20663 16.5697C8.22228 17.4943 8.5373 18.3464 9.06013 19.0368C9.58286 18.3464 9.89783 17.4944 9.91349 16.5697ZM6.94071 16.5905C6.91847 15.2766 7.38057 14.0604 8.15783 13.1002C7.43411 12.5665 6.54203 12.2482 5.58991 12.2482C3.2229 12.2482 1.22685 14.2162 1.26669 16.5697C1.30595 18.8891 3.2289 20.7518 5.59027 20.7518C6.54983 20.7518 7.43703 20.4442 8.15483 19.9232C7.41304 19.0067 6.96205 17.8512 6.94071 16.5905ZM18.1193 16.5905C18.1416 15.2766 17.6795 14.0604 16.9022 13.1001C17.6258 12.5665 18.5178 12.2482 19.4698 12.2482C20.4219 12.2482 21.314 12.5665 22.0378 13.1002C21.2605 14.0604 20.7984 15.2766 20.8206 16.5905C20.8419 17.8512 21.2929 19.0067 22.0347 19.9232C21.3169 20.4442 20.4297 20.7518 19.4701 20.7518C18.5105 20.7518 17.6233 20.4441 16.9054 19.9232C17.6471 19.0067 18.098 17.8512 18.1193 16.5905ZM22.0865 16.5697C22.0703 15.6102 22.3924 14.7148 22.94 13.9907C23.4877 14.7148 23.8097 15.6102 23.7934 16.5697C23.7777 17.4944 23.4627 18.3464 22.94 19.0368C22.4172 18.3464 22.1022 17.4943 22.0865 16.5697ZM26.4101 20.7518C25.4504 20.7518 24.5632 20.4441 23.8453 19.9232C24.587 19.0068 25.0379 17.8513 25.0593 16.5906C25.0817 15.2765 24.6196 14.0603 23.8423 13.1001C24.5659 12.5665 25.4579 12.2482 26.4099 12.2482C28.7771 12.2482 30.7732 14.216 30.7333 16.5697C30.694 18.8895 28.7711 20.7518 26.4101 20.7518ZM16.8534 16.599C16.8696 15.6395 16.5476 14.7442 15.9999 14.0201C15.4523 14.7442 15.1303 15.6395 15.1465 16.599C15.1622 17.5236 15.4772 18.3757 16 19.0661C16.5227 18.3757 16.8377 17.5237 16.8534 16.599Z&quot;</span>
+                                    fill=<span style="color: #87ceeb">&quot;black&quot;</span> /&gt;
+                            &lt;/svg&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                    &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                        src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                        </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 9 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview9' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview9'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code9' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code9'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerNine').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview9'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-9.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code9'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerNine">
+                    <!----
+                       <section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <h2 class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">Your tagline</h2>
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                        Longer medium lenght display headline to convert.</h1>
+                    <div class="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
+                        <div
+                            class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="flex-grow">
+                                <h1 class="flex mb-4 text-5xl font-normal leading-none text-blue-700 ">
+                                    <span>100</span>
+                                    <span class="mt-auto ml-1 text-lg font-normal text-gray-500">PX</span>
+                                </h1>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.</p>
+                                <a href="#"
+                                    class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="20" height="20" fill="currentColor">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div
+                            class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="flex-grow">
+                                <h1 class="flex mb-4 text-5xl font-normal leading-none text-blue-700 ">
+                                    <span>50</span>
+                                    <span class="mt-auto ml-1 text-lg font-normal text-gray-500">Projects</span>
+                                </h1>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.</p>
+                                <a href="#"
+                                    class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="20" height="20" fill="currentColor">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                                  ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
+                            &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                   &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                  &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                    &lt;h2 class=<span style="color: #87ceeb">&quot;mb-1 text-xs font-medium tracking-widest text-blue-500 title-font&quot;</span>&gt;
+                         Your tagline
+                    &lt;/h2&gt;
+                    &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                        Longer medium lenght display headline to convert.
+                    &lt;/h1&gt;
+                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 &quot;</span>&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                            &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                &lt;h1 class=<span style="color: #87ceeb">&quot;flex mb-4 text-5xl font-normal leading-none text-blue-700 &quot;</span>&gt;
+                                    &lt;span&gt;100&lt;/span&gt;
+                                    &lt;span class=<span style="color: #87ceeb">&quot;mt-auto ml-1 text-lg font-normal text-gray-500&quot;</span>&gt;
+                                        PX
+                                    &lt;/span&gt;
+                                &lt;/h1&gt;
+                                &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;
+                                    Explain 2 great feature here. Information about the
+                                    feature.
+                                &lt;/p&gt;
+                                &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                    class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                    Learn More
+                                    &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                        width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                        &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                        &lt;path d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                    &lt;/svg&gt;
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                            &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                &lt;h1 class=<span style="color: #87ceeb">&quot;flex mb-4 text-5xl font-normal leading-none text-blue-700 &quot;</span>&gt;
+                                    &lt;span&gt;50&lt;/span&gt;
+                                    &lt;span class=<span style="color: #87ceeb">&quot;mt-auto ml-1 text-lg font-normal text-gray-500&quot;</span>&gt;
+                                        Projects
+                                    &lt;/span&gt;
+                                &lt;/h1&gt;
+                                &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;
+                                    Explain 2 great feature here. Information about the
+                                    feature.
+                                &lt;/p&gt;
+                                &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span>
+                                    class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                    Learn More
+                                    &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                        width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                        &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                        &lt;path
+                                            d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                    &lt;/svg&gt;
+                                &lt;/a&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                    &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                        src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                            </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 10 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview10' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview10' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview10'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code10' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code10'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerTen').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview10'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-10.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code10'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerTen">
+                    <!----
+                      <section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <div class="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
+                        <div class="flex flex-col items-center w-full p-4 mb-6 text-center md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="34"
+                                    height="24" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M5.68 7.314l-1.82 5.914L12 19.442l8.14-6.214-1.82-5.914L16.643 11H7.356L5.681 7.314zM15.357 9l2.888-6.354a.4.4 0 0 1 .747.048l3.367 10.945a.5.5 0 0 1-.174.544L12 21.958 1.816 14.183a.5.5 0 0 1-.174-.544L5.009 2.694a.4.4 0 0 1 .747-.048L8.644 9h6.712z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h1
+                                    class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-3xl title-font">
+                                    Medium lenght headline
+                                </h1>
+                                <p class="text-base leading-relaxed">
+                                    Truffaut ramps kinfolk typewriter. Typewriter celiac yuccie banh mi wolf, chia
+                                    kinfolk gentrify raclette kogi man bun
+                                    subway tile green juice. Kitsch fashion axe YOLO, migas lyft subway tile polaroid
+                                    letterpress hexagon. Ugh squid
+                                    truffaut, prism blue bottle tousled pork belly deep.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                                      ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
+            &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+              &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                    &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 &quot;</span>&gt;
+                        &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full p-4 mb-6 text-center md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                            &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                &lt;svg class=<span style="color: #87ceeb">&quot;w-10 h-10&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;34&quot;</span>
+                                    height=<span style="color: #87ceeb">&quot;24&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                    &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                    &lt;path
+                                        d=<span style="color: #87ceeb">&quot;M5.68 7.314l-1.82 5.914L12 19.442l8.14-6.214-1.82-5.914L16.643 11H7.356L5.681 7.314zM15.357 9l2.888-6.354a.4.4 0 0 1 .747.048l3.367 10.945a.5.5 0 0 1-.174.544L12 21.958 1.816 14.183a.5.5 0 0 1-.174-.544L5.009 2.694a.4.4 0 0 1 .747-.048L8.644 9h6.712z&quot;</span> /&gt;
+                                &lt;/svg&gt;
+                            &lt;/div&gt;
+                            &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                &lt;h1
+                                    class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-3xl title-font&quot;</span>&gt;
+                                    Medium lenght headline
+                                &lt;/h1&gt;
+                                &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;
+                                    Truffaut ramps kinfolk typewriter. Typewriter celiac yuccie banh mi wolf, chia
+                                    kinfolk gentrify raclette kogi man bun
+                                    subway tile green juice. Kitsch fashion axe YOLO, migas lyft subway tile polaroid
+                                    letterpress hexagon. Ugh squid
+                                    truffaut, prism blue bottle tousled pork belly deep.
+                                &lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                    &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                        src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 11 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview11' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview11' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview11'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code11' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code11'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerEleven').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview11'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-11.png"
+                alt="">
+            </div>
+            <div class=" rounded-b-xl" x-show="tab === 'code11'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerEleven">
+                    <!----
+      <section class="text-gray-700 body-font">
+            <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
+                <div class="flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center">
+                    <div class="flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 ">
+                        <div class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8 5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
+                                    Information 1
+                                </h2>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.
+                                </p>
+                                <a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="20" height="20" fill="currentColor">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
+                                    Information 2
+                                </h2>
+                                <p class="text-base leading-relaxed">
+                                    Explain 2 great feature here. Information about the
+                                    feature.
+                                </p>
+                                <a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                                    Learn More
+                                    <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                        width="20" height="20" fill="currentColor">
+                                        <path fill="none" d="M0 0h24v24H0z" />
+                                        <path
+                                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
+                                    fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path d="M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8 5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">Information 3</h2>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start">
+                            <div class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18"
+                                    fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                                </svg>
+                            </div>
+                            <div class="flex-grow">
+                                <h2 class="mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font">
+                                    Information 4
+                                </h2>
+                                <p class="text-base leading-relaxed">Explain 2 great feature here. Information about the
+                                    feature.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center rounded-lg " alt="hero"
+                        src="https://dummyimage.com/720x600/F3F4F7/8693ac">
+                </div>
+            </div>
+        </section>
+                                            ---->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
+                             &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
+                                  &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row&quot;</span>&gt;
+                                      &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center w-full pt-0 mb-16 text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0 lg:text-center&quot;</span>&gt;
+                                          &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -mx-4 -mt-4 -mb-10 sm:-m-4 &quot;</span>&gt;
+                                              &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                                      &lt;svg class=<span style="color: #87ceeb">&quot;w-6 h-6&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;18&quot;</span>
+                                                          height=<span style="color: #87ceeb">&quot;18&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                          &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                          &lt;path d=<span style="color: #87ceeb">&quot;M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8 5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z&quot;</span> /&gt;
+                                                      &lt;/svg&gt;
+                                                  &lt;/div&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                                      &lt;h2 class=<span style="color: #87ceeb">&quot;mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font&quot;</span>&gt;
+                                                          Information 1
+                                                      &lt;/h2&gt;
+                                                      &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;Explain 2 great feature here. Information about the
+                                                          feature.
+                                                      &lt;/p&gt;
+                                                      &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span> class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                                          Learn More
+                                                          &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                                              width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                              &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                              &lt;path
+                                                                  d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                                          &lt;/svg&gt;
+                                                      &lt;/a&gt;
+                                                  &lt;/div&gt;
+                                              &lt;/div&gt;
+                                              &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                                      &lt;svg class=<span style="color: #87ceeb">&quot;w-6 h-6&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;18&quot;</span>
+                                                          height=<span style="color: #87ceeb">&quot;18&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                          &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                          &lt;path
+                                                              d=<span style="color: #87ceeb">&quot;M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z&quot;</span> /&gt;
+                                                      &lt;/svg&gt;
+                                                  &lt;/div&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                                      &lt;h2 class=<span style="color: #87ceeb">&quot;mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font&quot;</span>&gt;
+                                                          Information 2
+                                                      &lt;/h2&gt;
+                                                      &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;
+                                                          Explain 2 great feature here. Information about the
+                                                          feature.
+                                                      &lt;/p&gt;
+                                                      &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span> class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                                          Learn More
+                                                          &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                                              width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                              &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                              &lt;path
+                                                                  d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                                          &lt;/svg&gt;
+                                                      &lt;/a&gt;
+                                                  &lt;/div&gt;
+                                              &lt;/div&gt;
+                                              &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                                      &lt;svg class=<span style="color: #87ceeb">&quot;w-6 h-6&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;18&quot;</span> height=<span style="color: #87ceeb">&quot;18&quot;</span>
+                                                          fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                          &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                          &lt;path d=<span style="color: #87ceeb">&quot;M14 10h-4v4h4v-4zm2 0v4h3v-4h-3zm-2 9v-3h-4v3h4zm2 0h3v-3h-3v3zM14 5h-4v3h4V5zm2 0v3h3V5h-3zm-8 5H5v4h3v-4zm0 9v-3H5v3h3zM8 5H5v3h3V5zM4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z&quot;</span> /&gt;
+                                                      &lt;/svg&gt;
+                                                  &lt;/div&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                                      &lt;h2 class=<span style="color: #87ceeb">&quot;mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font&quot;</span>&gt;Information 3&lt;/h2&gt;
+                                                      &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;Explain 2 great feature here. Information about the
+                                                          feature.
+                                                      &lt;/p&gt;
+                                                  &lt;/div&gt;
+                                              &lt;/div&gt;
+                                              &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col items-center p-4 mb-6 text-center md:w-1/2 md:mb-0 lg:text-left lg:items-start&quot;</span>&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full&quot;</span>&gt;
+                                                      &lt;svg class=<span style="color: #87ceeb">&quot;w-6 h-6&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span> width=<span style="color: #87ceeb">&quot;18&quot;</span> height=<span style="color: #87ceeb">&quot;18&quot;</span>
+                                                          fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                                          &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                                          &lt;path
+                                                              d=<span style="color: #87ceeb">&quot;M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z&quot;</span> /&gt;
+                                                      &lt;/svg&gt;
+                                                  &lt;/div&gt;
+                                                  &lt;div class=<span style="color: #87ceeb">&quot;flex-grow&quot;</span>&gt;
+                                                      &lt;h2 class=<span style="color: #87ceeb">&quot;mb-3 text-lg font-medium tracking-tighter text-gray-700 title-font&quot;</span>&gt;
+                                                          Information 4
+                                                      &lt;/h2&gt;
+                                                      &lt;p class=<span style="color: #87ceeb">&quot;text-base leading-relaxed&quot;</span>&gt;Explain 2 great feature here. Information about the
+                                                          feature.
+                                                      &lt;/p&gt;
+                                                  &lt;/div&gt;
+                                              &lt;/div&gt;
+                                          &lt;/div&gt;
+                                      &lt;/div&gt;
+                                      &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 lg:max-w-lg lg:w-full md:w-1/2&quot;</span>&gt;
+                                          &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded-lg &quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span>
+                                              src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x600/F3F4F7/8693ac&quot;</span>&gt;
+                                      &lt;/div&gt;
+                                  &lt;/div&gt;
+                              &lt;/section&gt;
+                                      </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <!--- header 12 -->
+    <section class="p-5 pt-10 lg:p-0">
+      <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <div class="rounded-xl" x-data="{ tab: 'preview12' }">
+          <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview12' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'preview12'">
+              Preview
+            </button>
+            <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code12' }"
+              class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+              @click="tab = 'code12'">
+              Code
+            </button>
+            <!---- Copy Buton -->
+            <button
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              onclick="copyToClip(document.getElementById('headerTwelve').innerHTML)" x-data="{}"
+              @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
+                stroke-linejoin="round">
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="8" y="8" width="12" height="12" rx="2" />
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            </button>
+          </div>
+          <div class="h-auto text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+            <div class="border rounded-b-xl" x-show="tab === 'preview12'">
+              <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/headers-left/headers-left-header-12.png"
+                alt="">
+            </div>
+            <div class="rounded-b-xl" x-show="tab === 'code12'">
+              <div
+                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                <div class="rounded-b-xl">
+                  <div class="hidden" id="headerTwelve">
+                    <!----
+<section class="flex flex-col items-center h-screen md:flex-row ">
+            <div class="hidden w-full h-screen bg-gray-200 bg-left-bottom bg-cover lg:block md:w-1/3 xl:w-1/3">
+                <img src="https://dummyimage.com/600x1024/F3F4F7/8693ac"
+                    alt="" class="object-cover w-full h-full ">
+            </div>
+            <div
+                class="flex w-full h-screen px-6 bg-white md:max-w-md lg:max-w-full md:w-1/2 xl:w-1/2 lg:px-16 xl:px-12 items-left justify-left">
+                <div class="w-full h-100">
+                    <a
+                        class="inline-flex items-center w-48 mt-32 mb-20 font-medium text-gray-900 title-font md:mb-16 md:mt-32">
+                        <img src="../badges/WhitePink.svg" alt="">
+                    </a>
+                    <h1 class="mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font">
+                        Medium lenght display headline.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-left text-gray-900 lg:text-1xl">
+                        Tailwind CSS templates
+                    with a wicked design.
+                    Professionally designed and 100% responsive static templates for startups and personal use..</p>
+                <div class="flex ">
+                    <button
+                        class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                        Action
+                    </button>
+                    <p class="mt-2 text-sm text-center text-gray-600 md:ml-6 md:mt-0 sm:text-left">Bitters chicharrones fanny pack
+                        <br class="hidden lg:block">
+                        <a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                                fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /></svg>
+                        </a>
+                    </p>
+                </div>
+                </div>
+            </div>
+        </section>
+-->
+                  </div>
+                  <!---- display code goes here.-->
+                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
+              &lt;section class=<span style="color: #87ceeb">&quot;flex flex-col items-center h-screen md:flex-row &quot;</span>&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;hidden w-full h-screen bg-gray-200 bg-left-bottom bg-cover lg:block md:w-1/3 xl:w-1/3&quot;</span>&gt;
+                <span style="color: #EC4899">&lt;!--- image will be full height and occupy the whole with of this div.--&gt;</span>
+                &lt;img src=<span style="color: #87ceeb">&quot;https://dummyimage.com/600x1024/F3F4F7/8693ac&quot;</span> alt=<span style="color: #87ceeb">&quot;&quot;</span> class=<span style="color: #87ceeb">&quot;object-cover w-full h-full &quot;</span>&gt;
+               &lt;/div&gt;
+               &lt;div class=<span style="color: #87ceeb">&quot;flex w-full h-screen px-6 bg-white md:max-w-md lg:max-w-full md:w-1/2 xl:w-1/2 lg:px-16 xl:px-12 items-left justify-left&quot;</span>&gt;
+                &lt;div class=<span style="color: #87ceeb">&quot;w-full h-100&quot;</span>&gt;
+                    &lt;a class=<span style="color: #87ceeb">&quot;inline-flex items-center w-48 mt-32 mb-20 font-medium text-gray-900 title-font md:mb-16 md:mt-32&quot;</span>&gt;
+                        &lt;img src=<span style="color: #87ceeb">&quot;../badges/WhitePink.svg&quot;</span> alt=<span style="color: #87ceeb">&quot;&quot;</span>&gt;
+                    &lt;/a&gt;
+                    &lt;h1 class=<span style="color: #87ceeb">&quot;mb-8 text-2xl font-bold tracking-tighter text-center text-blue-800 lg:text-left lg:text-5xl title-font&quot;</span>&gt;
+                        Medium lenght display headline.
+                    &lt;/h1&gt;
+                    &lt;p class=<span style="color: #87ceeb">&quot;mb-8 text-base leading-relaxed text-left text-gray-900 lg:text-1xl&quot;</span>&gt;
+                        Tailwind CSS templates
+                        with a wicked design.
+                        Professionally designed and 100% responsive static templates for startups and personal use.
+                    &lt;/p&gt;
+                    &lt;div class=<span style="color: #87ceeb">&quot;flex&quot;</span>&gt;
+                        &lt;button class=<span style="color: #87ceeb">&quot;flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none&quot;</span>&gt;
+                            Action
+                        &lt;/button&gt;
+                        &lt;p class=<span style="color: #87ceeb">&quot;mt-2 text-sm text-center text-gray-600 md:ml-6 md:mt-0 sm:text-left&quot;</span>&gt;
+                            Bitters chicharrones fanny pack
+                            &lt;br class=<span style="color: #87ceeb">&quot;hidden lg:block&quot;</span>&gt;
+                            &lt;a href=<span style="color: #87ceeb">&quot;#&quot;</span> class=<span style="color: #87ceeb">&quot;inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 &quot;</span>&gt;
+                                Learn More
+                                &lt;svg class=<span style="color: #87ceeb">&quot;w-4 h-4 ml-2&quot;</span> xmlns=<span style="color: #87ceeb">&quot;http://www.w3.org/2000/svg&quot;</span> viewBox=<span style="color: #87ceeb">&quot;0 0 24 24&quot;</span>
+                                    width=<span style="color: #87ceeb">&quot;20&quot;</span> height=<span style="color: #87ceeb">&quot;20&quot;</span> fill=<span style="color: #87ceeb">&quot;currentColor&quot;</span>&gt;
+                                    &lt;path fill=<span style="color: #87ceeb">&quot;none&quot;</span> d=<span style="color: #87ceeb">&quot;M0 0h24v24H0z&quot;</span> /&gt;
+                                    &lt;path
+                                        d=<span style="color: #87ceeb">&quot;M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z&quot;</span> /&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/p&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                      </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </section>
+    <footer class="mx-auto bg-blue-1400 body-font">
+      <div
+        class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
+        <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
+          <a class="flex items-center justify-start font-medium text-gray-900 title-font">
+            <img class="object-cover object-center rounded-lg" alt="badge"
+              src="https://d33wubrfki0l68.cloudfront.net/a7b72555c81f0c1857ab2fcc8ef600ffeae9ab77/f7d9f/assets/badges/bluecyan.svg">
+          </a>
+        </div>
+        <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
+          <div class="w-1/2 px-3 lg:w-1/2">
+            <h2
+              class="mb-3 font-semibold tracking-tighter text-transparent text-md bg-clip-text bg-gradient-to-tr from-blue-400 via-blue-600 to-cyan-400 title-font">
+              SOCIAL</h2>
+            <nav class="mb-10 list-none">
+              <li>
+                <a href="https://twitter.com/WickedTemplates"
+                  class="text-blueGray-300 hover:text-blue-600">Wickedtemplates
+                  Twitter</a>
+              </li>
+              <li>
+                <a href="https://twitter.com/Mike_Andreuzza" class="text-blueGray-300 hover:text-blue-600">Mike's
+                  Twitter</a>
+              </li>
+            </nav>
+          </div>
+          <div class="w-1/2 px-3 lg:w-1/2">
+            <h2
+              class="mb-3 font-semibold tracking-tighter text-transparent text-md bg-clip-text bg-gradient-to-tr from-blue-400 via-blue-600 to-cyan-400 title-font">
+              OTHER PROJECTS</h2>
+            <nav class="mb-10 list-none">
+              <li>
+                <a href="https://colorsandfonts.com" class="text-blueGray-300 hover:text-blue-600">Colors &amp;
+                  fonts</a>
+              </li>
+              <li>
+                <a href="https://unicornsfeed.com" class="text-blueGray-300 hover:text-blue-600">TheUnicornsFeed</a>
+              </li>
+              <li>
+                <a href="https://wickedtemplates.com" class="text-blueGray-300 hover:text-blue-600">Wickedtemplates</a>
+              </li>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
+      <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
+        <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+          © 2020 WickedBlocks
+
+          <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+        </p>
+        <img loading="lazy focus:outline-none" alt="team"
+          class="flex-shrink-0 object-cover object-center w-8 h-8 mx-4 mb-4 rounded-full1b0-blueGray-50 lg:mb-0"
+          src="./assets/mike.svg">
+        <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+          <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+            MICHAEL ANDREUZZA
+          </a>
+        </p>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script>
+      function copyToClip(str) {
+        function listener(e) {
+          e.clipboardData.setData("text/html", str);
+          e.clipboardData.setData("text/plain", str);
+          e.preventDefault();
+        }
+        document.addEventListener("copy", listener);
+        document.execCommand("copy");
+        document.removeEventListener("copy", listener);
+      }
+    </script>
+    <script>
+      // Tabs
+      function slideout() {
+        return {
+          open: false,
+          usedKeyboard: false,
+          init() {
+            this.$watch('open', value => {
+              value && this.$refs.closeButton.focus()
+              this.toggleOverlay()
+            })
+            this.toggleOverlay()
+          },
+          toggleOverlay() {
+            document.body.classList[this.open ? 'add' : 'remove']('h-screen', 'overflow-hidden')
+          }
+        }
+      }
+      // Snackbar
+      function noticesHandler() {
+        return {
+          notices: [],
+          visible: [],
+          add(notice) {
+            notice.id = Date.now()
+            this.notices.push(notice)
+            this.fire(notice.id)
+          },
+          fire(id) {
+            this.visible.push(this.notices.find(notice => notice.id == id))
+            const timeShown = 2000 * this.visible.length
+            setTimeout(() => {
+              this.remove(id)
+            }, timeShown)
+          },
+          remove(id) {
+            const notice = this.visible.find(notice => notice.id == id)
+            const index = this.visible.indexOf(notice)
+            this.visible.splice(index, 1)
+          },
+        };
+      }
+    </script>
+  </body>
+
+</html>
