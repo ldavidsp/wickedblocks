@@ -1,4 +1,4 @@
 User-Agent: *
 Disallow:
 
-Sitemap: https://www.wickedtemplates.com/sitemap.xml
+Sitemap: https://www.blocks.wickedtemplates.com/sitemap.xml

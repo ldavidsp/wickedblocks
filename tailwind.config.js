@@ -5,7 +5,10 @@ const allColors = require(`tailwindcss/colors`);
 const extendedColors = defaultColors;
 
 module.exports = {
-  purge: [],
+purge: {
+		mode: 'layers',
+		content: ['./dist/**/*.html'],
+  },
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {

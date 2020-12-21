@@ -25,9 +25,9 @@
                     x-transition:enter-end="transform opacity-100" x-transition:leave="transition ease-out duration-500"
                     x-transition:leave-start="transform translate-x-0 opacity-100"
                     x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
-                    class="flex items-center justify-center w-full h-16 mb-4 mr-6 text-lg font-semibold tracking-tighter text-white cursor-pointer dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
+                    class="z-50 flex items-center justify-center w-full h-16 mb-4 text-lg font-semibold tracking-tighter text-white cursor-pointer lg:mr-6 dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
                     :class="{
-    				'bg-blue-600 dark:bg-lightBlue-400  ': notice.type === 'success',
+    				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
     			 }" style="pointer-events:all" x-text="notice.text">
                 </div>
             </template>
@@ -47,7 +47,7 @@
                         </h1>
                     </a>
                     <button class="rounded-xl md:hidden focus:outline-none" @click="open = !open">
-                        <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
+                        <svg fill="#000000" viewBox="0 0 20 20" class="w-12 h-12">
                             <path x-show="!open" fill-rule="evenodd"
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
                                 clip-rule="evenodd"></path>
@@ -166,7 +166,7 @@
                                 <span class="mx-4 font-medium tracking-tighter">Pricing</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
-                                href="#">
+                                href="./clients.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -174,7 +174,7 @@
                                     <circle cx="12" cy="7" r="4" />
                                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#0da5e9" />
                                 </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Customers</span>
+                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
                                 href="#">
@@ -242,7 +242,7 @@
         </section>
         <!----end sidebar -->
         <!--- header 1-->
-        <section class="p-5 pt-20 lg:pt-10 lg:p-0">
+        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview1' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -270,7 +270,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview1'">
                             <img class="rounded-b-xl " loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-1.png" alt="">
@@ -350,7 +350,7 @@
             </div>
         </section>
         <!--- header 2-->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview2' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -378,7 +378,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview2'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-2.png" alt="">
@@ -449,7 +449,7 @@
             </div>
         </section>
         <!--- header 3-->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview3' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -477,7 +477,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview3'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-3.png" alt="">
@@ -553,7 +553,7 @@
             </div>
         </section>
         <!--- header 4 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview4' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -581,7 +581,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview4'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-4.png" alt="">
@@ -680,7 +680,7 @@
             </div>
         </section>
         <!--- header 5 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview5' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -708,7 +708,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview5'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-5.png" alt="">
@@ -795,7 +795,7 @@
             </div>
         </section>
         <!--- header 6 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview6' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -823,7 +823,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview6'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-6.png" alt="">
@@ -900,7 +900,7 @@
             </div>
         </section>
         <!--- header 7 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview7' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -928,7 +928,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview7'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-7.png" alt="">
@@ -991,7 +991,7 @@
             </div>
         </section>
         <!--- header 8 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview8' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1019,7 +1019,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview8'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-8.png" alt="">
@@ -1076,7 +1076,7 @@
             </div>
         </section>
         <!--- header 9 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview9' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1104,7 +1104,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview9'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-9.png" alt="">
@@ -1184,7 +1184,7 @@
             </div>
         </section>
         <!--- header 10 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview10' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1212,7 +1212,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview10'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-10.png" alt="">
@@ -1293,7 +1293,7 @@
             </div>
         </section>
         <!--- header 11 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview11' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1321,7 +1321,7 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="h-screen text-blue-100 bg-white dark:bg-blueGray-900 dark:text-white">
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
                         <div class="border rounded-b-xl" x-show="tab === 'preview11'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/headers-center/headers-center-header-11.png" alt="">
@@ -1523,7 +1523,7 @@
             </div>
         </section>
         <!--- header 12 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview12' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1680,7 +1680,7 @@
             </div>
         </section>
         <!--- header 13 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview13' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1771,7 +1771,7 @@
             </div>
         </section>
         <!--- header 14 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview14' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -1871,7 +1871,7 @@
             </div>
         </section>
         <!--- header 15 -->
-        <section class="p-5 pt-10 lg:p-0">
+        <section class="p-5 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview15' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">

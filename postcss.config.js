@@ -2,7 +2,7 @@
  * Big thanks to the instructions here!
  * https://flaviocopes.com/tailwind-setup/
  */
- 
+
 const tailwindcss = require('tailwindcss')
 const purgecss = require('@fullhuman/postcss-purgecss')
 const cssnano = require('cssnano')
