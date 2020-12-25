@@ -1,0 +1,43 @@
+{
+  "name": "rainbow-code",
+  "version": "2.1.7",
+  "description": "Simple library for code syntax highlighting",
+  "main": "./src/rainbow-node.js",
+  "homepage": "http://rainbowco.de",
+  "scripts": {
+    "test": "luna test/rainbow-test.js test/language -n -x -f -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ccampbell/rainbow.git"
+  },
+  "keywords": [
+    "code",
+    "highlight",
+    "highlighter"
+  ],
+  "author": "Craig Campbell",
+  "license": "Apache-2.0",
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "del": "2.2.0",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "3.1.0",
+    "gulp-bump": "2.1.0",
+    "gulp-eslint": "^6.0.0",
+    "gulp-git": "2.6.0",
+    "gulp-inject-string": "1.1.0",
+    "gulp-run-command": "0.0.10",
+    "gulp-sass": "^4.1.0",
+    "luna-testing": "^1.6.1",
+    "rollup": "0.33.0",
+    "rollup-plugin-buble": "0.12.1",
+    "rollup-plugin-uglify": "0.3.1",
+    "semver": "5.1.0",
+    "through": "2.3.8",
+    "yargs": "4.7.1"
+  },
+  "dependencies": {
+    "web-worker": "1.0.0"
+  }
+}

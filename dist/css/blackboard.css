@@ -1,0 +1,84 @@
+pre {
+  position: relative;
+}
+pre {
+  word-wrap: break-word;
+  padding: 6px 10px;
+  margin-bottom: 20px;
+}
+pre code {
+  border: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+}
+code {
+  margin: 0px 2px;
+  padding: 0px 5px;
+  font-size: 16px;
+}
+pre,
+code {
+  color: #ffffff;
+  background: transparent;
+}
+pre,
+pre code {
+  font-size: 16px;
+}
+pre .comment {
+  color: #998;
+}
+pre .support {
+  color: #fff;
+}
+pre .tag {
+   color: #ffffff;
+}
+pre .tag-name {
+  color: #CBD5E1;
+}
+pre .keyword,
+pre .css-property,
+pre .vendor-fix,
+pre .sass,
+pre .class,
+pre .id,
+pre .css-value,
+pre .entity.function,
+pre .storage.function {
+  font-weight: bold;
+}
+pre .css-property,
+pre .css-value,
+pre .vendor-fix,
+pre .support.namespace {
+  color: #333;
+}
+pre .constant.numeric,
+pre .keyword.unit,
+pre .hex-color {
+  font-weight: normal;
+  color: #b2ebf2;
+}
+pre .entity.class {
+  color: #458;
+}
+pre .entity.id,
+pre .entity.function {
+  color: #64748B;
+}
+pre .attribute,
+pre .variable {
+  color: #64748B;
+}
+pre .string{
+    color: #bfad19;
+}
+pre .support.value {
+  font-weight: normal;
+  color: #CBD5E1;
+}
+pre .regexp {
+  color: #fff;
+}

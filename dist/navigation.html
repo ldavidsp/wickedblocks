@@ -1,0 +1,1193 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>WickedBlocks by Wicked Templates</title>
+        <meta name="author" content="Michael Andreuzza" />
+        <meta name="keywords" content="keywords,here" />
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
+        <link rel="stylesheet" href="./css/wt.css" type="text/css" />
+        <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+
+    <body class="antialiased bg-blue-1300">
+        <!----- Snackbar -->
+        <div x-data="noticesHandler()"
+            class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
+            @notice.window="add($event.detail)" style="pointer-events:none">
+            <template x-for="notice of notices" :key="notice.id">
+                <div x-show="visible.includes(notice)" x-transition:enter="transition ease-in duration-200"
+                    x-transition:enter-start="transform opacity-0 translate-y-2"
+                    x-transition:enter-end="transform opacity-100" x-transition:leave="transition ease-out duration-500"
+                    x-transition:leave-start="transform translate-x-0 opacity-100"
+                    x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
+                    class="z-50 flex items-center justify-center w-full h-16 mb-4 text-lg font-semibold tracking-tighter text-white cursor-pointer lg:mr-6 dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
+                    :class="{
+            				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
+            			 }" style="pointer-events:all" x-text="notice.text">
+                </div>
+            </template>
+        </div>
+    <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
+    <div class="fixed z-50 w-full text-gray-500 border-b border-blueGray-900 bg-blue-1300 lg:px-20">
+        <div x-data="{ open: false }"
+            class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+            <div class="flex flex-row items-center justify-between p-4 ">
+                <a href="./index.html" class=" focus:outline-none">
+                    <h1 class="text-2xl font-bold tracking-tighter text-white uppercase lg:text-3xl title-font ">
+                        WickedBlocks
+                        <span class="text-xs">©</span>
+                    </h1>
+                </a>
+                <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
+                    <svg fill="#000000" viewBox="0 0 20 20" class="w-12 h-12">
+                        <path x-show="!open" fill-rule="evenodd"
+                            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                            clip-rule="evenodd"></path>
+                        <path x-show="open" fill-rule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+            <nav :class="{'flex': open, 'hidden': !open}"
+                class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+                <a class="inline-flex items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform hover:text-teal-1000 rounded-xl hover:bg-gray-600 md:ml-4 md:w-auto font-lg focus:outline-none"
+                    href="https://www.wickedtemplates.com/free-templates">
+                    <span>
+                        WickedTemplates
+                    </span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-4" width="24" height="24" viewBox="0 0 24 24"
+                        stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <circle cx="12" cy="12" r="9" />
+                        <line x1="15" y1="9" x2="9" y2="15" />
+                        <polyline points="15 15 15 9 9 9" />
+                    </svg>
+
+                </a>
+                <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
+                    @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
+                    class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
+
+                    Quick Acces to Blockss
+                </button>
+            </nav>
+        </div>
+    </div>
+        <!-- Dev tools -->
+        <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
+        </div>
+        <!---- sidebar -->
+        <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+            @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+            <div x-show.transition.opacity.duration.500="open" @click="open = false"
+                class="fixed inset-0 bg-opacity-25 bg-blue-1400">
+            </div>
+            <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
+                :class="{'translate-x-full': !open}">
+                <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+                    class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="w-auto p-8 ">
+                    <div class="w-64 h-screen mt-8 sm:mt-0">
+                        <nav class="mt-20 font-semibold">
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./left-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round">
+                                    <line x1="20" y1="4" x2="20" y2="20" />
+                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./centered-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="12" y1="4" x2="12" y2="9" />
+                                    <line x1="12" y1="15" x2="12" y2="20" />
+                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./right-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="4" y1="4" x2="4" y2="20" />
+                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./auth.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                    <circle cx="9" cy="9" r="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./clients.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="12" cy="7" r="4" />
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="6" height="5" rx="2" />
+                                    <rect x="4" y="13" width="6" height="7" rx="2" />
+                                    <rect x="14" y="4" width="6" height="7" rx="2" />
+                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
+                                    <line x1="15" y1="8" x2="15.01" y2="8" />
+                                    <rect x="4" y="4" width="16" height="16" rx="3" />
+                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./navigation.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="#">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!----end sidebar -->
+        <!--- navigtation 1-->
+        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview1' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview1'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code1'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerOne').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview1'">
+                            <img class="rounded-b-xl " loading="lazy" src="./assets/sections/nav/nav-1.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code1'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navOne">
+                                        <!-----
+  <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto">
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Pricing</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Contact</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Services</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Now</a>
+                </nav>
+                <button
+                    class="items-center px-8 py-3 mt-4 font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-blue-800 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none">Button
+                </button>
+            </div>
+        </header>
+        <div class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+                <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                  --  Content goes here --
+                </p>
+        </div>
+-->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;nav class="flex flex-wrap items-center justify-center text-base md:ml-auto md:mr-auto"&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Contact&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Services&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Now&lt;/a&gt;
+                &lt;/nav&gt;
+                &lt;button
+                    class="items-center px-8 py-3 mt-4 font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-blue-800 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none"&gt;Button
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+                &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                  --  Content goes here --
+                &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--- navigtation 2-->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview2' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview2'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code2'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerTwo').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview2'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-2.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code2'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navTwo">
+                                        <!--------
+                      <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center text-base ">
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 lg:ml-24 hover:text-gray-800">Pricing</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Contact</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Services</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Now</a>
+                </nav>
+                <div class="flex ml-auto">
+                    <button
+                        class="inline-flex px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">Button</button>
+                    <button
+                        class="items-center px-8 py-3 mt-4 ml-5 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-black0 hover:bg-black hover:text-white focus:ring focus:outline-none">Button
+                        <svg class="hidden lg:block" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </header>
+        <div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+                      --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;nav class="flex flex-wrap items-center justify-center text-base "&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 lg:ml-24 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Contact&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Services&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Now&lt;/a&gt;
+                &lt;/nav&gt;
+                &lt;div class="flex ml-auto"&gt;
+                    &lt;button
+                        class="inline-flex px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Button&lt;/button&gt;
+                    &lt;button
+                        class="items-center px-8 py-3 mt-4 ml-5 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-black0 hover:bg-black hover:text-white focus:ring focus:outline-none"&gt;Button
+                        &lt;svg class="hidden lg:block" fill="none" stroke="currentColor" stroke-linecap="round"
+                            stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24"&gt;
+                            &lt;path d="M5 12h14M12 5l7 7-7 7"&gt;&lt;/path&gt;
+                        &lt;/svg&gt;
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- navigtation 3-->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview3' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview3'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code3'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerThree').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview3'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-3.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code3'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navThree">
+                                        <!----   <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <nav class="flex flex-wrap items-center justify-center text-base ">
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Pricing</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Contact</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Services</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Now</a>
+                </nav>
+                <a class="flex items-center w-40 mx-auto mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <button
+                    class="items-center px-8 py-3 mt-4 font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:ml-auto lg:mt-px hover:border-blue-700 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none">Button
+                </button>
+            </div>
+        </header>
+        <div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+        ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;nav class="flex flex-wrap items-center justify-center text-base "&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Contact&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Services&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Now&lt;/a&gt;
+                &lt;/nav&gt;
+                &lt;a class="flex items-center w-40 mx-auto mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;button
+                    class="items-center px-8 py-3 mt-4 font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:ml-auto lg:mt-px hover:border-blue-700 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none"&gt;Button
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- navigtation 4 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview4' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview4'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code4'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerFour').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview4'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-4.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code4'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navFour">
+                                        <!----
+                     <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center text-base md:ml-auto ">
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Pricing</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Contact</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Services</a>
+                    <a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800">Now</a>
+                </nav>
+                <button
+                    class="items-center px-8 py-3 mt-4 font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-blue-800 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none">Button
+                </button>
+            </div>
+        </header>
+        <div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+            ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;nav class="flex flex-wrap items-center justify-center text-base md:ml-auto "&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Contact&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Services&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm font-semibold text-gray-600 hover:text-gray-800"&gt;Now&lt;/a&gt;
+                &lt;/nav&gt;
+                &lt;button
+                    class="items-center px-8 py-3 mt-4 font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-blue-800 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none"&gt;Button
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- navigtation 5 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview5' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview5'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code5'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerFive').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview5'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-5.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code5'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navFive">
+                                        <!----
+  <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <button
+                    class="items-center px-8 py-3 mt-4 ml-auto font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-blue-800 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none">Button
+                </button>
+            </div>
+        </header>
+        <div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+                  ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;button
+                    class="items-center px-8 py-3 mt-4 ml-auto font-semibold text-blue-700 transition duration-500 ease-in-out transform bg-white border rounded-lg lg:inline-flex lg:mt-px hover:border-blue-800 hover:bg-blue-700 hover:text-white focus:ring focus:outline-none"&gt;Button
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- navigtation 6 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview6' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview6'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code6'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerSix').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview6'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-6.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code6'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navSix">
+                                        <!----
+ <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+            <div class="flex items-end ml-auto w-2/2 ">
+                <div class="relative w-1/2 mr-4 text-left ">
+                    <input type="text" id="hero-field" name="hero-field"
+                        class="flex-grow w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                </div>
+                <button
+                    class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg l bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">Action
+                </button>
+            </div>
+            </div>
+        </header>
+        <div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+                      ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+            &lt;div class="flex items-end ml-auto w-2/2 "&gt;
+                &lt;div class="relative w-1/2 mr-4 text-left "&gt;
+                    &lt;input type="text" id="hero-field" name="hero-field"
+                        class="flex-grow w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
+                &lt;/div&gt;
+                &lt;button
+                    class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg l bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Action
+                &lt;/button&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- navigtation 7 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview7' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview7'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code7' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code7'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('headerSeven').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview7'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-7.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code7'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navSeven">
+                                        <!----
+                       <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center ml-4 text-base">
+                    <a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800">Dashboard</a>
+                    <a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800">Projects</a>
+                    <a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800">Setting</a>
+                    <a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800">Account</a>
+                </nav>
+                <button
+                    class="p-1 ml-auto text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                    <span class="sr-only">View notifications</span>
+                                        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                        </svg>
+                                        </button>
+                                        <button
+                                            class="flex ml-3 text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                                            id="user-menu" aria-haspopup="true">
+                                            <span class="sr-only">Open user menu</span>
+                                            <img class="w-8 h-8 rounded-full "
+                                                src="https://res.cloudinary.com/the-unicorns-feed/image/upload/v1606463246/avatars/mke2_wnzylr.png"
+                                                alt="">
+                                        </button>
+                                    </div>
+                                    </header>
+                                    <div
+                                        class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+                                        <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                                            -- Content goes here --
+                                        </p>
+                                    </div>
+                                    ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;nav class="flex flex-wrap items-center justify-center ml-4 text-base"&gt;
+                    &lt;a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800"&gt;Dashboard&lt;/a&gt;
+                    &lt;a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800"&gt;Projects&lt;/a&gt;
+                    &lt;a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800"&gt;Setting&lt;/a&gt;
+                    &lt;a href="#"
+                        class="mr-5 text-sm font-semibold text-gray-700 rounded-xl hover:text-gray-800"&gt;Account&lt;/a&gt;
+                &lt;/nav&gt;
+                &lt;button
+                    class="p-1 ml-auto text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"&gt;
+                    &lt;span class="sr-only"&gt;View notifications&lt;/span&gt;
+                    &lt;!-- Heroicon name: bell --&gt;
+                    &lt;svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" aria-hidden="true"&gt;
+                        &lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /&gt;
+                    &lt;/svg&gt;
+                &lt;/button&gt;
+                &lt;button
+                    class="flex ml-3 text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    id="user-menu" aria-haspopup="true"&gt;
+                    &lt;span class="sr-only"&gt;Open user menu&lt;/span&gt;
+                        &lt;img class="w-8 h-8 rounded-full "
+                            src="https://res.cloudinary.com/the-unicorns-feed/image/upload/v1606463246/avatars/mke2_wnzylr.png" alt=""&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- navigtation 8 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview8' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview8'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code8' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code8'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+                            onclick="copyToClip(document.getElementById('navEight').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview8'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/nav/nav-8.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code8'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="navEight">
+                                        <!--------
+                                               <header class="text-gray-700 bg-white border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <div class="flex items-center mx-auto lg:pl-20">
+                    <div class="relative w-full mr-4 text-left ">
+                        <input type="text" id="hero-field" name="hero-field"
+                            class="flex-grow w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0">
+                    </div>
+                    <button
+                        class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg l bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">Action
+                    </button>
+                </div>
+                <button class="p-1 ml-auto text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring ">
+                    <span class="sr-only">View notifications</span>
+                    <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                </button>
+                <button
+                    class="flex ml-3 text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    id="user-menu" aria-haspopup="true">
+                    <span class="sr-only">Open user menu</span>
+                    <img class="w-8 h-8 border border-white rounded-full"
+                        src="https://res.cloudinary.com/the-unicorns-feed/image/upload/v1606463246/avatars/mke2_wnzylr.png"
+                        alt="">
+                </button>
+            </div>
+        </header>
+        <header class="text-gray-700 border-t border-b body-font">
+            <div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row ">
+                <nav class="flex flex-wrap items-center justify-center ml-4 text-base">
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Dashboard</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Projects</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Setting</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Account</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Team</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Code</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Preferences</a>
+                    <a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800">Profile</a>
+                </nav>
+            </div>
+        </header>
+        <div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+                                            --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;header class="text-gray-700 bg-white border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;a class="flex items-center w-40 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;div class="flex items-center mx-auto lg:pl-20"&gt;
+                    &lt;div class="relative w-full mr-4 text-left "&gt;
+                        &lt;input type="text" id="hero-field" name="hero-field"
+                            class="flex-grow w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
+                    &lt;/div&gt;
+                    &lt;button
+                        class="flex items-center px-4 py-2 mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg l bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Action
+                    &lt;/button&gt;
+                &lt;/div&gt;
+                &lt;button class="p-1 ml-auto text-gray-400 bg-gray-800 rounded-full hover:text-white focus:outline-none focus:ring "&gt;
+                    &lt;span class="sr-only"&gt;View notifications&lt;/span&gt;
+                    &lt;svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor" aria-hidden="true"&gt;
+                        &lt;path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /&gt;
+                    &lt;/svg&gt;
+                &lt;/button&gt;
+                &lt;button
+                    class="flex ml-3 text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                    id="user-menu" aria-haspopup="true"&gt;
+                    &lt;span class="sr-only"&gt;Open user menu&lt;/span&gt;
+                    &lt;img class="w-8 h-8 border border-white rounded-full"
+                        src="https://res.cloudinary.com/the-unicorns-feed/image/upload/v1606463246/avatars/mke2_wnzylr.png"
+                        alt=""&gt;
+                &lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;header class="text-gray-700 border-t border-b body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center md:flex-row "&gt;
+                &lt;nav class="flex flex-wrap items-center justify-center ml-4 text-base"&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Dashboard&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Projects&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Setting&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Account&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Team&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Code&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Preferences&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-700 rounded-xl hover:text-gray-800"&gt;Profile&lt;/a&gt;
+                &lt;/nav&gt;
+            &lt;/div&gt;
+        &lt;/header&gt;
+        &lt;div
+            class="container w-full p-20 m-4 mx-auto my-16 text-center bg-white border-2 border-dashed border-blueGray-300 h-96 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+    <footer class="pt-10 border-t border-gray-800 body-font">
+        <div
+            class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+            <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
+                <img class="object-cover object-center rounded-lg" alt="badge" src="./assets/Wickedblockswidget.svg">
+            </a>
+            <nav class="flex flex-wrap items-center justify-center py-6 text-base lg:ml-auto md:py-1 ">
+                <span class="mr-6 font-semibold tracking-tighter text-teal-1000 text-md"> OTHER PROJECTS</span>
+                <a href="https://colorsandfonts.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">
+                    ColorsAndFonts</a>
+                <a href="https://unicornsfeed.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">TheUnicornsFeed</a>
+                <a href="https://wickedtemplates.com"
+                    class="mr-4 text-blueGray-300 hover:text-yellow-1000">WickedTemplates</a>
+            </nav>
+        </div>
+    </footer>
+    <footer class="mt-10 border-t border-gray-800 body-font">
+        <div class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+            <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
+                © 2020 WickedBlocks
+            </p>
+            <span class="inline-flex items-center lg:ml-auto">
+                <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                    <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+                        <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+                        MICHAEL ANDREUZZA
+                    </a>
+                </p>
+                <img loading="lazy  alt=" team"
+                    class="flex-shrink-0 object-cover object-center w-8 h-8 ml-4 rounded-full bg-blueGray-50 lg:mb-0 "
+                    src="./assets/mike.svg">
+            </span>
+        </div>
+    </footer>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script>
+            function copyToClip(str) {
+                function listener(e) {
+                    e.clipboardData.setData("text/html", str);
+                    e.clipboardData.setData("text/plain", str);
+                    e.preventDefault();
+                }
+                document.addEventListener("copy", listener);
+                document.execCommand("copy");
+                document.removeEventListener("copy", listener);
+            }
+        </script>
+        <script>
+            // Sidebar
+            function slideout() {
+                return {
+                    open: false,
+                    usedKeyboard: false,
+                    init() {
+                        this.$watch('open', value => {
+                            value && this.$refs.closeButton.focus()
+                            this.toggleOverlay()
+                        })
+                        this.toggleOverlay()
+                    },
+                    toggleOverlay() {
+                        document.body.classList[this.open ? 'add' : 'remove']('h-screen', 'overflow-hidden')
+                    }
+                }
+            }
+            // Snackbar
+            function noticesHandler() {
+                return {
+                    notices: [],
+                    visible: [],
+                    add(notice) {
+                        notice.id = Date.now()
+                        this.notices.push(notice)
+                        this.fire(notice.id)
+                    },
+                    fire(id) {
+                        this.visible.push(this.notices.find(notice => notice.id == id))
+                        const timeShown = 2000 * this.visible.length
+                        setTimeout(() => {
+                            this.remove(id)
+                        }, timeShown)
+                    },
+                    remove(id) {
+                        const notice = this.visible.find(notice => notice.id == id)
+                        const index = this.visible.indexOf(notice)
+                        this.visible.splice(index, 1)
+                    },
+                };
+            }
+        </script>
+        <script src="./rainbow-code/dist/rainbow.js"></script>
+        <script src="./rainbow-code/src/language/generic.js"></script>
+        <script src="./rainbow-code/src/language/html.js"></script>
+        <script src="./rainbow-code/src/language/numbers.js"></script>
+    </body>
+
+</html>

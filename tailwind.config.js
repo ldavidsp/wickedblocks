@@ -5,10 +5,14 @@ const allColors = require(`tailwindcss/colors`);
 const extendedColors = defaultColors;
 
 module.exports = {
-purge: {
-		mode: 'layers',
-		content: ['./dist/**/*.html'],
-  },
+// purge: {
+  //  enabled: true,
+  //  content: [
+  //    './dist/**/*.html',
+   //   './dist/*.html',
+   //   './src/**/*.js',
+   // ],
+ // },
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
@@ -17,7 +21,7 @@ purge: {
       halfscreen: '50vh',
       },
       colors: {
-         transparent: 'transparent',
+      transparent: 'transparent',
       current: 'currentColor',
       black: colors.black,
       white: colors.white,
@@ -47,8 +51,12 @@ purge: {
         1300: '#000012',
         1400:'#01071B',
         },
-        purple: {
-        1000: '#202746',
+        yellow: {
+        1000: '#FCE952',
+
+        },
+         teal: {
+        1000: '#63F7EE',
 
         },
       }
@@ -59,6 +67,7 @@ purge: {
     extend: {},
   },
   plugins: [
+        require('@tailwindcss/typography'),
 
   ],
 }

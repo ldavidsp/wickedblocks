@@ -10,9 +10,10 @@
     <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
     <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
     <link rel="stylesheet" href="./css/wt.css" type="text/css" />
+    <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
     <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
   </head>
-  <body class="antialiased bg-white dark:bg-blue-1400">
+  <body class="antialiased bg-blue-1300">
     <!----- Snackbar -->
     <div x-data="noticesHandler()" class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
       @notice.window="add($event.detail)" style="pointer-events:none">
@@ -24,26 +25,23 @@
           x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
           class="z-50 flex items-center justify-center w-full h-16 mb-4 text-lg font-semibold tracking-tighter text-white cursor-pointer lg:mr-6 dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
           :class="{
-            				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
-            			 }" style="pointer-events:all" x-text="notice.text">
+              				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
+              			 }" style="pointer-events:all" x-text="notice.text">
         </div>
       </template>
     </div>
     <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
-    <div class="fixed z-50 w-full text-gray-500 bg-white border-b dark:bg-blue-1400 dark:border-blue-700 lg:px-20">
+    <div class="fixed z-50 w-full text-gray-500 border-b border-blueGray-900 bg-blue-1300 lg:px-20">
       <div x-data="{ open: false }"
         class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-        <div class="flex flex-row items-center justify-between p-4">
+        <div class="flex flex-row items-center justify-between p-4 ">
           <a href="./index.html" class=" focus:outline-none">
-            <h1
-              class="text-2xl font-bold tracking-tighter text-blue-800 uppercase lg:text-3xl title-font dark:text-white">
+            <h1 class="text-2xl font-bold tracking-tighter text-white uppercase lg:text-3xl title-font ">
               WickedBlocks
               <span class="text-xs">©</span>
-              <small class="text-sm italic font-semibold text-blue-600 lowercase"> by <span
-                  class="uppercase text-blue-1400 dark:text-white">WICKEDTEMPLATES</SPAN> </small>
             </h1>
           </a>
-          <button class="rounded-xl md:hidden focus:outline-none" @click="open = !open">
+          <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
             <svg fill="#000000" viewBox="0 0 20 20" class="w-12 h-12">
               <path x-show="!open" fill-rule="evenodd"
                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
@@ -56,42 +54,26 @@
         </div>
         <nav :class="{'flex': open, 'hidden': !open}"
           class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+          <a class="inline-flex items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform hover:text-teal-1000 rounded-xl hover:bg-gray-600 md:ml-4 md:w-auto font-lg focus:outline-none"
+            href="https://www.wickedtemplates.com/free-templates">
+            <span>
+              WickedTemplates
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="ml-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="12" cy="12" r="9" />
+              <line x1="15" y1="9" x2="9" y2="15" />
+              <polyline points="15 15 15 9 9 9" />
+            </svg>
+
+          </a>
           <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
             @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
-            class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl bg-blue-1000 hover:bg-blue-800 md:ml-4 md:w-auto font-lg focus:outline-none">
-            More Blocks
+            class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
+
+            Quick Acces to Blockss
           </button>
-          <!--   <div @click.away="open = false" class="relative" x-data="{ open: false }">
-                                                                <button @click="open = !open"
-                                                                    class="flex flex-row items-center w-full px-8 py-3 mt-2 font-semibold text-left text-white transition duration-500 ease-in-out bg-transparent bg-blueGray-900 lg:mr-2 md:w-auto md:inline md:mt-0 md:ml-4 focus:text-lightBlue-500 text-md hover:text-white focus:outline-none rounded-xl">
-                                                                    <span> Products </span>
-                                                                    <svg fill="currentColor" viewBox="0 0 20 20"
-                                                                        :class="{'rotate-180': open, 'rotate-0': !open}"
-                                                                        class="inline w-4 h-4 mt-1 ml-1 transition-transform duration-200 transform md:-mt-1">
-                                                                        <path fill-rule="evenodd"
-                                                                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                                            clip-rule="evenodd"></path>
-                                                                    </svg>
-                                                                </button>
-                                                                <div x-show="open" x-transition:enter="transition ease-out duration-100"
-                                                                    x-transition:enter-start="transform opacity-0 scale-95"
-                                                                    x-transition:enter-end="transform opacity-100 scale-100"
-                                                                    x-transition:leave="transition ease-in duration-75"
-                                                                    x-transition:leave-start="transform opacity-100 scale-100"
-                                                                    x-transition:leave-end="transform opacity-0 scale-95"
-                                                                    class="absolute right-0 z-30 w-full mt-2 origin-top-right bg-transparent md:w-48">
-                                                                    <div class="px-2 py-2 border border-gray-900 bg-blueGray-900 rounded-xl">
-                                                                        <a class="block px-4 py-2 mt-2 text-lg font-normal text-white bg-transparent border-gray-900 rounded-lg md:mt-0 focus:text-lightBlue-500 hover:bg-lightBlueGray-900 focus:bg-blue-1300 focus:outline-none focus:border"
-                                                                            href="#">
-                                                                            Screens
-                                                                        </a>
-                                                                        <a class="block px-4 py-2 mt-2 text-lg font-normal text-white bg-transparent border-gray-900 rounded-lg md:mt-0 focus:text-lightBlue-500 hover:bg-lightBlueGray-900 focus:bg-blue-1300 focus:outline-none focus:border"
-                                                                            href="./templates.html">
-                                                                            Templates
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </div> -->
         </nav>
       </div>
     </div>
@@ -102,13 +84,13 @@
     <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
       @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
       <div x-show.transition.opacity.duration.500="open" @click="open = false"
-        class="fixed inset-0 bg-opacity-25 bg-blueGray-900">
+        class="fixed inset-0 bg-opacity-25 bg-blue-1400">
       </div>
       <div
-        class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blueGray-900 border-blueGray-500 text-lightBlue-500"
+        class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
         :class="{'translate-x-full': !open}">
         <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
-          class="absolute top-0 right-0 p-2 mt-12 mr-6 transition duration-500 ease-in-out transform border-2 border-lightBlue-500 hover:bg-lightBlue-800 hover:text-white rounded-xl">
+          class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
             class="feather feather-x">
@@ -118,59 +100,68 @@
         </button>
         <div class="w-auto p-8 ">
           <div class="w-64 h-screen mt-8 sm:mt-0">
-            <nav class="mt-16 font-semibold">
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+            <nav class="mt-20 font-semibold">
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="./left-headers.html">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                  fill="none" stroke-linecap="round">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round">
                   <line x1="20" y1="4" x2="20" y2="20" />
-                  <rect x="4" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                  <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="./centered-headers.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <line x1="12" y1="4" x2="12" y2="9" />
                   <line x1="12" y1="15" x2="12" y2="20" />
-                  <rect x="6" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                  <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
-                href="#">
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                href="./right-headers.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <line x1="4" y1="4" x2="4" y2="20" />
-                  <rect x="8" y="9" width="12" height="6" rx="2" stroke="#0da5e9" />
+                  <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
-                href="#">
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                href="./auth.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                  <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#0da5e9" />
+                  <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Auth</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
-                  <circle cx="9" cy="9" r="2" stroke="#0da5e9" />
+                  <circle cx="9" cy="9" r="2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Pricing</span>
               </a>
-             
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                href="./clients.html">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
+                </svg>
+                <span class="mx-4 font-medium tracking-tighter">Clients</span>
+              </a>
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -178,49 +169,49 @@
                   <rect x="4" y="4" width="6" height="5" rx="2" />
                   <rect x="4" y="13" width="6" height="7" rx="2" />
                   <rect x="14" y="4" width="6" height="7" rx="2" />
-                  <rect x="14" y="15" width="6" height="5" rx="2" stroke="#0da5e9" />
+                  <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Grids</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#0da5e9" />
+                  <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Forms</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#0da5e9" />
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
                   <line x1="15" y1="8" x2="15.01" y2="8" />
                   <rect x="4" y="4" width="16" height="16" rx="3" />
-                  <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#0da5e9" />
-                  <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#0da5e9" />
+                  <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                  <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Gallery</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
-                href="#">
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                href="./navigation.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <line x1="4" y1="9" x2="20" y2="9" stroke="#0da5e9" />
+                  <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Navigation</span>
               </a>
-              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-lightBlue-500 hover:bg-lightBlue-800"
+              <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="#">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <rect x="4" y="4" width="16" height="16" rx="2" />
-                  <line x1="4" y1="15" x2="20" y2="15" stroke="#0da5e9" />
+                  <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter">Footers</span>
               </a>
@@ -230,7 +221,7 @@
       </div>
     </section>
     <!----end sidebar -->
-    <!--- header 1-->
+    <!--- client 1-->
     <section class="p-5 pt-32 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview1' }">
@@ -309,45 +300,45 @@
 -->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                     &lt;section class=<span style="color: #87ceeb">&quot;mx-auto&quot;</span>&gt;
-                            &lt;div class=<span style="color: #87ceeb">&quot;container px-5 mx-auto lg:px-24 lg:py-48&quot;</span>&gt;
-                                &lt;div class=<span style="color: #87ceeb">&quot;flex flex-col w-full mb-12 text-left lg:text-center&quot;</span>&gt;
-                                    &lt;h1 class=<span style="color: #87ceeb">&quot;mb-6 text-2xl font-semibold text-blue-800 title-font&quot;</span>&gt;
-                                        A centered
-                                        &lt;br class=<span style="color: #87ceeb">&quot;md:hidden&quot;</span>&gt;
-                                        headline.
-                                    &lt;/h1&gt;
-                                &lt;/div&gt;
-                                &lt;div class=<span style="color: #87ceeb">&quot;grid grid-cols-3 gap-16 my-16 text-center lg:grid-cols-6&quot;</span>&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;flex items-center justify-center &quot;</span>&gt;
-                                        &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/e018a9cb3c198579040cd7c76efc4319d9d73065/78dee/logos/notion.svg&quot;</span>
-                                            alt=<span style="color: #87ceeb">&quot;Todoist Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span> &gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;flex items-center justify-center &quot;</span>&gt;
-                                        &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg&quot;</span>
-                                            alt=<span style="color: #87ceeb">&quot;Slack Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span> &gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;flex items-center justify-center &quot;</span>&gt;
-                                        &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg&quot;</span>
-                                            alt=<span style="color: #87ceeb">&quot;Typeform Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span> &gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;flex items-center justify-center &quot;</span>&gt;
-                                        &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg&quot;</span>
-                                            alt=<span style="color: #87ceeb">&quot;Algolia Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span> &gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;flex items-center justify-center &quot;</span>&gt;
-                                        &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg&quot;</span>
-                                            alt=<span style="color: #87ceeb">&quot;Postcss Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span> &gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;flex items-center justify-center &quot;</span>&gt;
-                                        &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg&quot;</span>
-                                            alt=<span style="color: #87ceeb">&quot;Yahoo Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span> &gt;
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/section&gt;
-                     </pre>
+                  <pre class="leading-6"><code data-language="html">
+      &lt;section class="mx-auto"&gt;
+        &lt;div class="container px-5 mx-auto lg:px-24 lg:py-48"&gt;
+            &lt;div class="flex flex-col w-full mb-12 text-left lg:text-center"&gt;
+                &lt;h1 class="mb-6 text-2xl font-semibold text-blue-800 title-font"&gt;
+                    A centered
+                    &lt;br class="md:hidden"&gt;
+                    headline.
+                &lt;/h1&gt;
+            &lt;/div&gt;
+            &lt;div class="grid grid-cols-3 gap-16 my-16 text-center lg:grid-cols-6"&gt;
+                &lt;div class="flex items-center justify-center "&gt;
+                    &lt;img src="https://d33wubrfki0l68.cloudfront.net/e018a9cb3c198579040cd7c76efc4319d9d73065/78dee/logos/notion.svg"
+                        alt="Todoist Logo" class="block object-contain h-16" &gt;
+                &lt;/div&gt;
+                &lt;div class="flex items-center justify-center "&gt;
+                    &lt;img src="https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg"
+                        alt="Slack Logo" class="block object-contain h-16" &gt;
+                &lt;/div&gt;
+                &lt;div class="flex items-center justify-center "&gt;
+                    &lt;img src="https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg"
+                        alt="Typeform Logo" class="block object-contain h-16" &gt;
+                &lt;/div&gt;
+                &lt;div class="flex items-center justify-center "&gt;
+                    &lt;img src="https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg"
+                        alt="Algolia Logo" class="block object-contain h-16" &gt;
+                &lt;/div&gt;
+                &lt;div class="flex items-center justify-center "&gt;
+                    &lt;img src="https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg"
+                        alt="Postcss Logo" class="block object-contain h-16" &gt;
+                &lt;/div&gt;
+                &lt;div class="flex items-center justify-center "&gt;
+                    &lt;img src="https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg"
+                        alt="Yahoo Logo" class="block object-contain h-16" &gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+                    </code></pre>
                 </div>
               </div>
             </div>
@@ -355,7 +346,7 @@
         </div>
       </div>
     </section>
-    <!--- header 2-->
+    <!--- client 2-->
     <section class="p-5 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview2' }">
@@ -428,38 +419,38 @@
                       --->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                    &lt;section class=<span style="color: #87ceeb">&quot;mx-auto&quot;</span>&gt;
-                              &lt;div class=<span style="color: #87ceeb">&quot;container px-5 mx-auto lg:px-16 lg:py-48&quot;</span>&gt;
-                                  &lt;div class=<span style="color: #87ceeb">&quot;grid grid-cols-3 gap-16 my-16 text-center lg:grid-cols-6&quot;</span>&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;flex text-left&quot;</span>&gt;
-                                          &lt;p class=<span style="color: #87ceeb">&quot;mb-6 text-xl font-semibold text-blue-800 title-font&quot;</span>&gt;Deploy your mvp in
-                                             &lt;/p&gt;
-                                      &lt;/div&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center &quot;</span>&gt;
-                                          &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg&quot;</span>
-                                              alt=<span style="color: #87ceeb">&quot;Slack Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span>&gt;
-                                      &lt;/div&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center &quot;</span>&gt;
-                                          &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg&quot;</span>
-                                              alt=<span style="color: #87ceeb">&quot;Typeform Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span>&gt;
-                                      &lt;/div&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center &quot;</span>&gt;
-                                          &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg&quot;</span>
-                                              alt=<span style="color: #87ceeb">&quot;Algolia Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span>&gt;
-                                      &lt;/div&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center &quot;</span>&gt;
-                                          &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg&quot;</span>
-                                              alt=<span style="color: #87ceeb">&quot;Postcss Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span>&gt;
-                                      &lt;/div&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;flex justify-center &quot;</span>&gt;
-                                          &lt;img src=<span style="color: #87ceeb">&quot;https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg&quot;</span>
-                                              alt=<span style="color: #87ceeb">&quot;Yahoo Logo&quot;</span> class=<span style="color: #87ceeb">&quot;block object-contain h-16&quot;</span>&gt;
-                                      &lt;/div&gt;
-                                  &lt;/div&gt;
-                              &lt;/div&gt;
-                          &lt;/section&gt;
-  </pre>
+                  <pre class="leading-6"><code data-language="html">
+           &lt;section class="mx-auto"&gt;
+            &lt;div class="container px-5 mx-auto lg:px-16 lg:py-48"&gt;
+                &lt;div class="grid grid-cols-3 gap-16 my-16 text-center lg:grid-cols-6"&gt;
+                    &lt;div class="flex text-left"&gt;
+                        &lt;p class="mb-6 text-xl font-semibold text-blue-800 title-font"&gt;Deploy your mvp in
+                           &lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex justify-center "&gt;
+                        &lt;img src="https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg"
+                            alt="Slack Logo" class="block object-contain h-16"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex justify-center "&gt;
+                        &lt;img src="https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg"
+                            alt="Typeform Logo" class="block object-contain h-16"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex justify-center "&gt;
+                        &lt;img src="https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg"
+                            alt="Algolia Logo" class="block object-contain h-16"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex justify-center "&gt;
+                        &lt;img src="https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg"
+                            alt="Postcss Logo" class="block object-contain h-16"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex justify-center "&gt;
+                        &lt;img src="https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg"
+                            alt="Yahoo Logo" class="block object-contain h-16"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -468,7 +459,7 @@
       </div>
       </div>
     </section>
-    <!--- header 3-->
+    <!--- client 3-->
     <section class="p-5 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview3' }">
@@ -528,26 +519,26 @@
         ---->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                            &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;container px-8 pb-24 mx-auto pt-36 lg:px-4&quot;</span>&gt;
-                                        &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -m-4&quot;</span>&gt;
-                                            &lt;div class=<span style="color: #87ceeb">&quot;p-4 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                                &lt;div class=<span style="color: #87ceeb">&quot;h-full text-center&quot;</span>&gt;
-                                                    &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                        class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full&quot;</span>
-                                                        src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt;
-                                                    &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble
-                                                    griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose
-                                                    blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah.&lt;/p&gt;
-                                                    &lt;h2 class=<span style="color: #87ceeb">&quot;mt-12 text-sm font-medium tracking-wider text-gray-900 title-font&quot;</span>&gt;Mike Vega&lt;/h2&gt;
-                                                    &lt;p class=<span style="color: #87ceeb">&quot;text-gray-500&quot;</span>&gt;CE0  &lt;/p&gt;
-                                                &lt;/div&gt;
-                                            &lt;/div&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                &lt;/section&gt;
-                  </pre>
+                  <pre class="leading-6"><code data-language="html">
+          &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pb-24 mx-auto pt-36 lg:px-4"&gt;
+                &lt;div class="flex flex-wrap -m-4"&gt;
+                    &lt;div class="p-4 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full text-center"&gt;
+                            &lt;img alt="testimonial"
+                                class="inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full"
+                                src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt;
+                            &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble
+                            griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose
+                            blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah.&lt;/p&gt;
+                            &lt;h2 class="mt-12 text-sm font-medium tracking-wider text-gray-900 title-font"&gt;Mike Vega&lt;/h2&gt;
+                            &lt;p class="text-gray-500"&gt;CE0  &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -556,7 +547,7 @@
       </div>
       </div>
     </section>
-    <!--- header 4 -->
+    <!--- client 4 -->
     <section class="p-5 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview4' }">
@@ -623,32 +614,32 @@
             ---->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                  &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
-                                &lt;div class=<span style="color: #87ceeb">&quot;container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-36 md:flex-row&quot;</span>&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0&quot;</span>&gt;
-                                        &lt;img class=<span style="color: #87ceeb">&quot;object-cover object-center rounded&quot;</span> alt=<span style="color: #87ceeb">&quot;hero&quot;</span> src=<span style="color: #87ceeb">&quot;https://dummyimage.com/720x400/94a3b8/ffffff&quot;</span>&gt;
-                                    &lt;/div&gt;
-                                    &lt;div
-                                        class=<span style="color: #87ceeb">&quot;flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left&quot;</span>&gt;
-                                        &lt;p class=<span style="color: #87ceeb">&quot;mb-2 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-xl&quot;</span>&gt;
-                                            &quot;Tailwind CSS templates
-                                            with a wicked design.
-                                            Professionally designed and 100% responsive static templates for startups and personal use.Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble
-                                            griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose
-                                            blunt.&quot;&lt;/p&gt;
-                                            &lt;h2 class=<span style="color: #87ceeb">&quot;my-6 text-sm font-medium tracking-wider text-gray-900 title-font&quot;</span>&gt;Mike Vega
-                                                &lt;span class=<span style="color: #87ceeb">&quot;text-gray-500&quot;</span>&gt;CE0 &lt;/span&gt;
-                                            &lt;/h2&gt;
-                                            &lt;div class=<span style="color: #87ceeb">&quot;flex &quot;</span>&gt;
-                                                &lt;a href=<span style="color: #87ceeb">&quot;#slide1&quot;</span> class=<span style="color: #87ceeb">&quot;w-4 h-4 mx-1 bg-gray-400 rounded-full&quot;</span>&gt;&lt;/a&gt;
-                                                &lt;a href=<span style="color: #87ceeb">&quot;#slide2&quot;</span> class=<span style="color: #87ceeb">&quot;w-4 h-4 mx-1 bg-gray-400 rounded-full&quot;</span>&gt;&lt;/a&gt;
-                                                &lt;a href=<span style="color: #87ceeb">&quot;#slide3&quot;</span> class=<span style="color: #87ceeb">&quot;w-4 h-4 mx-1 bg-gray-400 rounded-full&quot;</span>&gt;&lt;/a&gt;
-                                            &lt;/div&gt;
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                            &lt;/section&gt;
-                </pre>
+                  <pre class="leading-6"><code data-language="html">
+          &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-36 md:flex-row"&gt;
+                &lt;div class="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0"&gt;
+                    &lt;img class="object-cover object-center rounded" alt="hero" src="https://dummyimage.com/720x400/94a3b8/ffffff"&gt;
+                &lt;/div&gt;
+                &lt;div
+                    class="flex flex-col items-center text-center lg:flex-grow md:w-1/2 lg:pl-24 md:pl-16 md:items-start md:text-left"&gt;
+                    &lt;p class="mb-2 text-base leading-relaxed text-center text-gray-700 lg:text-left lg:text-xl"&gt;
+                        "Tailwind CSS templates
+                        with a wicked design.
+                        Professionally designed and 100% responsive static templates for startups and personal use.Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble
+                        griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose
+                        blunt."&lt;/p&gt;
+                        &lt;h2 class="my-6 text-sm font-medium tracking-wider text-gray-900 title-font"&gt;Mike Vega
+                            &lt;span class="text-gray-500"&gt;CE0 &lt;/span&gt;
+                        &lt;/h2&gt;
+                        &lt;div class="flex "&gt;
+                            &lt;a href="#slide1" class="w-4 h-4 mx-1 bg-gray-400 rounded-full"&gt;&lt;/a&gt;
+                            &lt;a href="#slide2" class="w-4 h-4 mx-1 bg-gray-400 rounded-full"&gt;&lt;/a&gt;
+                            &lt;a href="#slide3" class="w-4 h-4 mx-1 bg-gray-400 rounded-full"&gt;&lt;/a&gt;
+                        &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -657,7 +648,7 @@
       </div>
       </div>
     </section>
-    <!--- header 5 -->
+    <!--- client 5 -->
     <section class="p-5 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview5' }">
@@ -734,42 +725,42 @@
                   ---->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                                &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;container px-8 pt-48 pb-24 mx-auto lg:px-4&quot;</span>&gt;
-                                        &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -m-4&quot;</span>&gt;
-                                            &lt;div class=<span style="color: #87ceeb">&quot;p-4 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                                &lt;div class=<span style="color: #87ceeb">&quot;h-full text-left&quot;</span>&gt;
-                                                    &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. &quot;.&lt;/p&gt;
-                                                    &lt;a class=<span style="color: #87ceeb">&quot;inline-flex items-center mt-6&quot;</span>&gt;
-                                                        &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                            class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full&quot;</span>
-                                                            src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt; &lt;span
-                                                            class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow pl-4&quot;</span>&gt;
-                                                            &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Adi Pio&lt;/span&gt;
-                                                            &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                                        &lt;/span&gt;
-                                                    &lt;/a&gt;
-                                                &lt;/div&gt;
-                                            &lt;/div&gt;
-                                            &lt;div class=<span style="color: #87ceeb">&quot;p-4 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                                &lt;div class=<span style="color: #87ceeb">&quot;h-full text-left&quot;</span>&gt;
-                                                    &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. &quot;.&lt;/p&gt;
-                                                    &lt;a class=<span style="color: #87ceeb">&quot;inline-flex items-center mt-6&quot;</span>&gt;
-                                                        &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                            class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full&quot;</span>
-                                                            src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt; &lt;span
-                                                            class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow pl-4&quot;</span>&gt;
-                                                            &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Anna Schönn&lt;/span&gt;
-                                                            &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                                        &lt;/span&gt;
-                                                    &lt;/a&gt;
-                                                &lt;/div&gt;
-                                            &lt;/div&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                &lt;/section&gt;
-                  </pre>
+                  <pre class="leading-6"><code data-language="html">
+         &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-48 pb-24 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap -m-4"&gt;
+                    &lt;div class="p-4 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full text-left"&gt;
+                            &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. ".&lt;/p&gt;
+                            &lt;a class="inline-flex items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt; &lt;span
+                                    class="flex flex-col flex-grow pl-4"&gt;
+                                    &lt;span class="font-medium text-gray-900 title-font"&gt;Adi Pio&lt;/span&gt;
+                                    &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-4 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full text-left"&gt;
+                            &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. ".&lt;/p&gt;
+                            &lt;a class="inline-flex items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-20 h-20 mb-8 bg-gray-100 rounded-full"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt; &lt;span
+                                    class="flex flex-col flex-grow pl-4"&gt;
+                                    &lt;span class="font-medium text-gray-900 title-font"&gt;Anna Schönn&lt;/span&gt;
+                                    &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -778,7 +769,7 @@
       </div>
       </div>
     </section>
-    <!--- header 6 -->
+    <!--- client 6 -->
     <section class="p-5 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview6' }">
@@ -868,55 +859,55 @@
                       ---->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                    &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
-                          &lt;div class=<span style="color: #87ceeb">&quot;container px-8 pt-48 pb-24 mx-auto lg:px-4&quot;</span>&gt;
-                              &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -m-4&quot;</span>&gt;
-                                  &lt;div class=<span style="color: #87ceeb">&quot;p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;h-full text-left&quot;</span>&gt;
-                                          &lt;a class=<span style="color: #87ceeb">&quot;inline-flex items-center mt-6&quot;</span>&gt;
-                                              &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                  class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-16 h-16 mb-8 bg-gray-100 rounded-full&quot;</span>
-                                                  src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt; &lt;span
-                                                  class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow pl-4&quot;</span>&gt;
-                                                  &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Adi Pio&lt;/span&gt;
-                                                  &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                              &lt;/span&gt;
-                                          &lt;/a&gt;
-                                           &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant.&quot;.&lt;/p&gt;
-                                      &lt;/div&gt;
-                                  &lt;/div&gt;
-                                  &lt;div class=<span style="color: #87ceeb">&quot;p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;h-full text-left&quot;</span>&gt;
-                                          &lt;a class=<span style="color: #87ceeb">&quot;inline-flex items-center mt-6&quot;</span>&gt;
-                                              &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                  class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-16 h-16 mb-8 bg-gray-100 rounded-full&quot;</span>
-                                                  src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt; &lt;span
-                                                  class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow pl-4&quot;</span>&gt;
-                                                  &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Anna Schönn&lt;/span&gt;
-                                                  &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                              &lt;/span&gt;
-                                          &lt;/a&gt;
-                                           &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant.&quot;.&lt;/p&gt;
-                                      &lt;/div&gt;
-                                  &lt;/div&gt;
-                                  &lt;div class=<span style="color: #87ceeb">&quot;p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                      &lt;div class=<span style="color: #87ceeb">&quot;h-full text-left&quot;</span>&gt;
-                                          &lt;a class=<span style="color: #87ceeb">&quot;inline-flex items-center mt-6&quot;</span>&gt;
-                                              &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                  class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-16 h-16 mb-8 bg-gray-100 rounded-full&quot;</span>
-                                                  src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt; &lt;span class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow pl-4&quot;</span>&gt;
-                                                  &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Jakko Svensson&lt;/span&gt;
-                                                  &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                              &lt;/span&gt;
-                                          &lt;/a&gt;
-                                           &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant.&quot;.&lt;/p&gt;
-                                      &lt;/div&gt;
-                                  &lt;/div&gt;
-                              &lt;/div&gt;
-                          &lt;/div&gt;
-                      &lt;/section&gt;
-                </pre>
+                  <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-48 pb-24 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap -m-4"&gt;
+                    &lt;div class="p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full text-left"&gt;
+                            &lt;a class="inline-flex items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 mb-8 bg-gray-100 rounded-full"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt; &lt;span
+                                    class="flex flex-col flex-grow pl-4"&gt;
+                                    &lt;span class="font-medium text-gray-900 title-font"&gt;Adi Pio&lt;/span&gt;
+                                    &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                             &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant.".&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full text-left"&gt;
+                            &lt;a class="inline-flex items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 mb-8 bg-gray-100 rounded-full"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt; &lt;span
+                                    class="flex flex-col flex-grow pl-4"&gt;
+                                    &lt;span class="font-medium text-gray-900 title-font"&gt;Anna Schönn&lt;/span&gt;
+                                    &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                             &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant.".&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full text-left"&gt;
+                            &lt;a class="inline-flex items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 mb-8 bg-gray-100 rounded-full"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt; &lt;span class="flex flex-col flex-grow pl-4"&gt;
+                                    &lt;span class="font-medium text-gray-900 title-font"&gt;Jakko Svensson&lt;/span&gt;
+                                    &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                                &lt;/span&gt;
+                            &lt;/a&gt;
+                             &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant.".&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -925,7 +916,7 @@
       </div>
       </div>
     </section>
-    <!--- header 7 -->
+    <!--- client 7 -->
     <section class="p-5 lg:pt-10 lg:p-0">
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview7' }">
@@ -1016,58 +1007,56 @@
                           ---->
                   </div>
                   <!---- display code goes here.-->
-                  <pre class="m-4 -ml-20 text-xs whitespace-pre">
-                    &lt;section class=<span style="color: #87ceeb">&quot;text-gray-700 body-font&quot;</span>&gt;
-                            &lt;div class=<span style="color: #87ceeb">&quot;container px-8 pb-24 mx-auto pt-36 lg:px-4&quot;</span>&gt;
-                                &lt;div class=<span style="color: #87ceeb">&quot;flex flex-wrap -m-4&quot;</span>&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                        &lt;div class=<span style="color: #87ceeb">&quot;h-full p-4 text-left border rounded-xl&quot;</span>&gt;
-                                            &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. &quot;.&lt;/p&gt;
-                                            &lt;a class=<span style="color: #87ceeb">&quot;flex flex-wrap items-center mt-6&quot;</span>&gt;
-                                                &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                    class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-16 h-16 mb-4 rounded-full bg-4gray-100&quot;</span>
-                                                    src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt;
-                                            &lt;/a&gt;
-                                            &lt;span class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow &quot;</span>&gt;
-                                                &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Jakko Svensson&lt;/span&gt;
-                                                &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                            &lt;/span&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                        &lt;div class=<span style="color: #87ceeb">&quot;h-full p-4 text-left border rounded-xl&quot;</span>&gt;
-                                            &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. &quot;.&lt;/p&gt;
-                                            &lt;a class=<span style="color: #87ceeb">&quot;flex flex-wrap items-center mt-6&quot;</span>&gt;
-                                                &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                    class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-16 h-16 mb-4 rounded-full bg-4gray-100&quot;</span>
-                                                    src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt;
-                                            &lt;/a&gt;
-                                            &lt;span class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow &quot;</span>&gt;
-                                                &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Mike Taissöön&lt;/span&gt;
-                                                &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                            &lt;/span&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                    &lt;div class=<span style="color: #87ceeb">&quot;p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0&quot;</span>&gt;
-                                        &lt;div class=<span style="color: #87ceeb">&quot;h-full p-4 text-left border rounded-xl&quot;</span>&gt;
-                                            &lt;p class=<span style="color: #87ceeb">&quot;text-base font-medium leading-relaxed text-gray-700&quot;</span>&gt;&quot;Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. &quot;.&lt;/p&gt;
-                                            &lt;a class=<span style="color: #87ceeb">&quot;flex flex-wrap items-center mt-6&quot;</span>&gt;
-                                                &lt;img alt=<span style="color: #87ceeb">&quot;testimonial&quot;</span>
-                                                    class=<span style="color: #87ceeb">&quot;inline-block object-cover object-center w-16 h-16 mb-4 rounded-full bg-4gray-100&quot;</span>
-                                                    src=<span style="color: #87ceeb">&quot;https://dummyimage.com/302x302/94a3b8/ffffff&quot;</span>&gt;
-                                            &lt;/a&gt;
-                                            &lt;span class=<span style="color: #87ceeb">&quot;flex flex-col flex-grow &quot;</span>&gt;
-                                                &lt;span class=<span style="color: #87ceeb">&quot;font-medium text-gray-900 title-font&quot;</span>&gt;Sanna Ristola&lt;/span&gt;
-                                                &lt;span class=<span style="color: #87ceeb">&quot;text-sm text-gray-500 uppercase&quot;</span>&gt;Corporate Position&lt;/span&gt;
-                                            &lt;/span&gt;
-                                        &lt;/div&gt;
-                                    &lt;/div&gt;
-                                &lt;/div&gt;
-                            &lt;/div&gt;
-                        &lt;/section&gt;
-
-
-                    </pre>
+                  <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pb-24 mx-auto pt-36 lg:px-4"&gt;
+                &lt;div class="flex flex-wrap -m-4"&gt;
+                    &lt;div class="p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full p-4 text-left border rounded-xl"&gt;
+                            &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. ".&lt;/p&gt;
+                            &lt;a class="flex flex-wrap items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 mb-4 rounded-full bg-4gray-100"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt;
+                            &lt;/a&gt;
+                            &lt;span class="flex flex-col flex-grow "&gt;
+                                &lt;span class="font-medium text-gray-900 title-font"&gt;Jakko Svensson&lt;/span&gt;
+                                &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full p-4 text-left border rounded-xl"&gt;
+                            &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. ".&lt;/p&gt;
+                            &lt;a class="flex flex-wrap items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 mb-4 rounded-full bg-4gray-100"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt;
+                            &lt;/a&gt;
+                            &lt;span class="flex flex-col flex-grow "&gt;
+                                &lt;span class="font-medium text-gray-900 title-font"&gt;Mike Taissöön&lt;/span&gt;
+                                &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-8 mx-auto mb-6 lg:w-1/3 lg:mb-0"&gt;
+                        &lt;div class="h-full p-4 text-left border rounded-xl"&gt;
+                            &lt;p class="text-base font-medium leading-relaxed text-gray-700"&gt;"Skate ipsum dolor sit amet, slam birdie wheels ollie darkslide egg plant. Baseplate 540 helipop flypaper feeble griptape. Nollie deck street bluntslide half-cab yeah. Casper slide ollie north 540 Bill Danforth slide cess slide nose blunt. Pressure flip Streetstyle in Tempe mute-air judo air backside fastplant yeah. ".&lt;/p&gt;
+                            &lt;a class="flex flex-wrap items-center mt-6"&gt;
+                                &lt;img alt="testimonial"
+                                    class="inline-block object-cover object-center w-16 h-16 mb-4 rounded-full bg-4gray-100"
+                                    src="https://dummyimage.com/302x302/94a3b8/ffffff"&gt;
+                            &lt;/a&gt;
+                            &lt;span class="flex flex-col flex-grow "&gt;
+                                &lt;span class="font-medium text-gray-900 title-font"&gt;Sanna Ristola&lt;/span&gt;
+                                &lt;span class="text-sm text-gray-500 uppercase"&gt;Corporate Position&lt;/span&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                  </code></pre>
                 </div>
               </div>
             </div>
@@ -1076,67 +1065,38 @@
       </div>
       </div>
     </section>
-    <footer class="mx-auto bg-blue-1400 body-font">
-      <div
-        class="container flex flex-col flex-wrap px-5 py-12 mx-auto lg:px-20 md:items-center md:flex-row md:flex-no-wrap">
-        <div class="flex-shrink-0 mx-auto text-center lg:w-96 md:mx-0 md:text-left">
-          <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
-            <img class="object-cover object-center rounded-lg" alt="badge" src="./assets/Wickedblockswidget.svg">
-          </a>
-        </div>
-        <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:pl-20 md:mt-0">
-          <div class="w-1/2 px-3 lg:w-1/2">
-            <h2
-              class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
-              SOCIAL</h2>
-            <nav class="mb-10 list-none">
-              <li>
-                <a href="https://twitter.com/WickedTemplates"
-                  class="text-blueGray-300 hover:text-blue-600">Wickedtemplates
-                  Twitter</a>
-              </li>
-              <li>
-                <a href="https://twitter.com/Mike_Andreuzza" class="text-blueGray-300 hover:text-blue-600">Mike's
-                  Twitter</a>
-              </li>
-            </nav>
-          </div>
-          <div class="w-1/2 px-3 lg:w-1/2">
-            <h2
-              class="mb-3 font-semibold tracking-tighter text-transparent bg-blue-500 text-md bg-clip-text title-font">
-              OTHER PROJECTS</h2>
-            <nav class="mb-10 list-none">
-              <li>
-                <a href="https://colorsandfonts.com" class="text-blueGray-300 hover:text-blue-600">Colors &amp;
-                  fonts</a>
-              </li>
-              <li>
-                <a href="https://unicornsfeed.com" class="text-blueGray-300 hover:text-blue-600">TheUnicornsFeed</a>
-              </li>
-              <li>
-                <a href="https://wickedtemplates.com" class="text-blueGray-300 hover:text-blue-600">Wickedtemplates</a>
-              </li>
-            </nav>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <footer class="text-white border-t border-blueGray-900 bg-blue-1400 body-font">
-      <div class="container flex flex-col flex-wrap items-center px-5 py-8 mx-auto lg:px-20 sm:flex-row">
-        <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-          © 2020 WickedBlocks
-          <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
-        </p>
-        <img loading="lazy focus:outline-none" alt="team"
-          class="flex-shrink-0 object-cover object-center w-8 h-8 mx-4 mb-4 rounded-full1b0-blueGray-50 lg:mb-0"
-          src="./assets/mike.svg">
+  <footer class="pt-10 border-t border-gray-800 body-font">
+    <div class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+      <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
+        <img class="object-cover object-center rounded-lg" alt="badge" src="./assets/Wickedblockswidget.svg">
+      </a>
+      <nav class="flex flex-wrap items-center justify-center py-6 text-base lg:ml-auto md:py-1 ">
+        <span class="mr-6 font-semibold tracking-tighter text-teal-1000 text-md"> OTHER PROJECTS</span>
+        <a href="https://colorsandfonts.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">
+          ColorsAndFonts</a>
+        <a href="https://unicornsfeed.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">TheUnicornsFeed</a>
+        <a href="https://wickedtemplates.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">WickedTemplates</a>
+      </nav>
+    </div>
+  </footer>
+  <footer class="mt-10 border-t border-gray-800 body-font">
+    <div class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+      <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
+        © 2020 WickedBlocks
+      </p>
+      <span class="inline-flex items-center lg:ml-auto">
         <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
           <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+            <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
             MICHAEL ANDREUZZA
           </a>
         </p>
-      </div>
-    </footer>
+        <img loading="lazy  alt=" team"
+          class="flex-shrink-0 object-cover object-center w-8 h-8 ml-4 rounded-full bg-blueGray-50 lg:mb-0 "
+          src="./assets/mike.svg">
+      </span>
+    </div>
+  </footer>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script>
       function copyToClip(str) {
@@ -1193,5 +1153,9 @@
         };
       }
     </script>
+    <script src="./rainbow-code/dist/rainbow.js"></script>
+    <script src="./rainbow-code/src/language/generic.js"></script>
+    <script src="./rainbow-code/src/language/html.js"></script>
+    <script src="./rainbow-code/src/language/numbers.js"></script>
   </body>
 </html>
