@@ -1,6 +1,6 @@
 <!-- component -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll">
 
     <head>
         <meta charset="UTF-8">
@@ -8,9 +8,16 @@
         <title>Wicked Blocks</title>
         <meta name="author" content="Michael Andreuzza">
         <meta name="keywords" content="keywords,here">
-        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
         <link rel="stylesheet" href="./css/tailwind.css" type="text/css">
         <link rel="stylesheet" href="./css/wt.css" type="text/css">
+        <!----favicons-->
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicons/favicon-16x16.png">
+        <!--         <link rel="manifest" href="./favicons/site.webmanifest">-->
+        <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#010412">
+        <meta name="msapplication-TileColor" content="#010412">
+        <meta name="theme-color" content="#010412">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
 
@@ -27,7 +34,7 @@
                         </h1>
                     </a>
                     <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
-                        <svg fill="#000000" viewBox="0 0 20 20" class="w-12 h-12">
+                        <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
                             <path x-show="!open" fill-rule="evenodd"
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
                                 clip-rule="evenodd"></path>
@@ -39,24 +46,10 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-                    <a class="inline-flex items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform hover:text-teal-1000 rounded-xl hover:bg-gray-600 md:ml-4 md:w-auto font-lg focus:outline-none"
-                        href="https://www.wickedtemplates.com/free-templates">
-                        <span>
-                            WickedTemplates
-                        </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <line x1="15" y1="9" x2="9" y2="15" />
-                            <polyline points="15 15 15 9 9 9" />
-                        </svg>
-
-                    </a>
+                   
                     <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
                         @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
                         class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
-
                         Quick Acces to Blockss
                     </button>
                 </nav>
@@ -65,6 +58,7 @@
         <!-- Dev tools -->
         <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
         </div>
+
         <!---- sidebar -->
         <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
             @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
@@ -88,9 +82,11 @@
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./left-headers.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
-                                    <line x1="20" y1="4" x2="20" y2="20" />
-                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="4" y1="4" x2="4" y2="20" />
+                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                                 </svg>
                                 <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
                             </a>
@@ -109,11 +105,9 @@
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./right-headers.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <line x1="4" y1="4" x2="4" y2="20" />
-                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
+                                    <line x1="20" y1="4" x2="20" y2="20" />
+                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                                 </svg>
                                 <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
                             </a>
@@ -130,7 +124,7 @@
                                 <span class="mx-4 font-medium tracking-tighter">Auth</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
+                                href="./pricing.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -153,7 +147,7 @@
                                 <span class="mx-4 font-medium tracking-tighter">Clients</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
+                                href="./grids.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -166,7 +160,7 @@
                                 <span class="mx-4 font-medium tracking-tighter">Grids</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
+                                href="./forms.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -177,7 +171,7 @@
                                 <span class="mx-4 font-medium tracking-tighter">Forms</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
+                                href="./gallery.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -201,7 +195,7 @@
                                 <span class="mx-4 font-medium tracking-tighter">Navigation</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
+                                href="./footers.html">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
                                     stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
                                     stroke-linejoin="round">
@@ -219,7 +213,7 @@
         <!----end sidebar -->
         <!----Hero  -->
         <section class="bg-blue-1300 body-font">
-            <div class="container justify-center px-10 py-8 pt-32 mx-auto lg:px-24">
+            <div class="container justify-center px-5 py-8 pt-32 mx-auto lg:px-24">
                 <div class="flex flex-col w-full mb-2 ">
                     <h2 class="w-full mx-auto mb-6 text-xs font-semibold tracking-widest text-white">COZ WE AIN'T
                         GOT TIME FOR THAT..
@@ -264,8 +258,7 @@
                     </a>
                     <a class="mr-2" href="#price">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blue-1300 text-blueGray-900 lg:w-auto focus:outline-none ring:opacity-50 "
-                            title="coming soon" disable>
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
                             Pricing
                         </button>
                     </a>
@@ -277,8 +270,7 @@
                     </a>
                     <a class="mr-2" href="#grids">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blue-1300 text-blueGray-900 lg:w-auto focus:outline-none ring:opacity-50 "
-                            title="coming soon" disable>
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
                             Grids
                         </button>
                     </a>
@@ -290,8 +282,7 @@
                     </a>
                     <a class="mr-2" href="#gallery">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blue-1300 text-blueGray-900 lg:w-auto focus:outline-none ring:opacity-50 "
-                            title="coming soon" disable>
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
                             Gallery
                         </button>
                     </a>
@@ -303,8 +294,7 @@
                     </a>
                     <a class="mr-2" href="#footers">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blue-1300 text-blueGray-900 lg:w-auto focus:outline-none ring:opacity-50 "
-                            title="coming soon" disable>
+                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
                             Footers
                         </button>
                     </a>
@@ -313,898 +303,454 @@
         </section>
         <!----end hero -->
         <!----Left Headers-->
-        <section class="text-left lg:pt-8" id="leftheaders">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Left Headers
+        <section class="text-left " id="leftheaders">
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        HEADERS
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        12 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Left Headers.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        This headers have text on the left side of the screen including zero to 2 call to action, on the
+                        right side there's an image
+                        or other assets.You can use them as a hero or within sections.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./left-headers.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./left-headers.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-1.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-2.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-3.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-4.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-5.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-6.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-7.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-8.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-9.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-10.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-11.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-left/headers-left-header-12.png"
-                                alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg shadow" alt="badge"
+                        src="./assets/intros/left-header.svg">
                 </div>
             </div>
         </section>
         <!----Centered Headers-->
         <section class="text-left lg:pt-8" id="centeredheaders">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Centered Headers
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        HEADERS
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        15 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Centered Headers.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        This headers have text on top of none, one or two call to action, sometimes there's an image or
+                        other assets, like text or call to actions as mentioned.You can use them as a hero or within
+                        sections.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./centered-headers.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./centered-headers.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-1.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-2.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-3.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-4.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-5.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-6.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-7.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-8.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-9.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-10.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-11.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-12.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-13.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-14.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-center/headers-center-header-15.png"
-                                alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg shadow" alt="badge"
+                        src="./assets/intros/centered-header.svg">
                 </div>
             </div>
         </section>
         <!----Right Headers-->
         <section class="text-left lg:pt-8" id="rightheaders">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Right Headers
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        HEADERS
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        12 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Right Headers.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        This headers have text on the right side of the screen with one or two call to action, on the
+                        left side there's an image or other assets. You can use them as a hero or within sections.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./right-headers.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./right-headers.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-1.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-2.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-3.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-4.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-5.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-6.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-7.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-8.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-9.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-10.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-11.png"
-                                alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/headers-right/headers-right-header-12.png"
-                                alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg shadow" alt="badge"
+                        src="./assets/intros/right-header.svg">
                 </div>
             </div>
         </section>
         <!----Auth -->
         <section class="text-left lg:pt-8" id="auth">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         Authentication
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        4 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Auth Components.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        Authentication/Authorization is used by a server when the server needs to know exactly who is
+                        accessing their information or site.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./auth.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./auth.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/auth/auth-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/auth/auth-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/auth/auth-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/auth/auth-4.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/auth.svg">
                 </div>
             </div>
         </section>
         <!----Pricing -->
         <section class="text-left lg:pt-8" id="price">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Pricing
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        E Commerce
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        6 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Pricing.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        The Pricing Table component is used to display price + features about your products. Cards and
+                        tables are often used for this.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="#">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./pricing.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/pricing/price-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/pricing/price-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/pricing/price-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/pricing/price-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/pricing/price-5.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/pricing.svg">
                 </div>
             </div>
         </section>
-        <!----Clients Headers-->
+        <!----Clients -->
         <section class="text-left lg:pt-8" id="clients">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Clients
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        TESTIMONIALS
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        7 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Clients.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        A website testimonial showcases the quality and success of a site’s products or services, this
+                        ones can include:
+                        Customer experiences,
+                        Case studies,
+                        Customer photos,
+                        Video reviews,
+                        Customer quotes, and even "plain Jane" logos.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./clients.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./clients.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-5.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-6.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/clients/clients-7.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/clients.svg">
                 </div>
             </div>
         </section>
         <!----Grids -->
         <section class="text-left lg:pt-8" id="grids">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Grids
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        LAYOUT
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        15 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Flexbox Grids.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        The flex layout allows responsive elements within a container to be automatically arranged
+                        depending upon screen size.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="#">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./grids.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-5.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-6.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-7.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-8.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-9.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-10.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-11.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-12.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-13.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-14.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/grids/grids-15.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/grids.svg">
                 </div>
             </div>
         </section>
         <!----Forms -->
         <section class="text-left lg:pt-8" id="forms">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Forms
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        DATA
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        11 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Forms.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        The form allows for user input and t is an interactive page that mimics a paper document or
+                        form, where users fill out particular
+                        fields with informaion.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./forms.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./forms.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-5.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-6.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-7.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-8.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-9.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-10.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/forms/forms-11.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/form.svg">
                 </div>
             </div>
         </section>
         <!---- gallery-->
         <section class="text-left lg:pt-8" id="gallery">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Gallery
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        IMAGES
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        13 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Galleries.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        Galleries are a popular way of integrating images into a website, allowing users to see several
+                        images clearly at once.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="#">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./gallery.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-5.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-6.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-7.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-8.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-9.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-10.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-11.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-12.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/gallery/gallery-13.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/gallery.svg">
                 </div>
             </div>
         </section>
         <!---- Navigation -->
         <section class="text-left lg:pt-8" id="nav">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Navigation
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        MENU
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        8 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Navigation.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        Navigation allows visitors to flow from one page to another without frustration.
+                        Without website navigation, your visitors can’t figure out how to find your blog, your email
+                        signup page, your product
+                        listings, pricing, contact information, your aunties picture or help docs.
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="./navigation.html">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./navigation.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-5.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-6.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-7.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/nav/nav-8.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/nav.svg">
                 </div>
             </div>
         </section>
         <!---- Footers -->
         <section class="text-left lg:pt-8" id="footers">
-            <div class="container flex flex-col items-center px-5 py-10 pt-8 mx-auto lg:px-24 md:flex-row ">
-                <div class="inline-flex items-center w-full border-b border-blueGray-600 sm:flex sm:justify-between">
-                    <h2 class="mb-4 text-xl font-normal tracking-tight text-white font-display sm:text-2xl">
-                        Footers
+            <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
+                <div
+                    class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
+                    <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
+                        SubMenu
                     </h2>
-                    <p class="px-4 ml-auto leading-relaxed text-gray-500 text-md lg:text-lg lg:border-r-2">
-                        10 Sections
+                    <h1
+                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        Footers.</h1>
+                    <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
+                        The website footer is the section of content at the very bottom of a web page. It typically
+                        contains a copyright notice,
+                        link to a privacy policy, sitemap, logo, contact information, social media icons, and an email
+                        sign-up form.( This last one i wouldnt add on a footer though...)
                     </p>
-                    <a class="flex items-center leading-relaxed text-teal-1000 text-md lg:text-lg hover:text-lightBlue-500"
-                        href="#">
-                        <span class="mx-4 font-semibold "> See All </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                            stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <polyline points="7 7 12 12 7 17" />
-                            <polyline points="13 7 18 12 13 17" />
-                        </svg>
-                    </a>
+                    <div class="flex justify-center">
+                        <a class="font-xs" href="./footers.html">
+                            <button
+                                class="flex items-center px-8 py-3 mt-auto font-semibold text-white transition duration-500 ease-in-out transform border-2 rounded-lg border-blueGray-600 hover:border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 md:w-auto font-lg focus:outline-none focus:text-blue-1000 lg:mr-4">
+                                See All
+                                <span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 " width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                        <line x1="15" y1="16" x2="19" y2="12" />
+                                        <line x1="15" y1="8" x2="19" y2="12" />
+                                    </svg>
+                                </span>
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="container flex flex-col items-center px-5 mx-auto lg:px-20 md:flex-row ">
-                <div class="flex flex-wrap w-full mx-auto -m-4">
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-1.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-2.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-3.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-4.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-5.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-6.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-7.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-8.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-9.png" alt="header-left">
-                        </div>
-                    </div>
-                    <div class="w-full p-2 lg:w-1/5 md:w-1/2">
-                        <div class="relative h-full overflow-hidden text-center bg-white rounded-lg shadow-xl">
-                            <img loading="lazy" src="./assets/sections/footers/footer-10.png" alt="header-left">
-                        </div>
-                    </div>
+                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                    <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
+                        src="./assets/intros/footer.svg">
                 </div>
             </div>
         </section>
@@ -1213,21 +759,23 @@
                 <div class="flex flex-col w-full p-8 mt-10 lg:w-4/6 md:w-1/2 md:ml-auto md:mt-0 ">
                     <h1
                         class="text-5xl font-bold tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-teal-1000 to-yellow-1000 lg:text-8xl">
-                        Stay
-                        <br> Connected.
+                        Got
+                        <br> Feedback?
                     </h1>
-                    <p class="mt-4 leading-relaxed text-blueGray-300">Subscribe for updates.</p>
+                    <p class="mt-4 leading-relaxed text-blueGray-300">Let me know what you think.</p>
                     <span
                         class="inline-block w-20 h-1 mt-6 mb-4 rounded-xl bg-gradient-to-r from-teal-1000 to-yellow-1000 "></span>
                 </div>
                 <div class="flex flex-col w-full p-8 lg:w-2/6 md:w-1/2 md:ml-auto lg:mt-10 md:mt-0">
                     <form class="w-full" name="feedback" method="POST" data-netlify="true" netlify-honeypot="bot-field">
                         <div class="relative mb-4">
-                            <input type="email" name="email" placeholder="email@example.com"
-                                class="w-full px-3 py-1 text-base leading-8 text-gray-700 transition-colors duration-200 ease-in-out bg-white border border-gray-300 rounded-lg outline-none focus:border-black">
+                            <textarea id="message" name="message"
+                                class="w-full px-3 py-1 text-base leading-6 text-white transition-colors duration-200 ease-in-out border border-transparent rounded-lg shadow outline-none resize-none bg-blueGray-700 h-28 focus:border-blueGray-900 focus:ring-2 focus:ring-blueGray-600"></textarea>
+
                         </div>
                         <button type="submit"
-                            class="w-full px-8 py-2 font-bold transition duration-500 ease-in-out transform rounded-lg focus:outline-none bg-teal-1000 hover:bg-yellow-1000 text-blue-1000">Subscribe
+                            class="w-full px-8 py-2 font-bold transition-colors duration-500 ease-in-out transform rounded-lg focus:outline-none bg-teal-1000 hover:bg-yellow-1000 text-blue-1000">Send
+                            Feedback
                         </button>
                         <div class="mx-auto mt-10 ">
                             <span>

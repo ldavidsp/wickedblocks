@@ -43,7 +43,7 @@
                         </h1>
                     </a>
                     <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
-                        <svg fill="#000000" viewBox="0 0 20 20" class="w-12 h-12">
+                        <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
                             <path x-show="!open" fill-rule="evenodd"
                                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
                                 clip-rule="evenodd"></path>
@@ -55,24 +55,9 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-                    <a class="inline-flex items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform hover:text-teal-1000 rounded-xl hover:bg-gray-600 md:ml-4 md:w-auto font-lg focus:outline-none"
-                        href="https://www.wickedtemplates.com/free-templates">
-                        <span>
-                            WickedTemplates
-                        </span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="ml-4" width="24" height="24" viewBox="0 0 24 24"
-                            stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <line x1="15" y1="9" x2="9" y2="15" />
-                            <polyline points="15 15 15 9 9 9" />
-                        </svg>
-
-                    </a>
                     <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
                         @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
                         class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
-
                         Quick Acces to Blockss
                     </button>
                 </nav>
@@ -81,146 +66,2141 @@
         <!-- Dev tools -->
         <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
         </div>
-        <!---- sidebar -->
-        <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
-            @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
-            <div x-show.transition.opacity.duration.500="open" @click="open = false"
-                class="fixed inset-0 bg-opacity-25 bg-blue-1400">
+    <!---- sidebar -->
+    <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+        @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+        <div x-show.transition.opacity.duration.500="open" @click="open = false"
+            class="fixed inset-0 bg-opacity-25 bg-blue-1400">
+        </div>
+        <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
+            :class="{'translate-x-full': !open}">
+            <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+                class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="w-auto p-8 ">
+                <div class="w-64 h-screen mt-8 sm:mt-0">
+                    <nav class="mt-20 font-semibold">
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./left-headers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <line x1="4" y1="4" x2="4" y2="20" />
+                                <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./centered-headers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <line x1="12" y1="4" x2="12" y2="9" />
+                                <line x1="12" y1="15" x2="12" y2="20" />
+                                <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./right-headers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round">
+                                <line x1="20" y1="4" x2="20" y2="20" />
+                                <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./auth.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./pricing.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                <circle cx="9" cy="9" r="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./clients.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <circle cx="12" cy="7" r="4" />
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Clients</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./grids.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="4" width="6" height="5" rx="2" />
+                                <rect x="4" y="13" width="6" height="7" rx="2" />
+                                <rect x="14" y="4" width="6" height="7" rx="2" />
+                                <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./forms.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./gallery.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
+                                <line x1="15" y1="8" x2="15.01" y2="8" />
+                                <rect x="4" y="4" width="16" height="16" rx="3" />
+                                <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                                <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./navigation.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./footers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                        </a>
+                    </nav>
+                </div>
             </div>
-            <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
-                :class="{'translate-x-full': !open}">
-                <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
-                    class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-x">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-                <div class="w-auto p-8 ">
-                    <div class="w-64 h-screen mt-8 sm:mt-0">
-                        <nav class="mt-20 font-semibold">
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./left-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round">
-                                    <line x1="20" y1="4" x2="20" y2="20" />
-                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./centered-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <line x1="12" y1="4" x2="12" y2="9" />
-                                    <line x1="12" y1="15" x2="12" y2="20" />
-                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./right-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <line x1="4" y1="4" x2="4" y2="20" />
-                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./auth.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
-                                    <circle cx="9" cy="9" r="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./clients.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <circle cx="12" cy="7" r="4" />
-                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="4" width="6" height="5" rx="2" />
-                                    <rect x="4" y="13" width="6" height="7" rx="2" />
-                                    <rect x="14" y="4" width="6" height="7" rx="2" />
-                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
-                                    <line x1="15" y1="8" x2="15.01" y2="8" />
-                                    <rect x="4" y="4" width="16" height="16" rx="3" />
-                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
-                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./navigation.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="4" width="16" height="16" rx="2" />
-                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="#">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="4" width="16" height="16" rx="2" />
-                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
-                            </a>
+        </div>
+    </section>
+    <!----end sidebar -->
+
+        <!--- footer 1-->
+        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview1' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview1'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code1'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerOne').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview1'">
+                            <img class="rounded-b-xl " loading="lazy"
+                                src="./assets/sections/footers/footer-1.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code1'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerOne">
+                                        <!------
+                                         <div
+            class="container w-full h-64 p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed border-blueGray-300 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+        <footer class="text-gray-700 border-t body-font ">
+            <div
+                class="container flex flex-col flex-wrap p-8 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap ">
+                <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
+                    <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start ">
+                        <img src="../badges/WhitePink.svg" alt="">
+                    </a>
+                </div>
+                <div class="flex flex-wrap flex-grow mt-8 -mb-10 text-left md:pl-20 md:mt-0 ">
+                    <div class="w-full px-4 lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font">
+                            Product
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Email Templates</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Web Templates</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Figma Files</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Sketch Files</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font">
+                            Company
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Home</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">About</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Carriers</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Pricing</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Security</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Contact Us</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font">Legal
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Terms Of Service</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Trademark Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Inactivity Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> DPA</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">SLA</a>
+                            </li>
                         </nav>
                     </div>
                 </div>
             </div>
+            <div class="bg-blueGray-900">
+                <div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row">
+                    <p class="text-sm text-center text-gray-200 sm:text-left ">© Your Company 2020
+                    </p>
+                    <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                        <a class="text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </footer>
+                                        --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;div class="container w-full h-64 p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed border-blueGray-300 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="text-gray-700 border-t body-font "&gt;
+            &lt;div
+                class="container flex flex-col flex-wrap p-8 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap "&gt;
+                &lt;div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left"&gt;
+                    &lt;a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start "&gt;
+                        &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                    &lt;/a&gt;
+                &lt;/div&gt;
+                &lt;div class="flex flex-wrap flex-grow mt-8 -mb-10 text-left md:pl-20 md:mt-0 "&gt;
+                    &lt;div class="w-full px-4 lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font"&gt;
+                            Product
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Email Templates&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Web Templates&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Figma Files&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Sketch Files&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font"&gt;
+                            Company
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Home&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;About&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Carriers&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Security&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Contact Us&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font"&gt;Legal
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Privacy Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Terms Of Service&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Trademark Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Inactivity Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; DPA&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;SLA&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-blueGray-900"&gt;
+                &lt;div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row"&gt;
+                    &lt;p class="text-sm text-center text-gray-200 sm:text-left "&gt;© Your Company 2020
+                    &lt;/p&gt;
+                    &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                        &lt;a class="text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                &lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <!----end sidebar -->
+        <!--- footer 2-->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview2' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview2'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code2'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerTwo').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview2'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-2.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code2'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerTwo">
+                                        <!----
+            <div
+            class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-80 border-blueGray-300 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+        <footer class="mt-10 text-gray-700 bg-white border-t body-font">
+            <div
+                class="container flex flex-col flex-wrap p-5 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap ">
+                <div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left">
+                    <a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start ">
+                                            <img src="../badges/WhitePink.svg" alt="">
+                    </a>
+                    <p class="mt-6 text-xs text-center text-gray-600">
+                        Wicked Templates helps you jumpstart a landing page by providing you with swapable sections.</p>
+                </div>
+                <div class="flex flex-wrap flex-grow mt-10 -mb-10 text-center md:pl-20 md:mt-0 md:text-left ">
+                    <div class="w-full px-4 lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Product
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Email Templates</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Web Templates</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Figma Files</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Sketch Files</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Company
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Home</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">About</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Carriers</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Pricing</a>
+                            </li>
+                            <li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-800 uppercase title-font">
+                            Contact
+                        </h1>
+                        <div class="flex ">
+                            <button
+                                class="inline-flex w-full px-4 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none">Action
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-4 h-4 my-auto ml-2" viewBox="0 0 24 24">
+                                    <path d="M5 12h14M12 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-blueGray-900">
+                <div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row">
+                    <p class="text-sm text-center text-gray-200 sm:text-left ">© Your Company 2020
+                    </p>
+                    <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                        <a class="text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </footer>
+                              --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;div class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-80 border-blueGray-300 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="mt-10 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div
+                class="container flex flex-col flex-wrap p-5 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap "&gt;
+                &lt;div class="flex-shrink-0 w-64 mx-auto text-center md:mx-0 md:text-left"&gt;
+                    &lt;a class="flex items-center justify-center font-medium text-gray-900 title-font md:justify-start "&gt;
+                                            &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                    &lt;/a&gt;
+                    &lt;p class="mt-6 text-xs text-center text-gray-600"&gt;
+                        Wicked Templates helps you jumpstart a landing page by providing you with swapable sections.&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div class="flex flex-wrap flex-grow mt-10 -mb-10 text-center md:pl-20 md:mt-0 md:text-left "&gt;
+                    &lt;div class="w-full px-4 lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Product
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Email Templates&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Web Templates&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Figma Files&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Sketch Files&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Company
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Home&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;About&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Carriers&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-800 uppercase title-font"&gt;
+                            Contact
+                        &lt;/h1&gt;
+                        &lt;div class="flex "&gt;
+                            &lt;button
+                                class="inline-flex w-full px-4 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Action
+                                &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-4 h-4 my-auto ml-2" viewBox="0 0 24 24"&gt;
+                                    &lt;path d="M5 12h14M12 5l7 7-7 7"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-blueGray-900"&gt;
+                &lt;div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row"&gt;
+                    &lt;p class="text-sm text-center text-gray-200 sm:text-left "&gt;© Your Company 2020
+                    &lt;/p&gt;
+                    &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                        &lt;a class="text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                &lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 3-->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview3' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview3'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code3'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerThree').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview3'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-3.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code3'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerThree">
+                                        <!----    <div
+            class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+        <footer class="mt-10 text-gray-700 bg-white border-t body-font">
+            <div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row md:flex-no-wrap ">
+                <a class="flex items-center justify-center w-48 font-medium text-gray-900 title-font md:justify-start ">
+                    <img src="../badges/WhitePink.svg" alt="">
+                </a>
+                <nav
+                    class="flex flex-wrap justify-center py-6 text-base items-cente md:mr-auto md:ml-4 md:py-1 md:pl-4 ">
+                    <a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"> Prices</a>
+                    <a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"> Contact</a>
+                    <a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"> Services</a>
+                    <a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"> About</a>
+                </nav>
+                <div class="flex flex-wrap justify-center ml-auto md:flex-no-wrap md:justify-end">
+                    <input
+                        class="w-2/4 px-4 py-2 mr-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0 lg:w-full xl:w-1/2"
+                        placeholder="Your Email" type="text">
+                    <button
+                        class="inline-flex px-4 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:ring focus:outline-none">
+                        Subscribe
+                    </button>
+                </div>
+            </div>
+            <div class="bg-blueGray-900">
+                <div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row">
+                    <p class="text-sm text-center text-gray-200 sm:text-left ">© Your Company 2020
+                    </p>
+                    <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                        <a class="text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </footer>
+                ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;div class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="mt-10 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div class="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row md:flex-no-wrap "&gt;
+                &lt;a class="flex items-center justify-center w-48 font-medium text-gray-900 title-font md:justify-start "&gt;
+                    &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                &lt;/a&gt;
+                &lt;nav
+                    class="flex flex-wrap justify-center py-6 text-base items-cente md:mr-auto md:ml-4 md:py-1 md:pl-4 "&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"&gt; Prices&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"&gt; Contact&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"&gt; Services&lt;/a&gt;
+                    &lt;a href="#" class="mr-5 text-sm text-gray-600 hover:text-gray-800"&gt; About&lt;/a&gt;
+                &lt;/nav&gt;
+                &lt;div class="flex flex-wrap justify-center ml-auto md:flex-no-wrap md:justify-end"&gt;
+                    &lt;input
+                        class="w-2/4 px-4 py-2 mr-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0 lg:w-full xl:w-1/2"
+                        placeholder="Your Email" type="text"&gt;
+                    &lt;button
+                        class="inline-flex px-4 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:ring focus:outline-none"&gt;
+                        Subscribe
+                    &lt;/button&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-blueGray-900"&gt;
+                &lt;div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row"&gt;
+                    &lt;p class="text-sm text-center text-gray-200 sm:text-left "&gt;© Your Company 2020
+                    &lt;/p&gt;
+                    &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                        &lt;a class="text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                &lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 4 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview4' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview4'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code4'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerFour').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview4'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-4.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code4'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerFour">
+                                        <!------
+                                          <div
+            class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+        <footer class="mt-10 text-gray-700 bg-white border-t body-font">
+            <div class="border-t border-gray-200">
+                <div class="container flex flex-col flex-wrap items-center justify-between p-5 mx-auto md:flex-row">
+                    <a class="flex items-center w-48 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                        <img src="../badges/WhitePink.svg" alt="">
+                    </a>
+                    <div class="flex flex-wrap items-center justify-center mx-auto text-base ">
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            Prices</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            Contact</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            Services</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            About</a>
+                    </div>
+                    <div class="inline-flex items-center justify-center md:justify-start ">
+                        <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                            <a class="text-blue-807 hover:text-blue-500">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a class="ml-4 text-blue-870 hover:text-blue-500">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a class="ml-4 text-blue-870 hover:text-blue-500">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div
+                    class="flex flex-wrap items-center justify-center py-6 mx-auto text-base bg-blueGray-900 ">
+                    <p class="text-sm text-center text-gray-200 ">© Your Company — 2020
+                    </p>
+                </div>
+            </div>
+        </footer>
+                                        ----->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                <pre class="leading-6"><code data-language="html">
+        &lt;div class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="mt-10 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div class="border-t border-gray-200"&gt;
+                &lt;div class="container flex flex-col flex-wrap items-center justify-between p-5 mx-auto md:flex-row"&gt;
+                    &lt;a class="flex items-center w-48 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                        &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                    &lt;/a&gt;
+                    &lt;div class="flex flex-wrap items-center justify-center mx-auto text-base "&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            Prices&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            Contact&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            Services&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            About&lt;/a&gt;
+                    &lt;/div&gt;
+                    &lt;div class="inline-flex items-center justify-center md:justify-start "&gt;
+                        &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                            &lt;a class="text-blue-807 hover:text-blue-500"&gt;
+                                &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                    &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                            &lt;a class="ml-4 text-blue-870 hover:text-blue-500"&gt;
+                                &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                    &lt;path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                    &lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                            &lt;a class="ml-4 text-blue-870 hover:text-blue-500"&gt;
+                                &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                    &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                    &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div
+                    class="flex flex-wrap items-center justify-center py-6 mx-auto text-base bg-blueGray-900 "&gt;
+                    &lt;p class="text-sm text-center text-gray-200 "&gt;© Your Company — 2020
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                              </code>  </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 5 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview5' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview5'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code5'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerFive').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview5'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-5.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code5'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerFive">
+                                        <!------
+                      <footer class="pt-20 mt-10 text-gray-700 border-t body-font ">
+            <div
+                class="container flex flex-col flex-wrap p-5 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap ">
+                <div class="flex flex-wrap w-full -mx-4 -mb-10 text-left ">
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Support
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Getting Started</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Knowledge Base</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">System Status</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Product Training</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Product
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Email Templates</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Web Templates</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Figma Files</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Sketch Files</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Company
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Home</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">About</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Carriers</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">PRicing</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Security</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Contact Us</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Legal
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Terms Of Service</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Trademark Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Inactivity Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> DPA</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">SLA</a>
+                            </li>
+                        </nav>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Inspiration
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Muzli</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Dribbble</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Behance</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Design Systems</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Follow us
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Instagram</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Twitter</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Dribbble</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Linkedin</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Facebook</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Youtube</a>
+                            </li>
+                        </nav>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Inspiration
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Muzli</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Dribbble</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Behance</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Design Systems</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full px-4 lg:w-3/12 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font">Follow us
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Instagram</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Twitter</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Dribbble</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Linkedin</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800"> Facebook</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Youtube</a>
+                            </li>
+                        </nav>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-blueGray-900">
+                <div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row">
+                    <p class="text-sm text-center text-gray-200 sm:text-left ">© Your Company 2020
+                    </p>
+                    <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                        <a class="text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </footer>
+                    -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                <pre class="leading-6"><code data-language="html">
+         &lt;footer class="pt-20 mt-10 text-gray-700 border-t body-font "&gt;
+            &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap "&gt;
+                &lt;div class="flex flex-wrap w-full -mx-4 -mb-10 text-left "&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Support
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Getting Started&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Knowledge Base&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;System Status&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Product Training&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Product
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Email Templates&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Web Templates&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Figma Files&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Sketch Files&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Company
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Home&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;About&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Carriers&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;PRicing&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Security&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Contact Us&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Legal
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Privacy Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Terms Of Service&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Trademark Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Inactivity Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; DPA&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;SLA&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Inspiration
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Muzli&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Dribbble&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Behance&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Design Systems&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Follow us
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Instagram&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Twitter&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Dribbble&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Linkedin&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Facebook&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Youtube&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Inspiration
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Muzli&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Dribbble&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Behance&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Design Systems&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full px-4 lg:w-3/12 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-medium tracking-widest text-blue-700 uppercase title-font"&gt;Follow us
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Instagram&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Twitter&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Dribbble&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Linkedin&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt; Facebook&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Youtube&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-blueGray-900"&gt;
+                &lt;div class="container flex flex-col flex-wrap px-5 py-6 mx-auto sm:flex-row"&gt;
+                    &lt;p class="text-sm text-center text-gray-200 sm:text-left "&gt;© Your Company 2020
+                    &lt;/p&gt;
+                    &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                        &lt;a class="text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                viewBox="0 0 24 24"&gt;
+                                &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5"
+                                viewBox="0 0 24 24"&gt;
+                                &lt;path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                &lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                                              </code>  </pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 6 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview6' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview6'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code6'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerSix').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview6'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-6.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code6'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerSix">
+                                        <!------
+                                  <div
+            class="container w-full p-20 m-4 mx-auto mt-8 text-center bg-white border-2 border-dashed h-72 border-blueGray-300 rounded-xl">
+            <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+                -- Content goes here --
+            </p>
+        </div>
+        <footer class="mt-6 text-gray-700 bg-white border-t body-font">
+            <div
+                class="container flex flex-col flex-wrap p-5 py-10 mx-auto lg:px-20 md:items-center lg:items-start md:flex-row md:flex-no-wrap ">
+                <div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:mt-0 ">
+                    <div class="w-full lg:w-1/3 md:w-full">
+                        <h1
+                            class="mb-8 text-2xl font-bold text-center text-blue-800 lg:text-left lg:text-2xl title-font">
+                            A pretty long lenght display headline ready to convert visitors into users.</h1>
+                    </div>
+                    <div class="w-full text-right lg:w-1/3 md:w-1/2 ">
+                        <h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font">
+                            Company
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Home</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">About</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Carriers</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Pricing</a>
+                            </li>
+                        </nav>
+                    </div>
+                    <div class="w-full text-right lg:w-1/3 md:w-1/2">
+                        <h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font">Legal
+                        </h1>
+                        <nav class="mb-10 list-none">
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Privacy Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Terms Of Service</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Trademark Policy</a>
+                            </li>
+                            <li>
+                                <a class="text-sm text-gray-600 hover:text-gray-800">Inactivity Policy</a>
+                            </li>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-blueGray-900">
+                <div class="container flex flex-col flex-wrap px-5 py-6 mx-auto lg:px-20 sm:flex-row">
+                    <span class="inline-flex justify-center mt-2 sm:mt-0 sm:justify-start">
+                        <a class="text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24">
+                                <path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                </path>
+                            </svg>
+                        </a>
+                        <a class="ml-4 text-white hover:text-blue-500">
+                            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </footer>
+        -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;div class="container w-full p-20 m-4 mx-auto mt-8 text-center bg-white border-2 border-dashed h-72 border-blueGray-300 rounded-xl"&gt;
+            &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+                -- Content goes here --
+            &lt;/p&gt;
+        &lt;/div&gt;
+        &lt;footer class="mt-6 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div
+                class="container flex flex-col flex-wrap p-5 py-10 mx-auto lg:px-20 md:items-center lg:items-start md:flex-row md:flex-no-wrap "&gt;
+                &lt;div class="flex flex-wrap flex-grow mx-auto mt-10 -mb-10 text-left md:mt-0 "&gt;
+                    &lt;div class="w-full lg:w-1/3 md:w-full"&gt;
+                        &lt;h1
+                            class="mb-8 text-2xl font-bold text-center text-blue-800 lg:text-left lg:text-2xl title-font"&gt;
+                            A pretty long lenght display headline ready to convert visitors into users.&lt;/h1&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full text-right lg:w-1/3 md:w-1/2 "&gt;
+                        &lt;h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font"&gt;
+                            Company
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Home&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;About&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Carriers&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Pricing&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full text-right lg:w-1/3 md:w-1/2"&gt;
+                        &lt;h1 class="mb-3 text-sm font-semibold tracking-widest text-blue-700 uppercase title-font"&gt;Legal
+                        &lt;/h1&gt;
+                        &lt;nav class="mb-10 list-none"&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Privacy Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Terms Of Service&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Trademark Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                            &lt;li&gt;
+                                &lt;a class="text-sm text-gray-600 hover:text-gray-800"&gt;Inactivity Policy&lt;/a&gt;
+                            &lt;/li&gt;
+                        &lt;/nav&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class="bg-blueGray-900"&gt;
+                &lt;div class="container flex flex-col flex-wrap px-5 py-6 mx-auto lg:px-20 sm:flex-row"&gt;
+                    &lt;span class="inline-flex justify-center mt-2 sm:mt-0 sm:justify-start"&gt;
+                        &lt;a class="text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;path
+                                    d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                &lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;a class="ml-4 text-white hover:text-blue-500"&gt;
+                            &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 7 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview7' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview7'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code7' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code7'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerSeven').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview7'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-7.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code7'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerSeven">
+                                        <!--------
+   <div
+        class="container w-full p-20 m-4 mx-auto mt-10 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl">
+        <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+            -- Content goes here --
+        </p>
+    </div>
+    <footer class="mt-32 text-gray-700 bg-white border-t body-font">
+            <div class="bg-blueGray-900">
+                <div class="container flex flex-col flex-wrap px-5 py-6 lg:px-20 sm:flex-row">
+                    <div class="flex flex-wrap items-center justify-center text-base ">
+                        <p class="mr-5 text-sm text-center text-gray-200">© Your Company — 2020
+                        </p>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"> Privacy Policy</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"> Terms Of Service</a>
+                    </div>
+                    <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-end">
+                        <p class="mr-5 text-sm text-center text-gray-200">Working Remote Since 2020
+                        </p>
+                    </span>
+                </div>
+            </div>
+        </footer>
+                -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+    &lt;div class="container w-full p-20 m-4 mx-auto mt-10 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl"&gt;
+        &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+            -- Content goes here --
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;footer class="mt-32 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div class="bg-blueGray-900"&gt;
+                &lt;div class="container flex flex-col flex-wrap px-5 py-6 lg:px-20 sm:flex-row"&gt;
+                    &lt;div class="flex flex-wrap items-center justify-center text-base "&gt;
+                        &lt;p class="mr-5 text-sm text-center text-gray-200"&gt;© Your Company — 2020
+                        &lt;/p&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt; Privacy Policy&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt; Terms Of Service&lt;/a&gt;
+                    &lt;/div&gt;
+                    &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-end"&gt;
+                        &lt;p class="mr-5 text-sm text-center text-gray-200"&gt;Working Remote Since 2020
+                        &lt;/p&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 8 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview8' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview8'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code8' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code8'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerEight').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview8'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-8.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code8'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerEight">
+                                        <!--------
+                                         <div
+        class="container w-full p-20 m-4 mx-auto mt-10 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl">
+        <p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font">
+            -- Content goes here --
+        </p>
+    </div>
+    <footer class="mt-16 text-gray-700 bg-white border-t body-font">
+            <div class="border-t border-gray-200">
+                <div class="container flex flex-col flex-wrap items-center justify-between p-5 mx-auto md:flex-row">
+                    <a class="flex items-center w-32 mb-4 font-medium text-gray-900 title-font md:mb-0">
+                        <img src="../badges/WhitePink.svg" alt="">
+                    </a>
+                    <div class="flex flex-wrap items-center justify-center mx-auto text-base md:ml-auto md:mr-auto">
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            Prices</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            Contact</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            Services</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800">
+                            About</a>
+                    </div>
+                    <div class="inline-flex items-center justify-center md:justify-start ">
+                        <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                            <a class="text-blue-807 hover:text-blue-500">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a class="ml-4 text-blue-870 hover:text-blue-500">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a class="ml-4 text-blue-870 hover:text-blue-500">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div
+                    class="flex items-center justify-center px-5 py-6 mx-auto text-base bg-blueGray-900 fle7-wrap md:ml-auto md:mr-auto">
+                    <div class="flex flex-wrap items-center justify-center mx-auto text-base">
+                        <p class="mr-5 text-sm text-center text-gray-200">© Your Company — 2020
+                        </p>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"> Privacy
+                            Policy</a>
+                        <a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"> Terms Of
+                            Service</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+                                    --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+    &lt;div class="container w-full p-20 m-4 mx-auto mt-10 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl"&gt;
+        &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+            -- Content goes here --
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;footer class="mt-16 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div class="border-t border-gray-200"&gt;
+                &lt;div class="container flex flex-col flex-wrap items-center justify-between p-5 mx-auto md:flex-row"&gt;
+                    &lt;a class="flex items-center w-32 mb-4 font-medium text-gray-900 title-font md:mb-0"&gt;
+                        &lt;img src="../badges/WhitePink.svg" alt=""&gt;
+                    &lt;/a&gt;
+                    &lt;div class="flex flex-wrap items-center justify-center mx-auto text-base md:ml-auto md:mr-auto"&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            Prices&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            Contact&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            Services&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-gray-600 hover:text-gray-800"&gt;
+                            About&lt;/a&gt;
+                    &lt;/div&gt;
+                    &lt;div class="inline-flex items-center justify-center md:justify-start "&gt;
+                        &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                            &lt;a class="text-blue-807 hover:text-blue-500"&gt;
+                                &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                    &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                            &lt;a class="ml-4 text-blue-870 hover:text-blue-500"&gt;
+                                &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                    &lt;path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                    &lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                            &lt;a class="ml-4 text-blue-870 hover:text-blue-500"&gt;
+                                &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24"&gt;
+                                    &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                    &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div
+                    class="flex items-center justify-center px-5 py-6 mx-auto text-base bg-blueGray-900 fle7-wrap md:ml-auto md:mr-auto"&gt;
+                    &lt;div class="flex flex-wrap items-center justify-center mx-auto text-base"&gt;
+                        &lt;p class="mr-5 text-sm text-center text-gray-200"&gt;© Your Company — 2020
+                        &lt;/p&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt; Privacy
+                            Policy&lt;/a&gt;
+                        &lt;a href="#" class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt; Terms Of
+                            Service&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- footer 9 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview9' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview9'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code9' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code9'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerNine').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview9'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/footers/footer-9.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code9'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="footerNine">
+                                        <!-------
+                                       <div
+        class="container w-full h-16 p-20 m-4 mx-auto mt-8 text-center bg-white border-2 border-dashed border-blueGray-300 rounded-xl">
+        <p class="mt-auto italic tracking-tighter text-md text-blueGray-500 title-font">
+            -- Content goes here --
+        </p>
+    </div>
+    <footer class="mt-6 text-gray-700 bg-white border-t body-font">
+            <div class="border-t border-gray-200">
+                <div class="container flex flex-col flex-wrap items-center p-5 mx-auto ">
+                    <div class="inline-flex items-center py-20">
+                        <span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start">
+                            <a class="text-blueGray-300 hover:text-blueGray-400">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-16 h-16" viewBox="0 0 24 24">
+                                    <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+                                </svg>
+                            </a>
+                            <a class="mx-5 text-blueGray-300 hover:text-blueGray-400">
+                                <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-16 h-16" viewBox="0 0 24 24">
+                                    <path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z">
+                                    </path>
+                                </svg>
+                            </a>
+                            <a class=" text-blueGray-300 hover:text-blueGray-400">
+                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-16 h-16" viewBox="0 0 24 24">
+                                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div class="bg-blueGray-900">
+                    <div class="container flex flex-col flex-wrap px-5 py-6 mx-auto lg:px-20 sm:flex-row">
+                        <div class="flex flex-wrap items-center justify-center mx-auto text-base">
+                            <a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700">
+                                Privacy Policy</a>
+                            <a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700">
+                                Terms Of Service</a>
+                            <a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700">
+                                Legal</a>
+                            <a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700">
+                                License</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-wrap items-center justify-center px-5 py-6 mx-auto text-base bg-blueGray-900 ">
+                    <div class="flex flex-wrap items-center justify-center mx-auto text-base">
+                        <p class="mr-5 text-sm text-center text-gray-200">© Your Company — 2020
+                        </p>
+
+                        <a href="#"
+                            class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"> All rights Reserves</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+                                    -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+    &lt;div class="container w-full h-16 p-20 m-4 mx-auto mt-8 text-center bg-white border-2 border-dashed border-blueGray-300 rounded-xl"&gt;
+        &lt;p class="mt-auto italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
+            -- Content goes here --
+        &lt;/p&gt;
+    &lt;/div&gt;
+    &lt;footer class="mt-6 text-gray-700 bg-white border-t body-font"&gt;
+            &lt;div class="border-t border-gray-200"&gt;
+                &lt;div class="container flex flex-col flex-wrap items-center p-5 mx-auto "&gt;
+                    &lt;div class="inline-flex items-center py-20"&gt;
+                        &lt;span class="inline-flex justify-center mt-2 sm:ml-auto sm:mt-0 sm:justify-start"&gt;
+                            &lt;a class="text-blueGray-300 hover:text-blueGray-400"&gt;
+                                &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-16 h-16" viewBox="0 0 24 24"&gt;
+                                    &lt;path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                            &lt;a class="mx-5 text-blueGray-300 hover:text-blueGray-400"&gt;
+                                &lt;svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    class="w-16 h-16" viewBox="0 0 24 24"&gt;
+                                    &lt;path
+                                        d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"&gt;
+                                    &lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                            &lt;a class=" text-blueGray-300 hover:text-blueGray-400"&gt;
+                                &lt;svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" class="w-16 h-16" viewBox="0 0 24 24"&gt;
+                                    &lt;rect width="20" height="20" x="2" y="2" rx="5" ry="5"&gt;&lt;/rect&gt;
+                                    &lt;path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"&gt;&lt;/path&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="bg-blueGray-900"&gt;
+                    &lt;div class="container flex flex-col flex-wrap px-5 py-6 mx-auto lg:px-20 sm:flex-row"&gt;
+                        &lt;div class="flex flex-wrap items-center justify-center mx-auto text-base"&gt;
+                            &lt;a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt;
+                                Privacy Policy&lt;/a&gt;
+                            &lt;a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt;
+                                Terms Of Service&lt;/a&gt;
+                            &lt;a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt;
+                                Legal&lt;/a&gt;
+                            &lt;a href="#"
+                                class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt;
+                                License&lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="flex flex-wrap items-center justify-center px-5 py-6 mx-auto text-base bg-blueGray-900 "&gt;
+                    &lt;div class="flex flex-wrap items-center justify-center mx-auto text-base"&gt;
+                        &lt;p class="mr-5 text-sm text-center text-gray-200"&gt;© Your Company — 2020
+                        &lt;/p&gt;
+
+                        &lt;a href="#"
+                            class="justify-center mr-5 text-sm text-center text-blueGray-200 hover:text-blue-700"&gt; All rights Reserves&lt;/a&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/footer&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
         <!--- foot 10 -->
         <section class="p-5 pt-20 lg:pt-32 lg:p-0">
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
@@ -238,8 +2218,8 @@
                         </button>
                         <!---- Copy Buton -->
                         <button
-                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
-                            onclick="copyToClip(document.getElementById('footTen').innerHTML)" x-data="{}"
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('footerTen').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -250,16 +2230,16 @@
                             </svg>
                         </button>
                     </div>
-                    <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+                    <div class="lg:h-screen">
                         <div class="border rounded-b-xl" x-show="tab === 'preview10'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/footers/footer-10.png" alt="">
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code10'">
                             <div
-                                class="h-screen overflow-auto overflow-y-scroll bg-blue-1400 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
-                                    <div class="hidden" id="footTen">
+                                    <div class="hidden" id="footerTen">
                                         <!----
                        <section class="text-gray-700 body-font">
             <div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row">
@@ -422,40 +2402,43 @@
             </div>
             </div>
         </section>
-    <footer class="pt-10 border-t border-gray-800 body-font">
-        <div
-            class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
-            <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
-                <img class="object-cover object-center rounded-lg" alt="badge" src="./assets/Wickedblockswidget.svg">
-            </a>
-            <nav class="flex flex-wrap items-center justify-center py-6 text-base lg:ml-auto md:py-1 ">
-                <span class="mr-6 font-semibold tracking-tighter text-teal-1000 text-md"> OTHER PROJECTS</span>
-                <a href="https://colorsandfonts.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">
-                    ColorsAndFonts</a>
-                <a href="https://unicornsfeed.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">TheUnicornsFeed</a>
-                <a href="https://wickedtemplates.com"
-                    class="mr-4 text-blueGray-300 hover:text-yellow-1000">WickedTemplates</a>
-            </nav>
-        </div>
-    </footer>
-    <footer class="mt-10 border-t border-gray-800 body-font">
-        <div class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
-            <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
-                © 2020 WickedBlocks
-            </p>
-            <span class="inline-flex items-center lg:ml-auto">
-                <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
-                    <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
-                        <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
-                        MICHAEL ANDREUZZA
-                    </a>
+        <footer class="pt-10 border-t border-gray-800 body-font">
+            <div
+                class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+                <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
+                    <img class="object-cover object-center rounded-lg" alt="badge"
+                        src="./assets/Wickedblockswidget.svg">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center py-6 text-base lg:ml-auto md:py-1 ">
+                    <span class="mr-6 font-semibold tracking-tighter text-teal-1000 text-md"> OTHER PROJECTS</span>
+                    <a href="https://colorsandfonts.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">
+                        ColorsAndFonts</a>
+                    <a href="https://unicornsfeed.com"
+                        class="mr-4 text-blueGray-300 hover:text-yellow-1000">TheUnicornsFeed</a>
+                    <a href="https://wickedtemplates.com"
+                        class="mr-4 text-blueGray-300 hover:text-yellow-1000">WickedTemplates</a>
+                </nav>
+            </div>
+        </footer>
+        <footer class="mt-10 border-t border-gray-800 body-font">
+            <div
+                class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+                <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
+                    © 2020 WickedBlocks
                 </p>
-                <img loading="lazy  alt=" team"
-                    class="flex-shrink-0 object-cover object-center w-8 h-8 ml-4 rounded-full bg-blueGray-50 lg:mb-0 "
-                    src="./assets/mike.svg">
-            </span>
-        </div>
-    </footer>
+                <span class="inline-flex items-center lg:ml-auto">
+                    <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                        <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+                            <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+                            MICHAEL ANDREUZZA
+                        </a>
+                    </p>
+                    <img loading="lazy  alt=" team"
+                        class="flex-shrink-0 object-cover object-center w-8 h-8 ml-4 rounded-full bg-blueGray-50 lg:mb-0 "
+                        src="./assets/mike.svg">
+                </span>
+            </div>
+        </footer>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <script>
             function copyToClip(str) {

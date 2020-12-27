@@ -1,0 +1,1392 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>WickedBlocks by Wicked Templates</title>
+        <meta name="author" content="Michael Andreuzza" />
+        <meta name="keywords" content="keywords,here" />
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
+        <link rel="stylesheet" href="./css/wt.css" type="text/css" />
+        <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+    <body class="antialiased bg-blue-1300">
+        <!----- Snackbar -->
+        <div x-data="noticesHandler()"
+            class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
+            @notice.window="add($event.detail)" style="pointer-events:none">
+            <template x-for="notice of notices" :key="notice.id">
+                <div x-show="visible.includes(notice)" x-transition:enter="transition ease-in duration-200"
+                    x-transition:enter-start="transform opacity-0 translate-y-2"
+                    x-transition:enter-end="transform opacity-100" x-transition:leave="transition ease-out duration-500"
+                    x-transition:leave-start="transform translate-x-0 opacity-100"
+                    x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
+                    class="z-50 flex items-center justify-center w-full h-16 mb-4 text-lg font-semibold tracking-tighter text-white cursor-pointer lg:mr-6 dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
+                    :class="{
+            				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
+            			 }" style="pointer-events:all" x-text="notice.text">
+                </div>
+            </template>
+        </div>
+        <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
+        <div class="fixed z-50 w-full text-gray-500 border-b border-blueGray-900 bg-blue-1300 lg:px-20">
+            <div x-data="{ open: false }"
+                class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+                <div class="flex flex-row items-center justify-between p-4 ">
+                    <a href="./index.html" class=" focus:outline-none">
+                        <h1 class="text-2xl font-bold tracking-tighter text-white uppercase lg:text-3xl title-font ">
+                            WickedBlocks
+                            <span class="text-xs">©</span>
+                        </h1>
+                    </a>
+                    <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
+                        <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
+                            <path x-show="!open" fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                            <path x-show="open" fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav :class="{'flex': open, 'hidden': !open}"
+                    class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+                    <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
+                        @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
+                        class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
+                        Quick Acces to Blockss
+                    </button>
+                </nav>
+            </div>
+        </div>
+        <!-- Dev tools -->
+        <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
+        </div>
+    <!---- sidebar -->
+    <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+        @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+        <div x-show.transition.opacity.duration.500="open" @click="open = false"
+            class="fixed inset-0 bg-opacity-25 bg-blue-1400">
+        </div>
+        <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
+            :class="{'translate-x-full': !open}">
+            <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+                class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="feather feather-x">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="w-auto p-8 ">
+                <div class="w-64 h-screen mt-8 sm:mt-0">
+                    <nav class="mt-20 font-semibold">
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./left-headers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <line x1="4" y1="4" x2="4" y2="20" />
+                                <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./centered-headers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <line x1="12" y1="4" x2="12" y2="9" />
+                                <line x1="12" y1="15" x2="12" y2="20" />
+                                <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./right-headers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round">
+                                <line x1="20" y1="4" x2="20" y2="20" />
+                                <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./auth.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./pricing.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                <circle cx="9" cy="9" r="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./clients.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <circle cx="12" cy="7" r="4" />
+                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Clients</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./grids.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="4" width="6" height="5" rx="2" />
+                                <rect x="4" y="13" width="6" height="7" rx="2" />
+                                <rect x="14" y="4" width="6" height="7" rx="2" />
+                                <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./forms.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./gallery.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
+                                <line x1="15" y1="8" x2="15.01" y2="8" />
+                                <rect x="4" y="4" width="16" height="16" rx="3" />
+                                <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                                <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./navigation.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                        </a>
+                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                            href="./footers.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="4" y="4" width="16" height="16" rx="2" />
+                                <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
+                            </svg>
+                            <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!----end sidebar -->
+        <!--- pricing 1-->
+        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview1' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview1'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code1'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('priceOne').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview1'">
+                            <img class="rounded-b-xl " loading="lazy"
+                                src="./assets/sections/pricing/price-1.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code1'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="priceOne">
+                                        <!------
+                                       <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-24 mx-auto lg:px-4">
+                <div class="flex flex-wrap text-center">
+                    <div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full">
+                        <div class="flex flex-col items-center justify-center h-48 px-2 text-center">
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $38
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+                                        --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-24 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap text-center"&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full"&gt;
+                        &lt;div class="flex flex-col items-center justify-center h-48 px-2 text-center"&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $38
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--- pricing 2-->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview2' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview2'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code2'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('priceTwo').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview2'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/pricing/price-2.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code2'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="priceTwo">
+                                        <!----
+         <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-24 mx-auto lg:px-4">
+                <div class="flex flex-wrap text-center">
+                    <div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full">
+                        <div class="flex flex-col items-center justify-center h-48 px-2 text-center">
+                                    <h3 class="tracking-widest">START</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $8
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                    <div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full">
+                        <div class="flex flex-col items-center justify-center h-48 px-2 text-center">
+                                    <h3 class="tracking-widest">PRO</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $38
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+                              --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-24 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap text-center"&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full"&gt;
+                        &lt;div class="flex flex-col items-center justify-center h-48 px-2 text-center"&gt;
+                                    &lt;h3 class="tracking-widest"&gt;START&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $8
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-24 lg:w-2/4 md:w-full"&gt;
+                        &lt;div class="flex flex-col items-center justify-center h-48 px-2 text-center"&gt;
+                                    &lt;h3 class="tracking-widest"&gt;PRO&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $38
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- pricing 3-->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview3' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview3'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code3'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('priceThree').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview3'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/pricing/price-3.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code3'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="priceThree">
+                                        <!----    <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-32 mx-auto lg:px-4">
+                <div class="flex flex-wrap text-center">
+                    <div class="px-8 py-6 mx-auto lg:px-20 lg:w-1/3 md:w-full">
+                        <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> User 1
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">START</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $8
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                    <div class="px-8 py-6 mx-auto lg:px-20 lg:w-1/3 md:w-full">
+                        <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> User 2
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">START</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $16
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                    <div class="px-8 py-6 mx-auto lg:px-20 lg:w-1/3 md:w-full">
+                        <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> User 3
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">PRO</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $38
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+                ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-32 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap text-center"&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-20 lg:w-1/3 md:w-full"&gt;
+                        &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; User 1
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;START&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $8
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-20 lg:w-1/3 md:w-full"&gt;
+                        &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; User 2
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;START&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $16
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-20 lg:w-1/3 md:w-full"&gt;
+                        &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; User 3
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;PRO&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $38
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- pricing 4 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview4' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview4'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code4'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('priceFour').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview4'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/pricing/price-4.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code4'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="priceFour">
+                                        <!------
+                                        <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-8 mx-auto lg:px-48">
+                <div class="flex flex-wrap ">
+                    <div class="px-8 py-6 mx-auto lg:px-10 lg:w-1/2 md:w-full">
+                        <div class="h-full px-4 py-6 border rounded-xl">
+                            <svg class="w-10 h-10 mb-4 ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="34" height="24" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M5.68 7.314l-1.82 5.914L12 19.442l8.14-6.214-1.82-5.914L16.643 11H7.356L5.681 7.314zM15.357 9l2.888-6.354a.4.4 0 0 1 .747.048l3.367 10.945a.5.5 0 0 1-.174.544L12 21.958 1.816 14.183a.5.5 0 0 1-.174-.544L5.009 2.694a.4.4 0 0 1 .747-.048L8.644 9h6.712z" />
+                            </svg>
+                            <h3 class="tracking-widest">START</h3>
+                            <h2
+                                class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl">
+                                $8
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                            <p class="mb-4 text-base leading-relaxed">Tailwind CSS templates
+                                with a wicked design.
+                                Professionally designed and 100% responsive static templates for startups and personal
+                                use.</p>
+                            <p class="flex items-center mb-2 text-gray-600">
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                </span>Feature 1
+                            </p>
+                            <p class="flex items-center mb-2 text-gray-600">
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                </span>Feature 2
+                            </p>
+                            <button
+                                class="items-end w-full px-8 py-2 mt-12 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white focus:shadow-outline focus:outline-none hover:bg-black hoveer:border-black">
+                                Action
+                            </button>
+                        </div>
+                    </div>
+                    <div class="px-8 py-6 mx-auto lg:px-10 lg:w-1/2 md:w-full">
+                        <div class="h-full px-4 py-6 border rounded-xl">
+                            <svg class="w-10 h-10 mb-4 ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="18" height="18" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                            </svg>
+                            <h3 class="tracking-widest">PRO</h3>
+                            <h2
+                                class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl">
+                                $38
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                            <p class="mb-4 text-base leading-relaxed">Tailwind CSS templates
+                                with a wicked design.
+                                Professionally designed and 100% responsive static templates for startups and personal
+                                use.</p>
+                            <p class="flex items-center mb-2 text-gray-600">
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                </span>Feature 1
+                            </p>
+                            <p class="flex items-center mb-2 text-gray-600">
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                </span>Feature 2
+                            </p>
+                            <p class="flex items-center mb-6 text-gray-600">
+                                <span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full">
+                                    <svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24">
+                                        <path d="M20 6L9 17l-5-5"></path>
+                                    </svg>
+                                </span>Feature 3
+                            </p>
+                            <button
+                                class="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                                        ----->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-8 mx-auto lg:px-48"&gt;
+                &lt;div class="flex flex-wrap "&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-10 lg:w-1/2 md:w-full"&gt;
+                        &lt;div class="h-full px-4 py-6 border rounded-xl"&gt;
+                            &lt;svg class="w-10 h-10 mb-4 ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="34" height="24" fill="currentColor"&gt;
+                                &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
+                                &lt;path
+                                    d="M5.68 7.314l-1.82 5.914L12 19.442l8.14-6.214-1.82-5.914L16.643 11H7.356L5.681 7.314zM15.357 9l2.888-6.354a.4.4 0 0 1 .747.048l3.367 10.945a.5.5 0 0 1-.174.544L12 21.958 1.816 14.183a.5.5 0 0 1-.174-.544L5.009 2.694a.4.4 0 0 1 .747-.048L8.644 9h6.712z" /&gt;
+                            &lt;/svg&gt;
+                            &lt;h3 class="tracking-widest"&gt;START&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl"&gt;
+                                $8
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                            &lt;p class="mb-4 text-base leading-relaxed"&gt;Tailwind CSS templates
+                                with a wicked design.
+                                Professionally designed and 100% responsive static templates for startups and personal
+                                use.&lt;/p&gt;
+                            &lt;p class="flex items-center mb-2 text-gray-600"&gt;
+                                &lt;span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full"&gt;
+                                    &lt;svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24"&gt;
+                                        &lt;path d="M20 6L9 17l-5-5"&gt;&lt;/path&gt;
+                                    &lt;/svg&gt;
+                                &lt;/span&gt;Feature 1
+                            &lt;/p&gt;
+                            &lt;p class="flex items-center mb-2 text-gray-600"&gt;
+                                &lt;span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full"&gt;
+                                    &lt;svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24"&gt;
+                                        &lt;path d="M20 6L9 17l-5-5"&gt;&lt;/path&gt;
+                                    &lt;/svg&gt;
+                                &lt;/span&gt;Feature 2
+                            &lt;/p&gt;
+                            &lt;button
+                                class="items-end w-full px-8 py-2 mt-12 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white focus:shadow-outline focus:outline-none hover:bg-black hoveer:border-black"&gt;
+                                Action
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 mx-auto lg:px-10 lg:w-1/2 md:w-full"&gt;
+                        &lt;div class="h-full px-4 py-6 border rounded-xl"&gt;
+                            &lt;svg class="w-10 h-10 mb-4 ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                width="18" height="18" fill="currentColor"&gt;
+                                &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
+                                &lt;path
+                                    d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" /&gt;
+                            &lt;/svg&gt;
+                            &lt;h3 class="tracking-widest"&gt;PRO&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl"&gt;
+                                $38
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                            &lt;p class="mb-4 text-base leading-relaxed"&gt;Tailwind CSS templates
+                                with a wicked design.
+                                Professionally designed and 100% responsive static templates for startups and personal
+                                use.&lt;/p&gt;
+                            &lt;p class="flex items-center mb-2 text-gray-600"&gt;
+                                &lt;span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full"&gt;
+                                    &lt;svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24"&gt;
+                                        &lt;path d="M20 6L9 17l-5-5"&gt;&lt;/path&gt;
+                                    &lt;/svg&gt;
+                                &lt;/span&gt;Feature 1
+                            &lt;/p&gt;
+                            &lt;p class="flex items-center mb-2 text-gray-600"&gt;
+                                &lt;span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full"&gt;
+                                    &lt;svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24"&gt;
+                                        &lt;path d="M20 6L9 17l-5-5"&gt;&lt;/path&gt;
+                                    &lt;/svg&gt;
+                                &lt;/span&gt;Feature 2
+                            &lt;/p&gt;
+                            &lt;p class="flex items-center mb-6 text-gray-600"&gt;
+                                &lt;span
+                                    class="inline-flex items-center justify-center flex-shrink-0 w-4 h-4 mr-2 text-white bg-gray-500 rounded-full"&gt;
+                                    &lt;svg fill="none" stroke="currentColor" stroke-linecap="round"
+                                        stroke-linejoin="round" stroke-width="2.5" class="w-3 h-3" viewBox="0 0 24 24"&gt;
+                                        &lt;path d="M20 6L9 17l-5-5"&gt;&lt;/path&gt;
+                                    &lt;/svg&gt;
+                                &lt;/span&gt;Feature 3
+                            &lt;/p&gt;
+                            &lt;button
+                                class="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;Button&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- pricing 5 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview5' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview5'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code5'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('priceFive').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview5'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/pricing/price-5.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code5'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="priceFive">
+                                        <!------
+                    <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-2 mx-auto lg:px-10">
+                <div class="flex flex-wrap ">
+                    <div class="px-2 py-2 lg:w-1/3 md:w-full">
+                        <div class="border rounded-xl">
+                            <img class="object-cover object-center w-full h-64 mb-6 rounded-t-xl"
+                                src="https://dummyimage.com/420x200/94a3b8/ffffff" alt="content">
+                            <div class="p-6 ">
+                                <h2
+                                    class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl">
+                                    $8
+                                    <span class="ml-1 text-base text-gray-600">/mo</span>
+                                </h2>
+                                <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Bundle
+                                    1
+                                </h2>
+                                <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit
+                                    waistcoat.
+                                    Distillery
+                                    hexagon disrupt edison bulbche.</p>
+                                <button
+                                    class="w-full px-8 py-2 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white hover:border-black hover:bg-black focus:shadow-outline focus:outline-none">Button</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-2 py-2 lg:w-1/3 md:w-full">
+                        <div class="border rounded-xl">
+                            <img class="object-cover object-center w-full h-64 mb-6 rounded-t-xl"
+                                src="https://dummyimage.com/420x200/94a3b8/ffffff" alt="content">
+                            <div class="p-6 ">
+                                <h2
+                                    class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl">
+                                    $18
+                                    <span class="ml-1 text-base text-gray-600">/mo</span>
+                                </h2>
+                                <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Bundle
+                                    2
+                                </h2>
+                                <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit
+                                    waistcoat.
+                                    Distillery
+                                    hexagon disrupt edison bulbche.</p>
+                                <button
+                                    class="w-full px-8 py-2 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white hover:border-black hover:bg-black focus:shadow-outline focus:outline-none">Button</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="px-2 py-2 lg:w-1/3 md:w-full">
+                        <div class="border rounded-xl">
+                            <img class="object-cover object-center w-full h-64 mb-6 rounded-t-xl"
+                                src="https://dummyimage.com/420x200/94a3b8/ffffff" alt="content">
+                            <div class="p-6 ">
+                                <h2
+                                    class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl">
+                                    $38
+                                    <span class="ml-1 text-base text-gray-600">/mo</span>
+                                </h2>
+                                <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Bundle
+                                    3
+                                </h2>
+                                <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit
+                                    waistcoat.
+                                    Distillery
+                                    hexagon disrupt edison bulbche.</p>
+                                <button
+                                    class="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                    -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-2 mx-auto lg:px-10"&gt;
+                &lt;div class="flex flex-wrap "&gt;
+                    &lt;div class="px-2 py-2 lg:w-1/3 md:w-full"&gt;
+                        &lt;div class="border rounded-xl"&gt;
+                            &lt;img class="object-cover object-center w-full h-64 mb-6 rounded-t-xl"
+                                src="https://dummyimage.com/420x200/94a3b8/ffffff" alt="content"&gt;
+                            &lt;div class="p-6 "&gt;
+                                &lt;h2
+                                    class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl"&gt;
+                                    $8
+                                    &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                                &lt;/h2&gt;
+                                &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Bundle
+                                    1
+                                &lt;/h2&gt;
+                                &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit
+                                    waistcoat.
+                                    Distillery
+                                    hexagon disrupt edison bulbche.&lt;/p&gt;
+                                &lt;button
+                                    class="w-full px-8 py-2 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white hover:border-black hover:bg-black focus:shadow-outline focus:outline-none"&gt;Button&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-2 py-2 lg:w-1/3 md:w-full"&gt;
+                        &lt;div class="border rounded-xl"&gt;
+                            &lt;img class="object-cover object-center w-full h-64 mb-6 rounded-t-xl"
+                                src="https://dummyimage.com/420x200/94a3b8/ffffff" alt="content"&gt;
+                            &lt;div class="p-6 "&gt;
+                                &lt;h2
+                                    class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl"&gt;
+                                    $18
+                                    &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                                &lt;/h2&gt;
+                                &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Bundle
+                                    2
+                                &lt;/h2&gt;
+                                &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit
+                                    waistcoat.
+                                    Distillery
+                                    hexagon disrupt edison bulbche.&lt;/p&gt;
+                                &lt;button
+                                    class="w-full px-8 py-2 font-semibold text-black transition duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl hover:text-white hover:border-black hover:bg-black focus:shadow-outline focus:outline-none"&gt;Button&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-2 py-2 lg:w-1/3 md:w-full"&gt;
+                        &lt;div class="border rounded-xl"&gt;
+                            &lt;img class="object-cover object-center w-full h-64 mb-6 rounded-t-xl"
+                                src="https://dummyimage.com/420x200/94a3b8/ffffff" alt="content"&gt;
+                            &lt;div class="p-6 "&gt;
+                                &lt;h2
+                                    class="flex items-center justify-start mt-2 mb-4 text-3xl font-bold leading-none text-left text-blue-800 lg:text-6xl"&gt;
+                                    $38
+                                    &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                                &lt;/h2&gt;
+                                &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Bundle
+                                    3
+                                &lt;/h2&gt;
+                                &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit
+                                    waistcoat.
+                                    Distillery
+                                    hexagon disrupt edison bulbche.&lt;/p&gt;
+                                &lt;button
+                                    class="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;Button&lt;/button&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- pricing 6 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview6' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview6'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code6'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('priceSix').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview6'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/pricing/price-6.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code6'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="priceSix">
+                                        <!------
+                                 <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-32 mx-auto lg:px-4">
+                <div class="flex flex-wrap text-center">
+                    <div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full">
+                        <div class="p-4 border rounded-xl">
+                        <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> User 1
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">BEGGINER</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $0
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                        </div>
+                    </div>
+                    <div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full">
+                                                <div class="p-4 border rounded-xl">
+                        <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> User 2
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">HOBBY</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $6
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                        </div>
+                    </div>
+                    <div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full">
+                                                <div class="p-4 border rounded-xl">
+                        <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> User 3
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">STARTUP</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $28
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                        </div>
+                    </div>
+                    <div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full">
+                                                <div class="p-4 border rounded-xl">
+                        <h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"> User 4
+                        </h2>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <div class="flex flex-col items-center justify-center px-2 text-center lg:h-32">
+                            <h3 class="tracking-widest">CORPORATE</h3>
+                            <h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl">
+                                $38
+                                <span class="ml-1 text-base text-gray-600">/mo</span>
+                            </h2>
+                        </div>
+                        <button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none">
+                            Action
+                        </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-32 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap text-center"&gt;
+                    &lt;div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full"&gt;
+                        &lt;div class="p-4 border rounded-xl"&gt;
+                        &lt;h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"&gt; User 1
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;BEGGINER&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $0
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full"&gt;
+                                                &lt;div class="p-4 border rounded-xl"&gt;
+                        &lt;h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"&gt; User 2
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;HOBBY&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $6
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full"&gt;
+                        &lt;div class="p-4 border rounded-xl"&gt;
+                        &lt;h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"&gt; User 3
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;STARTUP&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $28
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-2 py-6 mx-auto lg:w-1/4 md:w-full"&gt;
+                                                &lt;div class="p-4 border rounded-xl"&gt;
+                        &lt;h2 class="mb-3 text-lg font-bold text-blue-700 lg:text-4xl title-font"&gt; User 4
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;div class="flex flex-col items-center justify-center px-2 text-center lg:h-32"&gt;
+                            &lt;h3 class="tracking-widest"&gt;CORPORATE&lt;/h3&gt;
+                            &lt;h2
+                                class="flex items-center justify-center mt-2 mb-4 text-3xl font-bold leading-none text-blue-800 lg:text-6xl"&gt;
+                                $38
+                                &lt;span class="ml-1 text-base text-gray-600"&gt;/mo&lt;/span&gt;
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;button
+                            class="flex items-center px-4 py-2 mx-auto mt-auto font-semibold text-black duration-500 ease-in-out transform bg-white border rounded-lg shadow-xl transittion hover:text-white hover:bg-black hover:border-black focus:shadow-outline focus:outline-none"&gt;
+                            Action
+                        &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+      
+        <footer class="pt-10 border-t border-gray-800 body-font">
+            <div
+                class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+                <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
+                    <img class="object-cover object-center rounded-lg" alt="badge"
+                        src="./assets/Wickedblockswidget.svg">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center py-6 text-base lg:ml-auto md:py-1 ">
+                    <span class="mr-6 font-semibold tracking-tighter text-teal-1000 text-md"> OTHER PROJECTS</span>
+                    <a href="https://colorsandfonts.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">
+                        ColorsAndFonts</a>
+                    <a href="https://unicornsfeed.com"
+                        class="mr-4 text-blueGray-300 hover:text-yellow-1000">TheUnicornsFeed</a>
+                    <a href="https://wickedtemplates.com"
+                        class="mr-4 text-blueGray-300 hover:text-yellow-1000">WickedTemplates</a>
+                </nav>
+            </div>
+        </footer>
+        <footer class="mt-10 border-t border-gray-800 body-font">
+            <div
+                class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+                <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
+                    © 2020 WickedBlocks
+                </p>
+                <span class="inline-flex items-center lg:ml-auto">
+                    <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                        <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+                            <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+                            MICHAEL ANDREUZZA
+                        </a>
+                    </p>
+                    <img loading="lazy  alt=" team"
+                        class="flex-shrink-0 object-cover object-center w-8 h-8 ml-4 rounded-full bg-blueGray-50 lg:mb-0 "
+                        src="./assets/mike.svg">
+                </span>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script>
+            function copyToClip(str) {
+                function listener(e) {
+                    e.clipboardData.setData("text/html", str);
+                    e.clipboardData.setData("text/plain", str);
+                    e.preventDefault();
+                }
+                document.addEventListener("copy", listener);
+                document.execCommand("copy");
+                document.removeEventListener("copy", listener);
+            }
+        </script>
+        <script>
+            // Sidebar
+            function slideout() {
+                return {
+                    open: false,
+                    usedKeyboard: false,
+                    init() {
+                        this.$watch('open', value => {
+                            value && this.$refs.closeButton.focus()
+                            this.toggleOverlay()
+                        })
+                        this.toggleOverlay()
+                    },
+                    toggleOverlay() {
+                        document.body.classList[this.open ? 'add' : 'remove']('h-screen', 'overflow-hidden')
+                    }
+                }
+            }
+            // Snackbar
+            function noticesHandler() {
+                return {
+                    notices: [],
+                    visible: [],
+                    add(notice) {
+                        notice.id = Date.now()
+                        this.notices.push(notice)
+                        this.fire(notice.id)
+                    },
+                    fire(id) {
+                        this.visible.push(this.notices.find(notice => notice.id == id))
+                        const timeShown = 2000 * this.visible.length
+                        setTimeout(() => {
+                            this.remove(id)
+                        }, timeShown)
+                    },
+                    remove(id) {
+                        const notice = this.visible.find(notice => notice.id == id)
+                        const index = this.visible.indexOf(notice)
+                        this.visible.splice(index, 1)
+                    },
+                };
+            }
+        </script>
+        <script src="./rainbow-code/dist/rainbow.js"></script>
+        <script src="./rainbow-code/src/language/generic.js"></script>
+        <script src="./rainbow-code/src/language/html.js"></script>
+        <script src="./rainbow-code/src/language/numbers.js"></script>
+    </body>
+</html>

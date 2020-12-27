@@ -1,0 +1,1940 @@
+<!-- component -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>WickedBlocks by Wicked Templates</title>
+        <meta name="author" content="Michael Andreuzza" />
+        <meta name="keywords" content="keywords,here" />
+        <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
+        <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
+        <link rel="stylesheet" href="./css/wt.css" type="text/css" />
+        <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
+        <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
+    </head>
+    <body class="antialiased bg-blue-1300">
+        <!----- Snackbar -->
+        <div x-data="noticesHandler()"
+            class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
+            @notice.window="add($event.detail)" style="pointer-events:none">
+            <template x-for="notice of notices" :key="notice.id">
+                <div x-show="visible.includes(notice)" x-transition:enter="transition ease-in duration-200"
+                    x-transition:enter-start="transform opacity-0 translate-y-2"
+                    x-transition:enter-end="transform opacity-100" x-transition:leave="transition ease-out duration-500"
+                    x-transition:leave-start="transform translate-x-0 opacity-100"
+                    x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
+                    class="z-50 flex items-center justify-center w-full h-16 mb-4 text-lg font-semibold tracking-tighter text-white cursor-pointer lg:mr-6 dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
+                    :class="{
+            				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
+            			 }" style="pointer-events:all" x-text="notice.text">
+                </div>
+            </template>
+        </div>
+        <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
+        <div class="fixed z-50 w-full text-gray-500 border-b border-blueGray-900 bg-blue-1300 lg:px-20">
+            <div x-data="{ open: false }"
+                class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+                <div class="flex flex-row items-center justify-between p-4 ">
+                    <a href="./index.html" class=" focus:outline-none">
+                        <h1 class="text-2xl font-bold tracking-tighter text-white uppercase lg:text-3xl title-font ">
+                            WickedBlocks
+                            <span class="text-xs">©</span>
+                        </h1>
+                    </a>
+                    <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
+                        <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
+                            <path x-show="!open" fill-rule="evenodd"
+                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                clip-rule="evenodd"></path>
+                            <path x-show="open" fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav :class="{'flex': open, 'hidden': !open}"
+                    class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+                    <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
+                        @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
+                        class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
+                        Quick Acces to Blockss
+                    </button>
+                </nav>
+            </div>
+        </div>
+        <!-- Dev tools -->
+        <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
+        </div>
+        <!---- sidebar -->
+        <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+            @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+            <div x-show.transition.opacity.duration.500="open" @click="open = false"
+                class="fixed inset-0 bg-opacity-25 bg-blue-1400">
+            </div>
+            <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
+                :class="{'translate-x-full': !open}">
+                <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+                    class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="w-auto p-8 ">
+                    <div class="w-64 h-screen mt-8 sm:mt-0">
+                        <nav class="mt-20 font-semibold">
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./left-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="4" y1="4" x2="4" y2="20" />
+                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./centered-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="12" y1="4" x2="12" y2="9" />
+                                    <line x1="12" y1="15" x2="12" y2="20" />
+                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./right-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
+                                    <line x1="20" y1="4" x2="20" y2="20" />
+                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./auth.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./pricing.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                    <circle cx="9" cy="9" r="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./clients.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="12" cy="7" r="4" />
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./grids.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="6" height="5" rx="2" />
+                                    <rect x="4" y="13" width="6" height="7" rx="2" />
+                                    <rect x="14" y="4" width="6" height="7" rx="2" />
+                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./forms.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./gallery.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
+                                    <line x1="15" y1="8" x2="15.01" y2="8" />
+                                    <rect x="4" y="4" width="16" height="16" rx="3" />
+                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./navigation.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./footers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                            </a>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!----end sidebar -->
+        <!--- gallery 1-->
+        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview1' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview1'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code1'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryOne').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview1'">
+                            <img class="rounded-b-xl " loading="lazy" src="./assets/sections/gallery/gallery-1.png"
+                                alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code1'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryOne">
+                                        <!------
+                                          <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:px-32">
+                <div class="flex flex-wrap justify-center mx-auto ">
+                    <div class="w-full mt-6 lg:w-2/4 lg:pl-10 lg:py-6 lg:mt-0">
+                        <img alt="image"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x400/F3F4F7/8693ac">
+                        <div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center">
+                            <h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">Gallery 1.</h1>
+                            <button
+                                class="flex-shrink-0 px-4 py-2 mt-10 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg sm:mt-0 bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">Button</button>
+                        </div>
+                    </div>
+                    <div class="w-full mt-6 lg:w-2/4 lg:pl-10 lg:py-6 lg:mt-0">
+                        <img alt="image"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x400/F3F4F7/8693ac">
+                        <div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center">
+                            <h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"> Gallery 2.
+                            </h1>
+                            <button
+                                class="flex-shrink-0 px-4 py-2 mt-10 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg sm:mt-0 bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none">Button</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                                        --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:px-32"&gt;
+                &lt;div class="flex flex-wrap justify-center mx-auto "&gt;
+                    &lt;div class="w-full mt-6 lg:w-2/4 lg:pl-10 lg:py-6 lg:mt-0"&gt;
+                        &lt;img alt="image"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x400/F3F4F7/8693ac"&gt;
+                        &lt;div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                            &lt;h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;Gallery 1.&lt;/h1&gt;
+                            &lt;button
+                                class="flex-shrink-0 px-4 py-2 mt-10 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg sm:mt-0 bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none"&gt;Button&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full mt-6 lg:w-2/4 lg:pl-10 lg:py-6 lg:mt-0"&gt;
+                        &lt;img alt="image"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x400/F3F4F7/8693ac"&gt;
+                        &lt;div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                            &lt;h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt; Gallery 2.
+                            &lt;/h1&gt;
+                            &lt;button
+                                class="flex-shrink-0 px-4 py-2 mt-10 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg sm:mt-0 bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 hover:-translate-y-1 hover:scale-110 focus:shadow-outline focus:outline-none"&gt;Button&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!--- gallery 2-->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview2' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview2'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code2'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryTwo').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview2'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-2.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code2'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryTwo">
+                                        <!----
+          <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:px-10">
+                <div class="flex flex-wrap py-8 md:flex-no-wrap">
+                    <div class="w-full ">
+                        <img alt="image" style="height:400px;"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/1024x400/F3F4F7/8693ac">
+                        <div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center">
+                            <div
+                                class="flex flex-col items-center flex-grow mb-16 mr-64 text-left md:items-start md:text-left md:mb-0">
+                                <h1
+                                    class="mb-2 text-2xl font-semibold tracking-tighter text-left text-blue-700 sm:text-3xl title-font">
+                                    Wicked Templates Screens.</h1>
+                                <p
+                                    class="mb-8 text-base leading-relaxed text-center text-gray-900 lg:text-left lg:text-1xl">
+                                    Using Wicked Template Screens islike playing with lego, they just fit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                              --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:px-10"&gt;
+                &lt;div class="flex flex-wrap py-8 md:flex-no-wrap"&gt;
+                    &lt;div class="w-full "&gt;
+                        &lt;img alt="image" style="height:400px;"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/1024x400/F3F4F7/8693ac"&gt;
+                        &lt;div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                            &lt;div
+                                class="flex flex-col items-center flex-grow mb-16 mr-64 text-left md:items-start md:text-left md:mb-0"&gt;
+                                &lt;h1
+                                    class="mb-2 text-2xl font-semibold tracking-tighter text-left text-blue-700 sm:text-3xl title-font"&gt;
+                                    Wicked Templates Screens.&lt;/h1&gt;
+                                &lt;p
+                                    class="mb-8 text-base leading-relaxed text-center text-gray-900 lg:text-left lg:text-1xl"&gt;
+                                    Using Wicked Template Screens islike playing with lego, they just fit.&lt;/p&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 3-->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview3' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview3'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code3'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryThree').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview3'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-3.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code3'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryThree">
+                                        <!----     <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-6 mx-auto lg:px-10">
+                <div class="flex flex-wrap -m-4">
+                    <div class="p-4 lg:w-1/3 sm:w-1/2">
+                        <div class="relative flex rounded-lg ">
+                            <img alt="gallery"
+                                class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                            <div
+                                class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100">
+                                <div class="justify-center block mx-auto text-center ">
+                                    <button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                                        See More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 lg:w-1/3 sm:w-1/2">
+                        <div class="relative flex rounded-lg ">
+                            <img alt="gallery"
+                                class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                            <div
+                                class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100">
+                                <div class="justify-center block mx-auto text-center ">
+                                    <button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                                        See More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 lg:w-1/3 sm:w-1/2">
+                        <div class="relative flex rounded-lg ">
+                            <img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                            <div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100">
+                                <div class="justify-center block mx-auto text-center ">
+                                    <button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                                        See More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 lg:w-1/3 sm:w-1/2">
+                        <div class="relative flex rounded-lg ">
+                            <img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                            <div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100">
+                                <div class="justify-center block mx-auto text-center ">
+                                    <button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                                        See More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 lg:w-1/3 sm:w-1/2">
+                        <div class="relative flex rounded-lg ">
+                            <img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                            <div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100">
+                                <div class="justify-center block mx-auto text-center ">
+                                    <button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                                        See More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4 lg:w-1/3 sm:w-1/2">
+                        <div class="relative flex rounded-lg ">
+                            <img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                            <div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100">
+                                <div class="justify-center block mx-auto text-center ">
+                                    <button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none">
+                                        See More</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-start w-1/6 mx-auto mt-8 sm:flex-row sm:items-center">
+                    <h1 class="mb-2 text-2xl font-medium text-gray-900 title-font tracking-thighter">See more.
+                    </h1>
+                    <span class="inline-flex">
+                        <a
+                            class="inline-flex items-center justify-center w-10 h-10 ml-4 text-white rounded-full shadow-xl bg-gradient-to-r from-blue-700 to-blue-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <polyline points="9 6 15 12 9 18" />
+                            </svg>
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </section>
+                ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-6 mx-auto lg:px-10"&gt;
+                &lt;div class="flex flex-wrap -m-4"&gt;
+                    &lt;div class="p-4 lg:w-1/3 sm:w-1/2"&gt;
+                        &lt;div class="relative flex rounded-lg "&gt;
+                            &lt;img alt="gallery"
+                                class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                            &lt;div
+                                class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100"&gt;
+                                &lt;div class="justify-center block mx-auto text-center "&gt;
+                                    &lt;button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;
+                                        See More&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-4 lg:w-1/3 sm:w-1/2"&gt;
+                        &lt;div class="relative flex rounded-lg "&gt;
+                            &lt;img alt="gallery"
+                                class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                            &lt;div
+                                class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100"&gt;
+                                &lt;div class="justify-center block mx-auto text-center "&gt;
+                                    &lt;button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;
+                                        See More&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-4 lg:w-1/3 sm:w-1/2"&gt;
+                        &lt;div class="relative flex rounded-lg "&gt;
+                            &lt;img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                            &lt;div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100"&gt;
+                                &lt;div class="justify-center block mx-auto text-center "&gt;
+                                    &lt;button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;
+                                        See More&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-4 lg:w-1/3 sm:w-1/2"&gt;
+                        &lt;div class="relative flex rounded-lg "&gt;
+                            &lt;img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                            &lt;div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100"&gt;
+                                &lt;div class="justify-center block mx-auto text-center "&gt;
+                                    &lt;button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;
+                                        See More&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-4 lg:w-1/3 sm:w-1/2"&gt;
+                        &lt;div class="relative flex rounded-lg "&gt;
+                            &lt;img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                            &lt;div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100"&gt;
+                                &lt;div class="justify-center block mx-auto text-center "&gt;
+                                    &lt;button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;
+                                        See More&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="p-4 lg:w-1/3 sm:w-1/2"&gt;
+                        &lt;div class="relative flex rounded-lg "&gt;
+                            &lt;img alt="gallery" class="absolute inset-0 object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                            &lt;div class="relative z-10 w-full px-8 py-10 bg-white rounded-lg opacity-0 hover:opacity-100"&gt;
+                                &lt;div class="justify-center block mx-auto text-center "&gt;
+                                    &lt;button
+                                        class="w-full px-4 py-3 m-12 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl lg:w-auto bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:shadow-outline focus:outline-none"&gt;
+                                        See More&lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="flex items-start w-1/6 mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                    &lt;h1 class="mb-2 text-2xl font-medium text-gray-900 title-font tracking-thighter"&gt;See more.
+                    &lt;/h1&gt;
+                    &lt;span class="inline-flex"&gt;
+                        &lt;a
+                            class="inline-flex items-center justify-center w-10 h-10 ml-4 text-white rounded-full shadow-xl bg-gradient-to-r from-blue-700 to-blue-600"&gt;
+                            &lt;svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right"
+                                width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round"&gt;
+                                &lt;path stroke="none" d="M0 0h24v24H0z" fill="none" /&gt;
+                                &lt;polyline points="9 6 15 12 9 18" /&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                    &lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 4 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview4' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview4'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code4'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryFour').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview4'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-4.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code4'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryFour">
+                                        <!------
+                                        <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:px-48">
+                <div class="mx-auto lg:w-3/3">
+                    <div class="relative flex flex-wrap w-full px-10 py-32 mb-4">
+                        <img alt="gallery"
+                            class="absolute inset-0 block object-cover object-center w-full h-full border border-gray-200 rounded-lg opacity-25"
+                            src="https://dummyimage.com/600x360/94a3b8/ffffff">
+                        <div class="relative z-10 w-full text-left">
+                            <h1 class="mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">
+                                Gallery 1.</h1>
+                            <button
+                                class="inline-flex justify-center px-6 py-4 mt-2 mr-10 font-semibold duration-500 ease-in-out transform bg-white rounded-lg transblueGrayition text--700 hover:border-blueGray-700 hover:bg-blueGray-700 hover:text-white focus:shadow-outline focus:outline-none">
+                                Learn more »
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-2">
+                        <div class="w-1/2 px-2">
+                            <div class="relative flex flex-wrap w-full px-6 py-16 sm:py-24 sm:px-10">
+                                <img alt="gallery"
+                                    class="absolute inset-0 block object-cover object-center w-full h-full border border-gray-200 rounded-lg opacity-25"
+                                    src="https://dummyimage.com/600x360/94a3b8/ffffff">
+                                <div class="relative z-10 w-full text-left">
+                                    <h1 class="mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">Gallery.</h1>
+                                     <button
+                                            class="inline-flex justify-center px-6 py-4 mt-2 mr-10 font-semibold duration-500 ease-in-out transform bg-white rounded-lg transblueGrayition text--700 hover:border-blueGray-700 hover:bg-blueGray-700 hover:text-white focus:shadow-outline focus:outline-none">
+                                            Learn more »
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-1/2 px-2">
+                            <div class="relative flex flex-wrap w-full px-6 py-16 sm:py-24 sm:px-10">
+                                <img alt="gallery"
+                                    class="absolute inset-0 block object-cover object-center w-full h-full border border-gray-200 rounded-lg opacity-25"
+                                    src="https://dummyimage.com/600x360/94a3b8/ffffff">
+                                <div class="relative z-10 w-full text-left">
+                                    <h1 class="mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">Gallery 3.</h1>
+                                     <button
+                                            class="inline-flex justify-center px-6 py-4 mt-2 mr-10 font-semibold duration-500 ease-in-out transform bg-white rounded-lg transblueGrayition text--700 hover:border-blueGray-700 hover:bg-blueGray-700 hover:text-white focus:shadow-outline focus:outline-none">
+                                            Learn more »
+                                        </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                                        ----->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:px-48"&gt;
+                &lt;div class="mx-auto lg:w-3/3"&gt;
+                    &lt;div class="relative flex flex-wrap w-full px-10 py-32 mb-4"&gt;
+                        &lt;img alt="gallery"
+                            class="absolute inset-0 block object-cover object-center w-full h-full border border-gray-200 rounded-lg opacity-25"
+                            src="https://dummyimage.com/600x360/94a3b8/ffffff"&gt;
+                        &lt;div class="relative z-10 w-full text-left"&gt;
+                            &lt;h1 class="mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;
+                                Gallery 1.&lt;/h1&gt;
+                            &lt;button
+                                class="inline-flex justify-center px-6 py-4 mt-2 mr-10 font-semibold duration-500 ease-in-out transform bg-white rounded-lg transblueGrayition text--700 hover:border-blueGray-700 hover:bg-blueGray-700 hover:text-white focus:shadow-outline focus:outline-none"&gt;
+                                Learn more »
+                            &lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap -mx-2"&gt;
+                        &lt;div class="w-1/2 px-2"&gt;
+                            &lt;div class="relative flex flex-wrap w-full px-6 py-16 sm:py-24 sm:px-10"&gt;
+                                &lt;img alt="gallery"
+                                    class="absolute inset-0 block object-cover object-center w-full h-full border border-gray-200 rounded-lg opacity-25"
+                                    src="https://dummyimage.com/600x360/94a3b8/ffffff"&gt;
+                                &lt;div class="relative z-10 w-full text-left"&gt;
+                                    &lt;h1 class="mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;Gallery.&lt;/h1&gt;
+                                     &lt;button
+                                            class="inline-flex justify-center px-6 py-4 mt-2 mr-10 font-semibold duration-500 ease-in-out transform bg-white rounded-lg transblueGrayition text--700 hover:border-blueGray-700 hover:bg-blueGray-700 hover:text-white focus:shadow-outline focus:outline-none"&gt;
+                                            Learn more »
+                                        &lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                        &lt;div class="w-1/2 px-2"&gt;
+                            &lt;div class="relative flex flex-wrap w-full px-6 py-16 sm:py-24 sm:px-10"&gt;
+                                &lt;img alt="gallery"
+                                    class="absolute inset-0 block object-cover object-center w-full h-full border border-gray-200 rounded-lg opacity-25"
+                                    src="https://dummyimage.com/600x360/94a3b8/ffffff"&gt;
+                                &lt;div class="relative z-10 w-full text-left"&gt;
+                                    &lt;h1 class="mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;Gallery 3.&lt;/h1&gt;
+                                     &lt;button
+                                            class="inline-flex justify-center px-6 py-4 mt-2 mr-10 font-semibold duration-500 ease-in-out transform bg-white rounded-lg transblueGrayition text--700 hover:border-blueGray-700 hover:bg-blueGray-700 hover:text-white focus:shadow-outline focus:outline-none"&gt;
+                                            Learn more »
+                                        &lt;/button&gt;
+                                &lt;/div&gt;
+                            &lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                  </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 5 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview5' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview5'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code5' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code5'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryFive').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview5'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-5.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code5'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryFive">
+                                        <!------
+                      <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:px-32">
+                <div class="flex flex-wrap justify-center mx-auto ">
+                    <div class="w-full mt-6 lg:w-2/6 lg:pl-10 lg:py-6 lg:mt-0">
+                        <img alt="ecommerce"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x600/F3F4F7/8693ac">
+                    <div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center">
+                        <h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">
+                            Ui Kits .
+                        </h1>
+                        <span class="inline-flex">
+                            <a
+                                class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-gradient-to-r from-blue-700 to-blue-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24"
+                                    height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <polyline points="9 6 15 12 9 18" />
+                                </svg>
+                            </a>
+                        </span>
+                    </div>
+                    </div>
+                    <div class="w-full mt-6 lg:w-2/6 lg:pl-10 lg:py-6 lg:mt-0">
+                        <img alt="ecommerce"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x600/F3F4F7/8693ac">
+                        <div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center">
+                            <h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">
+                              Illustrations
+                            </h1>
+                            <span class="inline-flex">
+                                <a
+                                    class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-gradient-to-r from-blue-700 to-blue-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <polyline points="9 6 15 12 9 18" />
+                                    </svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="w-full mt-6 lg:w-2/6 lg:pl-10 lg:py-6 lg:mt-0">
+                        <img alt="ecommerce" class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x600/F3F4F7/8693ac">
+                        <div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center">
+                            <h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font">
+                                Case Studies
+                            </h1>
+                            <span class="inline-flex">
+                                <a
+                                    class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-gradient-to-r from-blue-700 to-blue-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24"
+                                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round">
+                                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                        <polyline points="9 6 15 12 9 18" />
+                                    </svg>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+                    -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+            &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:px-32"&gt;
+                &lt;div class="flex flex-wrap justify-center mx-auto "&gt;
+                    &lt;div class="w-full mt-6 lg:w-2/6 lg:pl-10 lg:py-6 lg:mt-0"&gt;
+                        &lt;img alt="ecommerce"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x600/F3F4F7/8693ac"&gt;
+                    &lt;div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                        &lt;h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;
+                            Ui Kits .
+                        &lt;/h1&gt;
+                        &lt;span class="inline-flex"&gt;
+                            &lt;a
+                                class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-gradient-to-r from-blue-700 to-blue-600"&gt;
+                                &lt;svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24"
+                                    height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round"&gt;
+                                    &lt;path stroke="none" d="M0 0h24v24H0z" fill="none" /&gt;
+                                    &lt;polyline points="9 6 15 12 9 18" /&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full mt-6 lg:w-2/6 lg:pl-10 lg:py-6 lg:mt-0"&gt;
+                        &lt;img alt="ecommerce"
+                            class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x600/F3F4F7/8693ac"&gt;
+                        &lt;div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                            &lt;h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;
+                              Illustrations
+                            &lt;/h1&gt;
+                            &lt;span class="inline-flex"&gt;
+                                &lt;a
+                                    class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-gradient-to-r from-blue-700 to-blue-600"&gt;
+                                    &lt;svg xmlns="http://www.w3.org/2000/svg"
+                                        class="icon icon-tabler icon-tabler-chevron-right" width="24" height="24"
+                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round"&gt;
+                                        &lt;path stroke="none" d="M0 0h24v24H0z" fill="none" /&gt;
+                                        &lt;polyline points="9 6 15 12 9 18" /&gt;
+                                    &lt;/svg&gt;
+                                &lt;/a&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full mt-6 lg:w-2/6 lg:pl-10 lg:py-6 lg:mt-0"&gt;
+                        &lt;img alt="ecommerce" class="object-cover object-center w-full h-64 rounded-lg lg:h-auto"
+                            src="https://dummyimage.com/400x600/F3F4F7/8693ac"&gt;
+                        &lt;div class="flex flex-col items-start mx-auto mt-8 sm:flex-row sm:items-center"&gt;
+                            &lt;h1 class="flex-grow mb-2 text-2xl font-medium tracking-tighter text-gray-900 title-font"&gt;
+                                Case Studies
+                            &lt;/h1&gt;
+                            &lt;span class="inline-flex"&gt;
+                                &lt;a
+                                    class="inline-flex items-center justify-center w-10 h-10 text-white rounded-full bg-gradient-to-r from-blue-700 to-blue-600"&gt;
+                                    &lt;svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-right" width="24"
+                                        height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="#ffffff" fill="none"
+                                        stroke-linecap="round" stroke-linejoin="round"&gt;
+                                        &lt;path stroke="none" d="M0 0h24v24H0z" fill="none" /&gt;
+                                        &lt;polyline points="9 6 15 12 9 18" /&gt;
+                                    &lt;/svg&gt;
+                                &lt;/a&gt;
+                            &lt;/span&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 6 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview6' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview6'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code6' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code6'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('gallerySix').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview6'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-6.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code6'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="gallerySix">
+                                        <!------
+                                  <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-24 lg:px-32">
+            <div class="flex flex-wrap -m-1 md:-m-2">
+                <div class="flex flex-wrap w-1/2">
+                    <div class="w-1/2 p-1 md:p-2">
+                        <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/500x300/F3F4F7/8693ac">
+                    </div>
+                    <div class="w-1/2 p-1 md:p-2">
+                        <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/501x301/F3F4F7/8693ac">
+                    </div>
+                    <div class="w-full p-1 md:p-2">
+                        <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/600x360/F3F4F7/8693ac">
+                    </div>
+                </div>
+                <div class="flex flex-wrap w-1/2">
+                    <div class="w-full p-1 md:p-2">
+                        <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/601x361/F3F4F7/8693ac">
+                    </div>
+                    <div class="w-1/2 p-1 md:p-2">
+                        <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/502x302/F3F4F7/8693ac">
+                    </div>
+                    <div class="w-1/2 p-1 md:p-2">
+                        <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/503x303/F3F4F7/8693ac">
+                    </div>
+                </div>
+            </div>
+        </section>
+        -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:pt-24 lg:px-32"&gt;
+            &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+                &lt;div class="flex flex-wrap w-1/2"&gt;
+                    &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/500x300/F3F4F7/8693ac"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/501x301/F3F4F7/8693ac"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-full p-1 md:p-2"&gt;
+                        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/600x360/F3F4F7/8693ac"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="flex flex-wrap w-1/2"&gt;
+                    &lt;div class="w-full p-1 md:p-2"&gt;
+                        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/601x361/F3F4F7/8693ac"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/502x302/F3F4F7/8693ac"&gt;
+                    &lt;/div&gt;
+                    &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                            src="https://dummyimage.com/503x303/F3F4F7/8693ac"&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 7 -->
+        <section class="p-5 lg:pt-10 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview7' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview7'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code7' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code7'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('gallerySeven').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview7'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-7.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code7'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="gallerySeven">
+                                        <!----
+                        <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-16 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-1/2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/2">
+                        <div class="w-1/2 p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac">
+                        </div>
+                        <div class="w-1/2 p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac">
+                        </div>
+                        <div class="w-1/2 p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac">
+                        </div>
+                        <div class="w-1/2 p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+                          ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+         &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:pt-16 lg:px-32"&gt;
+                &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+                    &lt;div class="flex flex-wrap w-1/2"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/2"&gt;
+                        &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                        &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                        &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                        &lt;div class="w-1/2 p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x500/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 8 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview8' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview8'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code8' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code8'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryEight').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview8'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-8.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code8'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryEight">
+                                        <!--------
+                                       <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-16 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-1/2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+                                    --->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:pt-16 lg:px-32"&gt;
+                &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+                    &lt;div class="flex flex-wrap w-1/2"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/2"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 9 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview9' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview9'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code9' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code9'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryNine').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview9'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-9.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code9'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryNine">
+                                        <!-------
+                                     <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-36 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+                                    -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:pt-36 lg:px-32"&gt;
+                &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x800/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 10 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview10' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview10' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview10'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code10' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code10'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryTen').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview10'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-10.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code10'">
+                            <div
+                                class="h-screen overflow-auto overflow-y-scroll bg-blue-1400 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryTen">
+                                        <!----
+                       <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/3">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+                                      ---->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32"&gt;
+                &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/3"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/800x600/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/section&gt;
+                                    </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 11 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview11' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview11' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview11'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code11' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code11'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryEleven').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview11'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-11.png" alt="">
+                        </div>
+                        <div class=" rounded-b-xl" x-show="tab === 'code11'">
+                            <div
+                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryEleven">
+                                        <!-------
+ <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-1/2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x300/F3F4F7/8693ac">
+                        </div>
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x200/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x200/F3F4F7/8693ac">
+                        </div>
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/500x300/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+                    -->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+        &lt;div class="container px-5 py-2 mx-auto lg:pt-12 lg:px-32"&gt;
+        &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+        &lt;div class="flex flex-wrap w-1/2"&gt;
+        &lt;div class="w-full p-1 md:p-2"&gt;
+        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+        src="https://dummyimage.com/500x300/F3F4F7/8693ac"&gt;
+        &lt;/div&gt;
+        &lt;div class="w-full p-1 md:p-2"&gt;
+        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+        src="https://dummyimage.com/500x200/F3F4F7/8693ac"&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class="flex flex-wrap w-1/2"&gt;
+        &lt;div class="w-full p-1 md:p-2"&gt;
+        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+        src="https://dummyimage.com/500x200/F3F4F7/8693ac"&gt;
+        &lt;/div&gt;
+        &lt;div class="w-full p-1 md:p-2"&gt;
+        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+        src="https://dummyimage.com/500x300/F3F4F7/8693ac"&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 12 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview12' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview12' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview12'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code12' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code12'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryTwelve').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview12'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-12.png" alt="">
+                        </div>
+                        <div class="rounded-b-xl" x-show="tab === 'code12'">
+                            <div
+                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryTwelve">
+                                        <!----
+ <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-16 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-full">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+                                src="https://dummyimage.com/1024x500/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+-->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+        &lt;div class="container px-5 py-2 mx-auto lg:pt-16 lg:px-32"&gt;
+        &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+        &lt;div class="flex flex-wrap w-full"&gt;
+        &lt;div class="w-full p-1 md:p-2"&gt;
+        &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg"
+        src="https://dummyimage.com/1024x500/F3F4F7/8693ac"&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <!--- gallery 13 -->
+        <section class="p-5 pt-20 lg:p-0">
+            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+                <div class="rounded-xl" x-data="{ tab: 'preview13' }">
+                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'preview13'">
+                            Preview
+                        </button>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code13' }"
+                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                            @click="tab = 'code13'">
+                            Code
+                        </button>
+                        <!---- Copy Buton -->
+                        <button
+                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                            onclick="copyToClip(document.getElementById('galleryThirteen').innerHTML)" x-data="{}"
+                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
+                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="lg:h-screen">
+                        <div class="border rounded-b-xl" x-show="tab === 'preview13'">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/gallery/gallery-13.png" alt="">
+                        </div>
+                        <div class="rounded-b-xl" x-show="tab === 'code13'">
+                            <div
+                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                <div class="rounded-b-xl">
+                                    <div class="hidden" id="galleryThirteen">
+                                        <!----
+ <section class="overflow-hidden text-gray-700 body-font">
+            <div class="container px-5 py-2 mx-auto lg:pt-2 lg:px-32">
+                <div class="flex flex-wrap -m-1 md:-m-2">
+                    <div class="flex flex-wrap w-1/-2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg "
+                                src="https://dummyimage.com/1024x300/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap w-1/-2">
+                        <div class="w-full p-1 md:p-2">
+                            <img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg "
+                                src="https://dummyimage.com/1024x300/F3F4F7/8693ac">
+                        </div>
+                    </div>
+                </div>
+        </section>
+-->
+                                    </div>
+                                    <!---- display code goes here.-->
+                                    <pre class="leading-6"><code data-language="html">
+        &lt;section class="overflow-hidden text-gray-700 body-font"&gt;
+            &lt;div class="container px-5 py-2 mx-auto lg:pt-2 lg:px-32"&gt;
+                &lt;div class="flex flex-wrap -m-1 md:-m-2"&gt;
+                    &lt;div class="flex flex-wrap w-1/-2"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg "
+                                src="https://dummyimage.com/1024x300/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="flex flex-wrap w-1/-2"&gt;
+                        &lt;div class="w-full p-1 md:p-2"&gt;
+                            &lt;img alt="gallery" class="block object-cover object-center w-full h-full rounded-lg "
+                                src="https://dummyimage.com/1024x300/F3F4F7/8693ac"&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+        &lt;/section&gt;
+                                                                        </code></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+        <footer class="pt-10 border-t border-gray-800 body-font">
+            <div
+                class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+                <a class="flex items-center justify-start w-64 font-medium text-gray-900 title-font">
+                    <img class="object-cover object-center rounded-lg" alt="badge"
+                        src="./assets/Wickedblockswidget.svg">
+                </a>
+                <nav class="flex flex-wrap items-center justify-center py-6 text-base lg:ml-auto md:py-1 ">
+                    <span class="mr-6 font-semibold tracking-tighter text-teal-1000 text-md"> OTHER PROJECTS</span>
+                    <a href="https://colorsandfonts.com" class="mr-4 text-blueGray-300 hover:text-yellow-1000">
+                        ColorsAndFonts</a>
+                    <a href="https://unicornsfeed.com"
+                        class="mr-4 text-blueGray-300 hover:text-yellow-1000">TheUnicornsFeed</a>
+                    <a href="https://wickedtemplates.com"
+                        class="mr-4 text-blueGray-300 hover:text-yellow-1000">WickedTemplates</a>
+                </nav>
+            </div>
+        </footer>
+        <footer class="mt-10 border-t border-gray-800 body-font">
+            <div
+                class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
+                <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
+                    © 2020 WickedBlocks
+                </p>
+                <span class="inline-flex items-center lg:ml-auto">
+                    <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
+                        <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
+                            <span class="py-2 mx-4 mt-2 text-sm text-white"> by</span>
+                            MICHAEL ANDREUZZA
+                        </a>
+                    </p>
+                    <img loading="lazy  alt=" team"
+                        class="flex-shrink-0 object-cover object-center w-8 h-8 ml-4 rounded-full bg-blueGray-50 lg:mb-0 "
+                        src="./assets/mike.svg">
+                </span>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script>
+            function copyToClip(str) {
+                function listener(e) {
+                    e.clipboardData.setData("text/html", str);
+                    e.clipboardData.setData("text/plain", str);
+                    e.preventDefault();
+                }
+                document.addEventListener("copy", listener);
+                document.execCommand("copy");
+                document.removeEventListener("copy", listener);
+            }
+        </script>
+        <script>
+            // Sidebar
+            function slideout() {
+                return {
+                    open: false,
+                    usedKeyboard: false,
+                    init() {
+                        this.$watch('open', value => {
+                            value && this.$refs.closeButton.focus()
+                            this.toggleOverlay()
+                        })
+                        this.toggleOverlay()
+                    },
+                    toggleOverlay() {
+                        document.body.classList[this.open ? 'add' : 'remove']('h-screen', 'overflow-hidden')
+                    }
+                }
+            }
+            // Snackbar
+            function noticesHandler() {
+                return {
+                    notices: [],
+                    visible: [],
+                    add(notice) {
+                        notice.id = Date.now()
+                        this.notices.push(notice)
+                        this.fire(notice.id)
+                    },
+                    fire(id) {
+                        this.visible.push(this.notices.find(notice => notice.id == id))
+                        const timeShown = 2000 * this.visible.length
+                        setTimeout(() => {
+                            this.remove(id)
+                        }, timeShown)
+                    },
+                    remove(id) {
+                        const notice = this.visible.find(notice => notice.id == id)
+                        const index = this.visible.indexOf(notice)
+                        this.visible.splice(index, 1)
+                    },
+                };
+            }
+        </script>
+        <script src="./rainbow-code/dist/rainbow.js"></script>
+        <script src="./rainbow-code/src/language/generic.js"></script>
+        <script src="./rainbow-code/src/language/html.js"></script>
+        <script src="./rainbow-code/src/language/numbers.js"></script>
+    </body>
+</html>

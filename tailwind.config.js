@@ -16,6 +16,9 @@ module.exports = {
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
+      boxShadow: {
+        DEFAULT: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
+      },
       height: {
        threescreen: '75vh',
       halfscreen: '50vh',

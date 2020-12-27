@@ -42,7 +42,7 @@
             </h1>
           </a>
           <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
-            <svg fill="#000000" viewBox="0 0 20 20" class="w-12 h-12">
+            <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
               <path x-show="!open" fill-rule="evenodd"
                 d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
                 clip-rule="evenodd"></path>
@@ -54,20 +54,7 @@
         </div>
         <nav :class="{'flex': open, 'hidden': !open}"
           class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-          <a class="inline-flex items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform hover:text-teal-1000 rounded-xl hover:bg-gray-600 md:ml-4 md:w-auto font-lg focus:outline-none"
-            href="https://www.wickedtemplates.com/free-templates">
-            <span>
-              WickedTemplates
-            </span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="ml-4" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
-              stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <circle cx="12" cy="12" r="9" />
-              <line x1="15" y1="9" x2="9" y2="15" />
-              <polyline points="15 15 15 9 9 9" />
-            </svg>
-
-          </a>
+         
           <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
             @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
             class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
@@ -104,10 +91,12 @@
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="./left-headers.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" fill="none" stroke-linecap="round">
-                  <line x1="20" y1="4" x2="20" y2="20" />
-                  <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="4" y1="4" x2="4" y2="20" />
+                  <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                 </svg>
+
                 <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
               </a>
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
@@ -124,10 +113,9 @@
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                 href="./right-headers.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                  stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <line x1="4" y1="4" x2="4" y2="20" />
-                  <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                  stroke="currentColor" fill="none" stroke-linecap="round">
+                  <line x1="20" y1="4" x2="20" y2="20" />
+                  <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                 </svg>
                 <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
               </a>
@@ -142,7 +130,7 @@
                 <span class="mx-4 font-medium tracking-tighter">Auth</span>
               </a>
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                href="#">
+                href="./pricing.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -162,7 +150,7 @@
                 <span class="mx-4 font-medium tracking-tighter">Clients</span>
               </a>
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                href="#">
+                href="./grids.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -174,7 +162,7 @@
                 <span class="mx-4 font-medium tracking-tighter">Grids</span>
               </a>
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                href="#">
+                href="./forms.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -184,7 +172,7 @@
                 <span class="mx-4 font-medium tracking-tighter">Forms</span>
               </a>
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                href="#">
+                href="./gallery.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
@@ -206,7 +194,7 @@
                 <span class="mx-4 font-medium tracking-tighter">Navigation</span>
               </a>
               <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                href="#">
+                href="./footers.html">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
                   stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -238,7 +226,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerOne').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -250,7 +238,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview1'">
               <img class="rounded-b-xl " loading="lazy" src="./assets/sections/clients/clients-1.png" alt="">
             </div>
@@ -363,7 +351,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerTwo').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -375,7 +363,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview2'">
               <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/clients/clients-2.png"
                 alt="">
@@ -476,7 +464,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerThree').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -488,7 +476,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview3'">
               <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/clients/clients-3.png"
                 alt="">
@@ -564,7 +552,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerFour').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -576,7 +564,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview4'">
               <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/clients/clients-4.png"
                 alt="">
@@ -665,7 +653,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerFive').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -677,7 +665,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview5'">
               <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/clients/clients-5.png"
                 alt="">
@@ -786,7 +774,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerSix').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -798,7 +786,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview6'">
               <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/clients/clients-6.png"
                 alt="">
@@ -933,7 +921,7 @@
             </button>
             <!---- Copy Buton -->
             <button
-              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-white"
+              class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
               onclick="copyToClip(document.getElementById('headerSeven').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
@@ -945,7 +933,7 @@
               </svg>
             </button>
           </div>
-          <div class="text-blue-100 bg-white lg:h-screen dark:bg-blueGray-900 dark:text-white">
+          <div class="lg:h-screen">
             <div class="border rounded-b-xl" x-show="tab === 'preview7'">
               <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/clients/clients-7.png"
                 alt="">
