@@ -5,14 +5,14 @@ const allColors = require(`tailwindcss/colors`);
 const extendedColors = defaultColors;
 
 module.exports = {
-// purge: {
-  //  enabled: true,
-  //  content: [
-  //    './dist/**/*.html',
-   //   './dist/*.html',
-   //   './src/**/*.js',
-   // ],
- // },
+ purge: {
+   enabled: true,
+   content: [
+     './dist/**/*.html',
+     './dist/*.html',
+    './src/**/*.js',
+   ],
+  },
   darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {

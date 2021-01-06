@@ -57,7 +57,7 @@
             </div>
             <nav :class="{'flex': open, 'hidden': !open}"
                 class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-               
+
                 <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
                     @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
                     class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
@@ -216,6 +216,10 @@
             <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview1' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            1
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview1'">
@@ -229,7 +233,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerOne').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navOne').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -309,6 +313,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview2' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            2
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview2'">
@@ -322,7 +330,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerTwo').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navTwo').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -422,6 +430,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview3' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            3
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview3'">
@@ -435,7 +447,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerThree').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navThree').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -518,6 +530,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview4' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            4
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview4'">
@@ -531,7 +547,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerFour').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navFour').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -615,6 +631,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview5' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            5
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview5'">
@@ -628,7 +648,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerFive').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navFive').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -700,6 +720,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview6' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            6
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview6'">
@@ -713,7 +737,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerSix').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navSix').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -797,6 +821,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview7' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            7
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview7'">
@@ -810,7 +838,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('headerSeven').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('navSeven').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -930,6 +958,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview8' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            8
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview8'">

@@ -1,6 +1,7 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -9,10 +10,12 @@
         <meta name="keywords" content="keywords,here" />
         <!-- <link rel="manifest" href="./favicons/site.webmanifest"> -->
         <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
-        <link rel="stylesheet" href="./css/wt.css" type="text/css" />
+        <link rel="stylesheet" href="./css/wt.hcss" type="text/css" />
+        <link rel="stylesheet" href="./css/blackboard.css" type="text/css" />
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
-    <body class="antialiased bg-blue-1300">
+
+    <body class="antialiased bg-blue-1300 </div>">
         <!----- Snackbar -->
         <div x-data="noticesHandler()"
             class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
@@ -54,7 +57,7 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-                   
+
                     <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
                         @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
                         class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
@@ -88,8 +91,9 @@
                         <nav class="mt-20 font-semibold">
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./left-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <line x1="4" y1="4" x2="4" y2="20" />
                                     <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
@@ -99,8 +103,9 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./centered-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <line x1="12" y1="4" x2="12" y2="9" />
                                     <line x1="12" y1="15" x2="12" y2="20" />
@@ -110,8 +115,8 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./right-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
                                     <line x1="20" y1="4" x2="20" y2="20" />
                                     <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                                 </svg>
@@ -119,28 +124,33 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./auth.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                    <path
+                                        d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                                     <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
                                 </svg>
                                 <span class="mx-4 font-medium tracking-tighter">Auth</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./pricing.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                    <path
+                                        d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
                                     <circle cx="9" cy="9" r="2" stroke="#FCE952" />
                                 </svg>
                                 <span class="mx-4 font-medium tracking-tighter">Pricing</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./clients.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <circle cx="12" cy="7" r="4" />
                                     <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
@@ -149,8 +159,9 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./grids.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <rect x="4" y="4" width="6" height="5" rx="2" />
                                     <rect x="4" y="13" width="6" height="7" rx="2" />
@@ -161,8 +172,9 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./forms.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
                                     <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
@@ -171,8 +183,9 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./gallery.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
                                     <line x1="15" y1="8" x2="15.01" y2="8" />
                                     <rect x="4" y="4" width="16" height="16" rx="3" />
@@ -183,8 +196,9 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./navigation.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <rect x="4" y="4" width="16" height="16" rx="2" />
                                     <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
@@ -193,8 +207,9 @@
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
                                 href="./footers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                    stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
                                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                     <rect x="4" y="4" width="16" height="16" rx="2" />
                                     <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
@@ -212,17 +227,41 @@
             <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview1' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            1
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview1'">
                             Preview
                         </button>
+
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'code1'">
                             Code
                         </button>
-                        <!---- Copy Buton -->
+
+
+
+                        <!---- Codepen Buton -->
+                        <!-- <form action="https://codepen.io/pen/define" class="ml-auto"
+                            action="http://codepen.io/pen/define" method="POST" target="_blank">
+ -->
+                            <!-- We'll populate the value with the data to post to codepen here. -->
+                            <!-- <input id="data-input" type="hidden" name="data" value="">
+ -->
+                            <!-- Fancy Pants CodePen Submit Button. -->
+                            <!-- <input
+                                class="inline-flex items-center justify-center w-full p-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                                type="image" src="./assets/codepen.svg" " value=" Create Pen"
+                                class="codepen-mover-button" value="Create Pen" class="codepen-mover-button">
+
+                        </form> -->
+
+
+                        <!---- Copy Buton --->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
                             onclick="copyToClip(document.getElementById('headerOne').innerHTML)" x-data="{}"
@@ -243,7 +282,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code1'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerOne">
                                         <!------
@@ -278,7 +317,7 @@
                                         --->
                                     </div>
                                     <!---- display code goes here.-->
-                                    <pre class="leading-6"><code data-language="html">
+                                    <pre class="codepen-able" data-type="html" class="leading-6"><code data-language="html">
          &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 pt-48 pb-24 mx-auto lg:px-4"&gt;
                 &lt;div class="flex flex-col w-full mb-12 text-left lg:text-center"&gt;
@@ -320,6 +359,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview2' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            2
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview2'">
@@ -351,7 +394,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code2'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerTwo">
                                         <!----
@@ -419,6 +462,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview3' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            3
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview3'">
@@ -450,7 +497,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code3'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerThree">
                                         <!----    <section class="text-gray-700 body-font">
@@ -523,6 +570,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview4' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            4
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview4'">
@@ -554,7 +605,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code4'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerFour">
                                         <!------
@@ -650,6 +701,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview5' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            5
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview5'">
@@ -681,7 +736,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code5'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerFive">
                                         <!------
@@ -765,6 +820,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview6' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            6
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview6'">
@@ -796,7 +855,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code6'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerSix">
                                         <!------
@@ -871,6 +930,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview7' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            7
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview7'">
@@ -902,7 +965,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code7'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerSeven">
                                         <!--------
@@ -962,6 +1025,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview8' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            8
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview8'">
@@ -993,7 +1060,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code8'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerEight">
                                         <!--------
@@ -1047,6 +1114,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview9' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            9
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview9'">
@@ -1078,7 +1149,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code9'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerNine">
                                         <!-------
@@ -1150,6 +1221,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview10' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            10
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview10' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview10'">
@@ -1181,7 +1256,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code10'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerTen">
                                         <!-------
@@ -1259,6 +1334,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview11' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            11
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview11' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview11'">
@@ -1290,7 +1369,7 @@
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code11'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerEleven">
                                         <!-------
@@ -1488,6 +1567,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview12' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            12
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview12' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview12'">
@@ -1519,7 +1602,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code12'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerTwelve">
                                         <!----
@@ -1645,6 +1728,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview13' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            13
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview13'">
@@ -1676,7 +1763,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code13'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerThirteen">
                                         <!----
@@ -1736,6 +1823,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview14' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            14
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview14'">
@@ -1767,7 +1858,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code14'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerFourteen">
                                         <!----
@@ -1835,6 +1926,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview15' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            15
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview14'">
@@ -1866,7 +1961,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code15'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="headerFiveteen">
                                         <!----
@@ -1996,7 +2091,7 @@
             }
         </script>
         <script>
-            // Tabs
+            // Sidebar
             function slideout() {
                 return {
                     open: false,
@@ -2038,5 +2133,11 @@
                 };
             }
         </script>
+        <script src="./rainbow-code/dist/rainbow.js"></script>
+        <script src="./rainbow-code/src/language/generic.js"></script>
+        <script src="./rainbow-code/src/language/html.js"></script>
+        <script src="./rainbow-code/src/language/numbers.js"></script>
+
     </body>
+
 </html>

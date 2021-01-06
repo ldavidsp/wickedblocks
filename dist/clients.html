@@ -54,7 +54,7 @@
         </div>
         <nav :class="{'flex': open, 'hidden': !open}"
           class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-         
+
           <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
             @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
             class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
@@ -214,6 +214,10 @@
       <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview1' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            1
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview1'">
@@ -227,7 +231,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerOne').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientOne').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -264,23 +268,23 @@
                 </div>
                 <div class="flex items-center justify-center ">
                     <img src="https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg"
-                        alt="Slack Logo" class="block object-contain h-16" >
+                        alt="logo" class="block object-contain h-16" >
                 </div>
                 <div class="flex items-center justify-center ">
                     <img src="https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg"
-                        alt="Typeform Logo" class="block object-contain h-16" >
+                        alt="logo" class="block object-contain h-16" >
                 </div>
                 <div class="flex items-center justify-center ">
                     <img src="https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg"
-                        alt="Algolia Logo" class="block object-contain h-16" >
+                        alt="logo" class="block object-contain h-16" >
                 </div>
                 <div class="flex items-center justify-center ">
                     <img src="https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg"
-                        alt="Postcss Logo" class="block object-contain h-16" >
+                        alt="logo" class="block object-contain h-16" >
                 </div>
                 <div class="flex items-center justify-center ">
                     <img src="https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg"
-                        alt="Yahoo Logo" class="block object-contain h-16" >
+                        alt="logo" class="block object-contain h-16" >
                 </div>
             </div>
         </div>
@@ -305,23 +309,23 @@
                 &lt;/div&gt;
                 &lt;div class="flex items-center justify-center "&gt;
                     &lt;img src="https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg"
-                        alt="Slack Logo" class="block object-contain h-16" &gt;
+                        alt="logo" class="block object-contain h-16" &gt;
                 &lt;/div&gt;
                 &lt;div class="flex items-center justify-center "&gt;
                     &lt;img src="https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg"
-                        alt="Typeform Logo" class="block object-contain h-16" &gt;
+                        alt="logo" class="block object-contain h-16" &gt;
                 &lt;/div&gt;
                 &lt;div class="flex items-center justify-center "&gt;
                     &lt;img src="https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg"
-                        alt="Algolia Logo" class="block object-contain h-16" &gt;
+                        alt="logo" class="block object-contain h-16" &gt;
                 &lt;/div&gt;
                 &lt;div class="flex items-center justify-center "&gt;
                     &lt;img src="https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg"
-                        alt="Postcss Logo" class="block object-contain h-16" &gt;
+                        alt="logo" class="block object-contain h-16" &gt;
                 &lt;/div&gt;
                 &lt;div class="flex items-center justify-center "&gt;
                     &lt;img src="https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg"
-                        alt="Yahoo Logo" class="block object-contain h-16" &gt;
+                        alt="logo" class="block object-contain h-16" &gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/div&gt;
@@ -339,6 +343,10 @@
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview2' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            2
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview2'">
@@ -352,7 +360,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerTwo').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientTwo').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -383,23 +391,23 @@
                     </div>
                     <div class="flex justify-center ">
                         <img src="https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg"
-                            alt="Slack Logo" class="block object-contain h-16">
+                            alt="logo" class="block object-contain h-16">
                     </div>
                     <div class="flex justify-center ">
                         <img src="https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg"
-                            alt="Typeform Logo" class="block object-contain h-16">
+                            alt="logo" class="block object-contain h-16">
                     </div>
                     <div class="flex justify-center ">
                         <img src="https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg"
-                            alt="Algolia Logo" class="block object-contain h-16">
+                            alt="logo" class="block object-contain h-16">
                     </div>
                     <div class="flex justify-center ">
                         <img src="https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg"
-                            alt="Postcss Logo" class="block object-contain h-16">
+                            alt="logo" class="block object-contain h-16">
                     </div>
                     <div class="flex justify-center ">
                         <img src="https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg"
-                            alt="Yahoo Logo" class="block object-contain h-16">
+                            alt="logo" class="block object-contain h-16">
                     </div>
                 </div>
             </div>
@@ -417,23 +425,23 @@
                     &lt;/div&gt;
                     &lt;div class="flex justify-center "&gt;
                         &lt;img src="https://d33wubrfki0l68.cloudfront.net/3c4dca12c4e61997e31aa2810408ec46ea6b300c/35012/logos/jb_rider.svg"
-                            alt="Slack Logo" class="block object-contain h-16"&gt;
+                            alt="logo" class="block object-contain h-16"&gt;
                     &lt;/div&gt;
                     &lt;div class="flex justify-center "&gt;
                         &lt;img src="https://d33wubrfki0l68.cloudfront.net/f89a5bbfd36f091aa28386a9a5d00beeac739466/a67a2/logos/marvel.svg"
-                            alt="Typeform Logo" class="block object-contain h-16"&gt;
+                            alt="logo" class="block object-contain h-16"&gt;
                     &lt;/div&gt;
                     &lt;div class="flex justify-center "&gt;
                         &lt;img src="https://d33wubrfki0l68.cloudfront.net/00e9e5a3abb0f4a67423ee14f9822db4f0e22172/46c6b/logos/paypal.svg"
-                            alt="Algolia Logo" class="block object-contain h-16"&gt;
+                            alt="logo" class="block object-contain h-16"&gt;
                     &lt;/div&gt;
                     &lt;div class="flex justify-center "&gt;
                         &lt;img src="https://d33wubrfki0l68.cloudfront.net/bd27dc44fc4b5c47e46941477c7d332a60d57351/09469/logos/volkswagen.svg"
-                            alt="Postcss Logo" class="block object-contain h-16"&gt;
+                            alt="logo" class="block object-contain h-16"&gt;
                     &lt;/div&gt;
                     &lt;div class="flex justify-center "&gt;
                         &lt;img src="https://d33wubrfki0l68.cloudfront.net/7f4ce7b480fdac0e72b719c7de1c37f4e3792529/1f376/logos/stripe.svg"
-                            alt="Yahoo Logo" class="block object-contain h-16"&gt;
+                            alt="logo" class="block object-contain h-16"&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -452,6 +460,10 @@
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview3' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            3
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview3'">
@@ -465,7 +477,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerThree').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientThree').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -540,6 +552,10 @@
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview4' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            4
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview4'">
@@ -553,7 +569,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerFour').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientFour').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -641,6 +657,10 @@
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview5' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            5
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview5'">
@@ -654,7 +674,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerFive').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientFive').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -762,6 +782,10 @@
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview6' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            6
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview6'">
@@ -775,7 +799,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerSix').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientSix').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"
@@ -909,6 +933,10 @@
       <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
         <div class="rounded-xl" x-data="{ tab: 'preview7' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+            <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            7
+                        </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview7'">
@@ -922,7 +950,7 @@
             <!---- Copy Buton -->
             <button
               class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-              onclick="copyToClip(document.getElementById('headerSeven').innerHTML)" x-data="{}"
+              onclick="copyToClip(document.getElementById('clientSeven').innerHTML)" x-data="{}"
               @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
               <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24" height="24"
                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round"

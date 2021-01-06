@@ -1,7 +1,6 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -14,7 +13,6 @@
         <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
-
     <body class="antialiased bg-blue-1300">
         <!----- Snackbar -->
         <div x-data="noticesHandler()"
@@ -225,6 +223,10 @@
             <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview1' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            1
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview1'">
@@ -388,6 +390,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview2' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            2
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview2'">
@@ -517,6 +523,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview3' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            3
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview3'">
@@ -679,6 +689,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview4' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            4
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview4'">
@@ -715,99 +729,99 @@
                                     <div class="hidden" id="gridFour">
                                         <!------
                                         <section class="text-gray-700 body-font">
-            <div class="container px-8 mx-auto pt-36 lg:px-4">
-                <div class="flex flex-col w-full mx-auto mb-12 text-left lg:w-2/3 lg:text-center">
-                    <h1 class="mb-6 text-2xl font-semibold tracking-tighter text-blue-800 sm:text-5xl title-font">
-                        A centered<section class="text-gray-700 body-font">
-                            <div class="container px-8 pt-48 mx-auto lg:px-4">
-                                <div class="flex flex-wrap text-left">
-                                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                                        <div class="flex items-center mb-3">
-                                            <div
-                                                class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full">
-                                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                                    height="18" fill="currentColor">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
-                                                </svg>
-                                            </div>
-                                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer
-                                                Information 1
-                                            </h2>
-                                        </div>
-                                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
-                                            Distillery
-                                            hexagon disrupt edison bulbche.</p>
-                                        <a href="#"
-                                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                            Learn More
-                                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                                height="20" fill="currentColor">
-                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                                        <div class="flex items-center mb-3">
-                                            <div
-                                                class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full">
-                                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                                    height="18" fill="currentColor">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
-                                                </svg>
-                                            </div>
-                                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer
-                                                Information 2
-                                            </h2>
-                                        </div>
-                                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
-                                            Distillery
-                                            hexagon disrupt edison bulbche.</p>
-                                        <a href="#"
-                                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                            Learn More
-                                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                                height="20" fill="currentColor">
-                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                                        <div class="flex items-center mb-3">
-                                            <div
-                                                class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full">
-                                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
-                                                    height="18" fill="currentColor">
-                                                    <path fill="none" d="M0 0h24v24H0z" />
-                                                    <path
-                                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
-                                                </svg>
-                                            </div>
-                                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer
-                                                Information 3
-                                            </h2>
-                                        </div>
-                                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
-                                            Distillery
-                                            hexagon disrupt edison bulbche.</p>
-                                        <a href="#"
-                                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                            Learn More
-                                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                                height="20" fill="currentColor">
-                                                <path fill="none" d="M0 0h24v24H0z" />
-                                                <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
+            <div class="container px-8 mx-<section class="text-gray-700 body-font">
+            <div class="container px-8 pt-48 mx-auto lg:px-4">
+                <div class="flex flex-wrap text-left">
+                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
+                        <div class="flex items-center mb-3">
+                            <div
+                                class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                                </svg>
                             </div>
-                        </section>
+                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer
+                                Information 1
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <a href="#"
+                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
+                        <div class="flex items-center mb-3">
+                            <div
+                                class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                                </svg>
+                            </div>
+                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer
+                                Information 2
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <a href="#"
+                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
+                        <div class="flex items-center mb-3">
+                            <div
+                                class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full">
+                                <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
+                                    height="18" fill="currentColor">
+                                    <path fill="none" d="M0 0h24v24H0z" />
+                                    <path
+                                        d="M21 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h18zM11 13H4v6h7v-6zm9 0h-7v6h7v-6zm-9-8H4v6h7V5zm9 0h-7v6h7V5z" />
+                                </svg>
+                            </div>
+                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">Longer
+                                Information 3
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                        <a href="#"
+                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
+                            Learn More
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="currentColor">
+                                <path fill="none" d="M0 0h24v24H0z" />
+                                <path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
                                         ----->
                                     </div>
                                     <!---- display code goes here.-->
@@ -815,7 +829,7 @@
         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 pt-48 mx-auto lg:px-4"&gt;
                 &lt;div class="flex flex-wrap text-left"&gt;
-                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
+                    &lt;div class="px-8 py-6 md:w-full"&gt;
                         &lt;div class="flex items-center mb-3"&gt;
                             &lt;div
                                 class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 mr-3 text-blue-800 bg-gray-200 rounded-full"&gt;
@@ -919,6 +933,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview5' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            5
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview5'">
@@ -954,71 +972,46 @@
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="gridFive">
                                         <!------
-                    <section class="text-gray-700 body-font">
-            <div cla<section class="text-gray-700 body-font">
-            <div class="container px-8 pt-24 mx-auto lg:px-4">
+                       <section class="text-gray-700 body-font">
+            <div class="container px-8 pt-48 mx-auto lg:px-4">
                 <div class="flex flex-wrap text-left">
-                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                        <div class="p-6 rounded-md bg-blueGray-200">
-                        <img class="object-cover object-center w-full h-40 mb-6 rounded"
-                            src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content">
-
-                        <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
+                    <div class="px-8 py-6 lg:w-1/4 md:w-full">
+                        <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+                            Information 1
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-                        <a href="#"
-                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                            Read More
-                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                height="20" fill="currentColor">
-                                <path fill="none" d="M0 0h24v24H0z" />
-                                <path
-                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                            </svg>
-                        </a>
-                        </div>
                     </div>
-                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                        <div class="p-6 rounded-md bg-blueGray-200">
-                            <img class="object-cover object-center w-full h-40 mb-6 rounded"
-                                src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content">
-
-                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
+                    <div class="px-8 py-6 lg:w-1/4 md:w-full">
+                        <div class="flex items-center mb-3">
+                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+                                Information 2
                             </h2>
-                            <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
-                                Distillery
-                                hexagon disrupt edison bulbche.</p>
-                            <a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                Read More
-                                <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
-                                    fill="currentColor">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                </svg>
-                            </a>
                         </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
                     </div>
-                    <div class="px-8 py-6 lg:w-1/3 md:w-full">
-                        <div class="p-6 rounded-md bg-blueGray-200">
-                            <img class="object-cover object-center w-full h-40 mb-6 rounded"
-                                src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content">
-
-                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 3
+                    <div class="px-8 py-6 lg:w-1/4 md:w-full">
+                        <div class="flex items-center mb-3">
+                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+                                Information 3
                             </h2>
-                            <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
-                                Distillery
-                                hexagon disrupt edison bulbche.</p>
-                            <a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 ">
-                                Read More
-                                <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
-                                    fill="currentColor">
-                                    <path fill="none" d="M0 0h24v24H0z" />
-                                    <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" />
-                                </svg>
-                            </a>
                         </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
+                    </div>
+                    <div class="px-8 py-6 lg:w-1/4 md:w-full">
+                        <div class="flex items-center mb-3">
+                            <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font">
+                                Information 4
+                            </h2>
+                        </div>
+                        <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.</p>
                     </div>
                 </div>
             </div>
@@ -1027,70 +1020,46 @@
                                     </div>
                                     <!---- display code goes here.-->
                                     <pre class="leading-6"><code data-language="html">
-      &lt;section class="text-gray-700 body-font"&gt;
-            &lt;div class="container px-8 pt-24 mx-auto lg:px-4"&gt;
+         &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-48 mx-auto lg:px-4"&gt;
                 &lt;div class="flex flex-wrap text-left"&gt;
-                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
-                        &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
-                        &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
-                            src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
-
-                        &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
+                    &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
+                        &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt;
+                            Information 1
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-                        &lt;a href="#"
-                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
-                            Read More
-                            &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
-                                height="20" fill="currentColor"&gt;
-                                &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
-                                &lt;path
-                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /&gt;
-                            &lt;/svg&gt;
-                        &lt;/a&gt;
-                        &lt;/div&gt;
                     &lt;/div&gt;
-                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
-                        &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
-                            &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
-                                src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
-
-                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
+                    &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
+                        &lt;div class="flex items-center mb-3"&gt;
+                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt;
+                                Information 2
                             &lt;/h2&gt;
-                            &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
-                                Distillery
-                                hexagon disrupt edison bulbche.&lt;/p&gt;
-                            &lt;a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
-                                Read More
-                                &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
-                                    fill="currentColor"&gt;
-                                    &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
-                                    &lt;path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /&gt;
-                                &lt;/svg&gt;
-                            &lt;/a&gt;
                         &lt;/div&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
                     &lt;/div&gt;
-                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
-                        &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
-                            &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
-                                src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
-
-                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 3
+                    &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
+                        &lt;div class="flex items-center mb-3"&gt;
+                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt;
+                                Information 3
                             &lt;/h2&gt;
-                            &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
-                                Distillery
-                                hexagon disrupt edison bulbche.&lt;/p&gt;
-                            &lt;a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
-                                Read More
-                                &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
-                                    fill="currentColor"&gt;
-                                    &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
-                                    &lt;path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /&gt;
-                                &lt;/svg&gt;
-                            &lt;/a&gt;
                         &lt;/div&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
+                        &lt;div class="flex items-center mb-3"&gt;
+                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt;
+                                Information 4
+                            &lt;/h2&gt;
+                        &lt;/div&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -1109,6 +1078,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview6' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            6
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview6'">
@@ -1366,6 +1339,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview7' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            6
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview7'">
@@ -1404,7 +1381,6 @@
  <section class="text-gray-700 body-font">
             <div class="container px-8 pt-48 pb-24 mx-auto lg:px-4">
                 <div class="flex flex-wrap text-left">
-
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <div
                             class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
@@ -1419,12 +1395,10 @@
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <div
                             class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
-
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
                                 height="18" fill="currentColor">
                                 <path fill="none" d="M0 0h24v24H0z" />
@@ -1436,7 +1410,6 @@
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <div
@@ -1452,12 +1425,10 @@
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <div
                             class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full">
-
                             <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
                                 height="18" fill="currentColor">
                                 <path fill="none" d="M0 0h24v24H0z" />
@@ -1469,7 +1440,6 @@
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                 </div>
             </div>
@@ -1481,7 +1451,6 @@
          &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 pt-48 pb-24 mx-auto lg:px-4"&gt;
                 &lt;div class="flex flex-wrap text-left"&gt;
-
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;div
                             class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full"&gt;
@@ -1496,12 +1465,10 @@
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;div
                             class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full"&gt;
-
                             &lt;svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
                                 height="18" fill="currentColor"&gt;
                                 &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
@@ -1513,7 +1480,6 @@
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;div
@@ -1529,12 +1495,10 @@
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;div
                             class="inline-flex items-center justify-center flex-shrink-0 w-12 h-12 mb-5 text-blue-800 bg-gray-200 rounded-full"&gt;
-
                             &lt;svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
                                 height="18" fill="currentColor"&gt;
                                 &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
@@ -1546,7 +1510,6 @@
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -1565,6 +1528,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview8' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            8
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview8'">
@@ -1605,7 +1572,6 @@
                 <div class="flex flex-wrap text-left">
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                                   <img class="object-cover object-center w-full h-40 mb-6 rounded" src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1624,7 +1590,6 @@
                     </div>
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                                   <img class="object-cover object-center w-full h-40 mb-6 rounded" src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1643,7 +1608,6 @@
                     </div>
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                                   <img class="object-cover object-center w-full h-40 mb-6 rounded" src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1672,7 +1636,6 @@
                 &lt;div class="flex flex-wrap text-left"&gt;
                     &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
                                   &lt;img class="object-cover object-center w-full h-40 mb-6 rounded" src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1691,7 +1654,6 @@
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
                                   &lt;img class="object-cover object-center w-full h-40 mb-6 rounded" src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1710,7 +1672,6 @@
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
                                   &lt;img class="object-cover object-center w-full h-40 mb-6 rounded" src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1744,6 +1705,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview9' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            9
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview9'">
@@ -1799,8 +1764,6 @@
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
                         <div class="flex items-center justify-between ">
-
-
                             <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                             </h2>
                             <span class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">Your
@@ -1814,8 +1777,6 @@
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
                         <div class="flex items-center justify-between ">
-
-
                             <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 3
                             </h2>
                             <span class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font">Your
@@ -1852,8 +1813,6 @@
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
                         &lt;div class="flex items-center justify-between "&gt;
-
-
                             &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                             &lt;/h2&gt;
                             &lt;span class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font"&gt;Your
@@ -1867,8 +1826,6 @@
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
                         &lt;div class="flex items-center justify-between "&gt;
-
-
                             &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 3
                             &lt;/h2&gt;
                             &lt;span class="mb-1 text-xs font-medium tracking-widest text-blue-500 title-font"&gt;Your
@@ -1895,6 +1852,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview10' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            10
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview10' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview10'">
@@ -1922,7 +1883,7 @@
                     <div class="lg:h-screen">
                         <div class="border rounded-b-xl" x-show="tab === 'preview10'">
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
-                                src="./assets/sections/footers/footer-10.png" alt="">
+                                src="./assets/sections/grids/grids-10.png" alt="">
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code10'">
                             <div
@@ -1936,7 +1897,6 @@
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1956,7 +1916,6 @@
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
@@ -1976,7 +1935,6 @@
                     <div class="px-8 py-6 lg:w-1/3 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
@@ -2006,7 +1964,6 @@
                     &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
@@ -2026,7 +1983,6 @@
                     &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
@@ -2046,7 +2002,6 @@
                     &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
@@ -2080,6 +2035,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview11' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            11
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview11' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview11'">
@@ -2093,7 +2052,7 @@
                         <!---- Copy Buton -->
                         <button
                             class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('gridEleven').innerHTML)" x-data="{}"
+                            onclick="copyToClip(document.getElementById('headerEleven').innerHTML)" x-data="{}"
                             @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
                                 height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
@@ -2109,13 +2068,13 @@
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/grids/grids-11.png" alt="">
                         </div>
-                        <div class=" rounded-b-xl" x-show="tab === 'code11'">
+                        <div class="rounded-b-xl" x-show="tab === 'code11'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="gridEleven">
                                         <!-------
-  <section class="text-gray-700 body-font">
+          <section class="text-gray-700 body-font">
             <div class="container px-8 mx-auto py-36 lg:px-4">
                 <div class="flex flex-wrap text-left">
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
@@ -2199,7 +2158,7 @@
                 </div>
             </div>
         </section>
-                    -->
+                            -->
                                     </div>
                                     <!---- display code goes here.-->
                                     <pre class="leading-6"><code data-language="html">
@@ -2287,7 +2246,8 @@
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/section&gt;
-                                                                        </code></pre>
+
+                                    </code></pre>
                                 </div>
                             </div>
                         </div>
@@ -2301,6 +2261,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview12' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            12
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview12' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview12'">
@@ -2332,7 +2296,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code12'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="gridTwelve">
                                         <!----
@@ -2342,46 +2306,38 @@
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 3
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 4
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-
                     </div>
                 </div>
             </div>
@@ -2396,46 +2352,38 @@
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 3
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 4
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
-
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -2454,6 +2402,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview13' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            13
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview13'">
@@ -2485,7 +2437,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code13'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="gridThirteen">
                                         <!----
@@ -2495,50 +2447,42 @@
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
                             <p class="mt-1 font-bold">$21.15</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
                             <p class="mt-1 font-bold">$21.15</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 3
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
                             <p class="mt-1 font-bold">$21.15</p>
-
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 4
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
                             <p class="mt-1 font-bold">$21.15</p>
-
                     </div>
                 </div>
             </div>
@@ -2553,50 +2497,42 @@
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                             &lt;p class="mt-1 font-bold"&gt;$21.15&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                             &lt;p class="mt-1 font-bold"&gt;$21.15&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 3
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                             &lt;p class="mt-1 font-bold"&gt;$21.15&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 4
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                             &lt;p class="mt-1 font-bold"&gt;$21.15&lt;/p&gt;
-
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
@@ -2615,7 +2551,11 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview14' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            14
+                        </div>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview14' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview14'">
                             Preview
@@ -2644,125 +2584,109 @@
                             <img class="rounded-b-xl dark:opacity-50" loading="lazy"
                                 src="./assets/sections/grids/grids-14.png" alt="">
                         </div>
-                        <div class="rounded-b-xl" x-show="tab === 'code14'">
+                        <div class=" rounded-b-xl" x-show="tab === 'code14'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="gridFourteen">
-                                        <!----
-<section class="text-gray-700 body-font">
+                                        <!------
+                                                        <section class="text-gray-700 body-font">
             <div class="container px-8 mx-auto py-36 lg:px-4">
                 <div class="flex flex-wrap text-left">
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-                        <p class="mt-1 mt-12 text-sm ">Small text.</p>
-
+                        <p class="mt-1 text-sm ">Small text.</p>
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-                        <p class="mt-1 mt-12 text-sm ">Small text.</p>
-
+                        <p class="mt-1 text-sm ">Small text.</p>
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 3
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-                        <p class="mt-1 mt-12 text-sm ">Small text.</p>
-
+                        <p class="mt-1 text-sm">Small text.</p>
                     </div>
                     <div class="px-8 py-6 lg:w-1/4 md:w-full">
                         <img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content">
-
                         <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 4
                         </h2>
                         <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.</p>
-                        <p class="mt-1 mt-12 text-sm ">Small text.</p>
-
+                        <p class="mt-1 text-sm ">Small text.</p>
                     </div>
                 </div>
             </div>
         </section>
--->
+                        -->
                                     </div>
                                     <!---- display code goes here.-->
                                     <pre class="leading-6"><code data-language="html">
-       &lt;section class="text-gray-700 body-font"&gt;
+         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 mx-auto py-36 lg:px-4"&gt;
                 &lt;div class="flex flex-wrap text-left"&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                         &lt;p class="mt-1 mt-12 text-sm "&gt;Small text.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                         &lt;p class="mt-1 mt-12 text-sm "&gt;Small text.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 3
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                         &lt;p class="mt-1 mt-12 text-sm "&gt;Small text.&lt;/p&gt;
-
                     &lt;/div&gt;
                     &lt;div class="px-8 py-6 lg:w-1/4 md:w-full"&gt;
                         &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                             src="https://dummyimage.com/720x400/F3F4F7/8693ac" alt="content"&gt;
-
                         &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 4
                         &lt;/h2&gt;
                         &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
                             Distillery
                             hexagon disrupt edison bulbche.&lt;/p&gt;
                         &lt;p class="mt-1 mt-12 text-sm "&gt;Small text.&lt;/p&gt;
-
                     &lt;/div&gt;
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/section&gt;
-                                                                        </code></pre>
+                                            </code></pre>
                                 </div>
                             </div>
                         </div>
@@ -2776,9 +2700,13 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview15' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview13' }"
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            15
+                        </div>
+                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview15' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'preview14'">
+                            @click="tab = 'preview15'">
                             Preview
                         </button>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code15' }"
@@ -2807,7 +2735,7 @@
                         </div>
                         <div class="rounded-b-xl" x-show="tab === 'code15'">
                             <div
-                                class="overflow-auto overflow-y-scroll hh-screen bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
                                 <div class="rounded-b-xl">
                                     <div class="hidden" id="gridFiveteen">
                                         <!----
@@ -2846,6 +2774,71 @@
                                     </div>
                                     <!---- display code goes here.-->
                                     <pre class="leading-6"><code data-language="html">
+        &lt;section class="text-gray-700 body-font"&gt;
+            &lt;div class="container px-8 pt-24 mx-auto lg:px-4"&gt;
+                &lt;div class="flex flex-wrap text-left"&gt;
+                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
+                        &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
+                        &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
+                            src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
+                        &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
+                        &lt;/h2&gt;
+                        &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                            Distillery
+                            hexagon disrupt edison bulbche.&lt;/p&gt;
+                        &lt;a href="#"
+                            class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
+                            Read More
+                            &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20"
+                                height="20" fill="currentColor"&gt;
+                                &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
+                                &lt;path
+                                    d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /&gt;
+                            &lt;/svg&gt;
+                        &lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
+                        &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
+                            &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
+                                src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
+                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
+                            &lt;/h2&gt;
+                            &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                                Distillery
+                                hexagon disrupt edison bulbche.&lt;/p&gt;
+                            &lt;a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
+                                Read More
+                                &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                                    fill="currentColor"&gt;
+                                    &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
+                                    &lt;path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="px-8 py-6 lg:w-1/3 md:w-full"&gt;
+                        &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
+                            &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
+                                src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
+                            &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 3
+                            &lt;/h2&gt;
+                            &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit waistcoat.
+                                Distillery
+                                hexagon disrupt edison bulbche.&lt;/p&gt;
+                            &lt;a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
+                                Read More
+                                &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
+                                    fill="currentColor"&gt;
+                                    &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
+                                    &lt;path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" /&gt;
+                                &lt;/svg&gt;
+                            &lt;/a&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/section&gt;
                                     </code></pre>
                                 </div>
                             </div>
@@ -2860,6 +2853,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview16' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            16
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview16' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview16'">
@@ -2886,8 +2883,8 @@
                     </div>
                     <div class="lg:h-screen">
                         <div class="border rounded-b-xl" x-show="tab === 'preview16'">
-                            <img class="rounded-b-xl dark:opacity-50" loading="lazy" src="./assets/sections/grids/grids-16.png"
-                                alt="">
+                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                src="./assets/sections/grids/grids-16.png" alt="">
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code16'">
                             <div
@@ -2902,7 +2899,6 @@
                         <div class="p-6 rounded-md bg-blueGray-200">
                             <img class="object-cover object-center w-full h-40 mb-6 rounded"
                                 src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content">
-
                             <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 1
                             </h2>
                             <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit
@@ -2925,7 +2921,6 @@
                         <div class="p-6 rounded-md bg-blueGray-200">
                             <img class="object-cover object-center w-full h-40 mb-6 rounded"
                                 src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content">
-
                             <h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"> Information 2
                             </h2>
                             <p class="mb-4 text-base leading-relaxed">Fingerstache flexitarian street art 8-bit
@@ -2944,7 +2939,6 @@
                             </a>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -2952,14 +2946,13 @@
                                     </div>
                                     <!---- display code goes here.-->
                                     <pre class="leading-6"><code data-language="html">
-        &lt;section class="text-gray-700 body-font"&gt;
+       &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 pt-24 mx-auto lg:px-4"&gt;
                 &lt;div class="flex flex-wrap text-left"&gt;
                     &lt;div class="px-8 py-6 lg:px-24 lg:w-1/2 md:w-full"&gt;
                         &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
                             &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                                 src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
-
                             &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 1
                             &lt;/h2&gt;
                             &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit
@@ -2982,7 +2975,6 @@
                         &lt;div class="p-6 rounded-md bg-blueGray-200"&gt;
                             &lt;img class="object-cover object-center w-full h-40 mb-6 rounded"
                                 src="https://dummyimage.com/720x400/ffffff/8693ac" alt="content"&gt;
-
                             &lt;h2 class="mb-3 text-lg font-semibold text-gray-700 lg:text-2xl title-font"&gt; Information 2
                             &lt;/h2&gt;
                             &lt;p class="mb-4 text-base leading-relaxed"&gt;Fingerstache flexitarian street art 8-bit
@@ -3001,7 +2993,6 @@
                             &lt;/a&gt;
                         &lt;/div&gt;
                     &lt;/div&gt;
-
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/section&gt;
@@ -3112,5 +3103,4 @@
         <script src="./rainbow-code/src/language/html.js"></script>
         <script src="./rainbow-code/src/language/numbers.js"></script>
     </body>
-
 </html>

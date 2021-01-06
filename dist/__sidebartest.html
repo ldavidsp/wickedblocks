@@ -16,255 +16,229 @@
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
 
-    <body class="antialiased bg-blue-1300 ">
-        <!----- Snackbar -->
-        <div x-data="noticesHandler()"
-            class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
-            @notice.window="add($event.detail)" style="pointer-events:none">
-            <template x-for="notice of notices" :key="notice.id">
-                <div x-show="visible.includes(notice)" x-transition:enter="transition ease-in duration-200"
-                    x-transition:enter-start="transform opacity-0 translate-y-2"
-                    x-transition:enter-end="transform opacity-100" x-transition:leave="transition ease-out duration-500"
-                    x-transition:leave-start="transform translate-x-0 opacity-100"
-                    x-transition:leave-end="transform translate-x-full opacity-0" @click="remove(notice.id)"
-                    class="z-50 flex items-center justify-center w-full h-16 mb-4 text-lg font-semibold tracking-tighter text-white cursor-pointer lg:mr-6 dark:text-cyan-900 text-whiteshadow-xl lg:w-1/4 rounded-xl"
-                    :class="{
-            				'bg-blue-800 dark:bg-lightBlue-400  ': notice.type === 'success',
-            			 }" style="pointer-events:all" x-text="notice.text">
-                </div>
-            </template>
-        </div>
-        <div class="fixed z-50 w-full text-gray-500 border-b border-blueGray-900 bg-blue-1300 lg:px-20">
-            <div x-data="{ open: false }"
-                class="flex flex-col max-w-screen-xl mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
-                <div class="flex flex-row items-center justify-between p-4 ">
-                    <a href="./index.html" class=" focus:outline-none">
-                        <h1 class="text-2xl font-bold tracking-tighter text-white uppercase lg:text-3xl title-font ">
-                            WickedBlocks
-                            <span class="text-xs">©</span>
-                        </h1>
-                    </a>
-                    <button class="rounded-xl md:hidden focus:outline-none " @click="open = !open">
-                        <svg fill="#ffffff" viewBox="0 0 20 20" class="w-12 h-12">
-                            <path x-show="!open" fill-rule="evenodd"
-                                d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
-                                clip-rule="evenodd"></path>
-                            <path x-show="open" fill-rule="evenodd"
-                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-                <nav :class="{'flex': open, 'hidden': !open}"
-                    class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
+    <body class="text-black transition-colors duration-1000 bg-blue-1300 dark:bg-black">
+        <!--- The header is made with AlpineJS -->
 
-                    <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
-                        @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
-                        class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
-                        Quick Acces to Blockss
-                    </button>
-                </nav>
-            </div>
-        </div>
-        <!-- Dev tools -->
-        <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
-        </div>
-        <!---- sidebar -->
-        <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
-            @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
-            <div x-show.transition.opacity.duration.500="open" @click="open = false"
-                class="fixed inset-0 bg-opacity-25 bg-blue-1400">
-            </div>
-            <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
-                :class="{'translate-x-full': !open}">
-                <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
-                    class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                        class="feather feather-x">
-                        <line x1="18" y1="6" x2="6" y2="18"></line>
-                        <line x1="6" y1="6" x2="18" y2="18"></line>
-                    </svg>
-                </button>
-                <div class="w-auto p-8 ">
-                    <div class="w-64 h-screen mt-8 sm:mt-0">
-                        <nav class="mt-20 font-semibold">
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./left-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <line x1="4" y1="4" x2="4" y2="20" />
-                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                                </svg>
-
-                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./centered-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <line x1="12" y1="4" x2="12" y2="9" />
-                                    <line x1="12" y1="15" x2="12" y2="20" />
-                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./right-headers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
-                                    <line x1="20" y1="4" x2="20" y2="20" />
-                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./auth.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./pricing.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path
-                                        d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
-                                    <circle cx="9" cy="9" r="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./clients.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <circle cx="12" cy="7" r="4" />
-                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./grids.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="4" width="6" height="5" rx="2" />
-                                    <rect x="4" y="13" width="6" height="7" rx="2" />
-                                    <rect x="14" y="4" width="6" height="7" rx="2" />
-                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./forms.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./gallery.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
-                                    <line x1="15" y1="8" x2="15.01" y2="8" />
-                                    <rect x="4" y="4" width="16" height="16" rx="3" />
-                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
-                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./navigation.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="4" width="16" height="16" rx="2" />
-                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
-                            </a>
-                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                                href="./footers.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
-                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                    <rect x="4" y="4" width="16" height="16" rx="2" />
-                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
-                                </svg>
-                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
-                            </a>
-                        </nav>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!----end sidebar -->
-        <!--- auth 1-->
-        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
-                <div class="rounded-xl" x-data="{ tab: 'preview1' }">
-                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+        <section class="">
+            <div class="px-5 mx-auto containe lg:pb-16">
+                <div class="flex-1 mx-auto ">
+                    <div class="grid gap-4 grid-col-1 lg:grid-col-6 lg:gap-8">
                         <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            1
+                            class="col-start-1 row-span-2 border-r rounded-lg border-blueGray-900 lg:col-span-1 col-span-full ">
+
+                            <div class="flex-col w-full lg:flex lg:flex-row md:min-h-screen ">
+                                <div class="flex-col w-full md:flex md:flex-row md:min-h-screen">
+                                    <div @click.away="open = false"
+                                        class="flex flex-col flex-shrink-0 w-full text-gray-700 bg-blue-1300 md:w-64 dark-mode:text-gray-200 dark-mode:bg-gray-800"
+                                        x-data="{ open: false }">
+                                        <div class="flex flex-row items-center justify-between flex-shrink-0 px-8 py-4">
+                                            <a href="./index.html" class=" focus:outline-none">
+                                                <h1
+                                                    class="text-2xl font-bold tracking-tighter text-white uppercase lg:text-2xl title-font ">
+                                                    WickedBlocks
+                                                    <span class="text-xs">©</span>
+                                                </h1>
+                                            </a>
+                                            <button class="rounded-lg md:hidden focus:outline-none focus:shadow-outline"
+                                                @click="open = !open">
+                                                <svg fill="currentColor" viewBox="0 0 20 20" class="w-6 h-6">
+                                                    <path x-show="!open" fill-rule="evenodd"
+                                                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM9 15a1 1 0 011-1h6a1 1 0 110 2h-6a1 1 0 01-1-1z"
+                                                        clip-rule="evenodd"></path>
+                                                    <path x-show="open" fill-rule="evenodd"
+                                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <nav :class="{'block': open, 'hidden': !open}"
+                                            class="flex-grow px-4 pb-4 md:block md:pb-0 md:overflow-y-auto">
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./left-headers.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="4" y1="4" x2="4" y2="20" />
+                                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                                </svg>
+
+                                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./centered-headers.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <line x1="12" y1="4" x2="12" y2="9" />
+                                                    <line x1="12" y1="15" x2="12" y2="20" />
+                                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./right-headers.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round">
+                                                    <line x1="20" y1="4" x2="20" y2="20" />
+                                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./auth.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./pricing.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path
+                                                        d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                                    <circle cx="9" cy="9" r="2" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./clients.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <circle cx="12" cy="7" r="4" />
+                                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"
+                                                        stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./grids.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <rect x="4" y="4" width="6" height="5" rx="2" />
+                                                    <rect x="4" y="13" width="6" height="7" rx="2" />
+                                                    <rect x="14" y="4" width="6" height="7" rx="2" />
+                                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./forms.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./gallery.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"
+                                                        stroke="#FCE952" />
+                                                    <line x1="15" y1="8" x2="15.01" y2="8" />
+                                                    <rect x="4" y="4" width="16" height="16" rx="3" />
+                                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./navigation.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                                            </a>
+                                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                                href="./footers.html">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6"
+                                                    viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
+                                                </svg>
+                                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                                            </a>
+
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'preview1'">
-                            Preview
-                        </button>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'code1'">
-                            Code
-                        </button>
-                        <!---- Copy Buton -->
-                        <button
-                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('authOne').innerHTML)" x-data="{}"
-                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="8" y="8" width="12" height="12" rx="2" />
-                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="lg:h-screen">
-                        <div class="border rounded-b-xl" x-show="tab === 'preview1'">
-                            <img class="rounded-b-xl " loading="lazy" src="./assets/sections/auth/auth-1.png" alt="">
-                        </div>
-                        <div class="rounded-b-xl" x-show="tab === 'code1'">
-                            <div
-                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
-                                <div class="rounded-b-xl">
-                                    <div class="hidden" id="authOne">
-                                        <!---------
+                        <div class="col-start-1 lg:col-start-2 col-span-full lg:col-span-5 ">
+
+
+                            <div class="container py-8 mx-auto lg:max-w-5xl lg:py-16 lg:px-10 rounded-xl">
+                                <div class="rounded-xl" x-data="{ tab: 'preview1' }">
+                                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                                        <div
+                                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                                            1
+                                        </div>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'preview1'">
+                                            Preview
+                                        </button>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code1' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'code1'">
+                                            Code
+                                        </button>
+                                        <!---- Copy Buton -->
+                                        <button
+                                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                                            onclick="copyToClip(document.getElementById('authOne').innerHTML)"
+                                            x-data="{}"
+                                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                                <path
+                                                    d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="lg:h-screen ">
+                                        <div class="border rounded-b-xl" x-show="tab === 'preview1'">
+                                            <img class="rounded-b-xl " loading="lazy"
+                                                src="./assets/sections/auth/auth-1.png" alt="">
+                                        </div>
+                                        <div class="rounded-b-xl" x-show="tab === 'code1'">
+                                            <div
+                                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                                <div class="rounded-b-xl">
+                                                    <div class="hidden" id="authOne">
+                                                        <!---------
 <section class="flex flex-col items-center h-screen md:flex-row ">
             <div class="hidden w-full h-screen bg-gray-400 lg:block md:w-1/3 xl:w-2/3">
                  <img src="https://dummyimage.com/1000x800/F3F4F7/64748b"
@@ -282,13 +256,13 @@
                             <label class="block text-sm font-medium leading-relaxed tracking-tighter text-gray-700">Email
                                 Address</label>
                             <input type="email" name="" id="" placeholder="Your Email "
-                                class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0 "
+                                class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-blue-1300 focus:ring-0 "
                                 autofocus autocomplete required>
                         </div>
                         <div class="mt-4">
                             <label class="block text-sm font-medium leading-relaxed tracking-tighter text-gray-700">Password</label>
                             <input type="password" name="" id="" placeholder="Your Password" minlength="6"
-                                class="w-full px-4 py-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"
+                                class="w-full px-4 py-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-blue-1300 focus:ring-0"
                                 required>
                         </div>
                         <div class="mt-2 text-right">
@@ -341,9 +315,9 @@
             </div>
         </section>
                 -->
-                                    </div>
-                                    <!---- display code goes here.-->
-                                    <pre class="leading-6"><code data-language="html">
+                                                    </div>
+                                                    <!---- display code goes here.-->
+                                                    <pre class="leading-6"><code data-language="html">
         &lt;section class="flex flex-col items-center h-screen md:flex-row "&gt;
             &lt;div class="hidden w-full h-screen bg-gray-400 lg:block md:w-1/3 xl:w-2/3"&gt;
                 &lt;!---- The image will cover the whole right side from bottom to top and side to side--&gt;
@@ -362,13 +336,13 @@
                             &lt;label class="block text-sm font-medium leading-relaxed tracking-tighter text-gray-700"&gt;Email
                                 Address&lt;/label&gt;
                             &lt;input type="email" name="" id="" placeholder="Your Email "
-                                class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0 "
+                                class="w-full px-4 py-2 mt-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-blue-1300 focus:ring-0 "
                                 autofocus autocomplete required&gt;
                         &lt;/div&gt;
                         &lt;div class="mt-4"&gt;
                             &lt;label class="block text-sm font-medium leading-relaxed tracking-tighter text-gray-700"&gt;Password&lt;/label&gt;
                             &lt;input type="password" name="" id="" placeholder="Your Password" minlength="6"
-                                class="w-full px-4 py-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"
+                                class="w-full px-4 py-2 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-blue-1300 focus:ring-0"
                                 required&gt;
                         &lt;/div&gt;
                         &lt;div class="mt-2 text-right"&gt;
@@ -421,57 +395,59 @@
             &lt;/div&gt;
         &lt;/section&gt;
                                 </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--- auth 2-->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
-                <div class="rounded-xl" x-data="{ tab: 'preview2' }">
-                <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
-                    <div
-                        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                        2
-                    </div>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'preview2'">
-                            Preview
-                        </button>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'code2'">
-                            Code
-                        </button>
-                        <!---- Copy Buton -->
-                        <button
-                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('authTwo').innerHTML)" x-data="{}"
-                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="8" y="8" width="12" height="12" rx="2" />
-                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="lg:h-screen">
-                        <div class="border rounded-b-xl" x-show="tab === 'preview2'">
-                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
-                                src="./assets/sections/auth/auth-2.png" alt="">
-                        </div>
-                        <div class=" rounded-b-xl" x-show="tab === 'code2'">
-                            <div
-                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
-                                <div class="rounded-b-xl">
-                                    <div class="hidden" id="authTwo">
-                                        <!----
+                            <div class="container py-8 mx-auto lg:max-w-5xl lg:py-16 lg:px-10 rounded-xl">
+                                <div class="rounded-xl" x-data="{ tab: 'preview2' }">
+                                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                                        <div
+                                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                                            2
+                                        </div>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'preview2'">
+                                            Preview
+                                        </button>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code2' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'code2'">
+                                            Code
+                                        </button>
+                                        <!---- Copy Buton -->
+                                        <button
+                                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                                            onclick="copyToClip(document.getElementById('authTwo').innerHTML)"
+                                            x-data="{}"
+                                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                                <path
+                                                    d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="lg:h-screen">
+                                        <div class="border rounded-b-xl" x-show="tab === 'preview2'">
+                                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                                src="./assets/sections/auth/auth-2.png" alt="">
+                                        </div>
+                                        <div class=" rounded-b-xl" x-show="tab === 'code2'">
+                                            <div
+                                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                                <div class="rounded-b-xl">
+                                                    <div class="hidden" id="authTwo">
+                                                        <!----
   <section class="flex flex-col items-center h-screen md:flex-row ">
             <div class="relative hidden w-full h-screen bg-gray-400 lg:block md:w-1/3 xl:w-1/3">
                  <img src="https://dummyimage.com/600x500/F3F4F7/64748b"
@@ -555,10 +531,10 @@
             </div>
         </section>
                       --->
-                                    </div>
-                                    <!---- display code goes here.-->
-                                    <!-- HTML generated using hilite.me -->
-                                    <pre class="leading-6"><code data-language="html">
+                                                    </div>
+                                                    <!---- display code goes here.-->
+                                                    <!-- HTML generated using hilite.me -->
+                                                    <pre class="leading-6"><code data-language="html">
         &lt;section class="flex flex-col items-center h-screen md:flex-row "&gt;
             &lt;div class="relative hidden w-full h-screen bg-gray-400 lg:block md:w-1/3 xl:w-1/3"&gt;
                 &lt;!---- The image will cover the whole right side from bottom to top and side to side--&gt;
@@ -644,58 +620,59 @@
         &lt;/section&gt;
                                     </code></pre>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <!--- auth 3-->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
-                <div class="rounded-xl" x-data="{ tab: 'preview3' }">
-                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
-<div
-    class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-    3
-</div>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'preview3'">
-                            Preview
-                        </button>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'code3'">
-                            Code
-                        </button>
-                        <!---- Copy Buton -->
-                        <button
-                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('authThree').innerHTML)" x-data="{}"
-                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="8" y="8" width="12" height="12" rx="2" />
-                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="lg:h-screen">
-                        <div class="border rounded-b-xl" x-show="tab === 'preview3'">
-                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
-                                src="./assets/sections/auth/auth-3.png" alt="">
-                        </div>
-                        <div class=" rounded-b-xl" x-show="tab === 'code3'">
-                            <div
-                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
-                                <div class="rounded-b-xl">
-                                    <div class="hidden" id="authThree">
-                                        <!---- <section class="flex flex-col items-center h-screen md:flex-row">
+                            <div class="container py-8 mx-auto lg:max-w-5xl lg:py-16 lg:px-10 rounded-xl">
+                                <div class="rounded-xl" x-data="{ tab: 'preview3' }">
+                                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                                        <div
+                                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                                            3
+                                        </div>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'preview3'">
+                                            Preview
+                                        </button>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code3' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'code3'">
+                                            Code
+                                        </button>
+                                        <!---- Copy Buton -->
+                                        <button
+                                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                                            onclick="copyToClip(document.getElementById('authThree').innerHTML)"
+                                            x-data="{}"
+                                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                                <path
+                                                    d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="lg:h-screen">
+                                        <div class="border rounded-b-xl" x-show="tab === 'preview3'">
+                                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                                src="./assets/sections/auth/auth-3.png" alt="">
+                                        </div>
+                                        <div class=" rounded-b-xl" x-show="tab === 'code3'">
+                                            <div
+                                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                                <div class="rounded-b-xl">
+                                                    <div class="hidden" id="authThree">
+                                                        <!---- <section class="flex flex-col items-center h-screen md:flex-row">
             <div class="container mx-auto">
                 <div class="flex justify-center px-2 py-6 ">
                     <div class="flex w-full rounded-lg xl:w-3/4 lg:w-11/12 lg:shadow-xl ">
@@ -808,9 +785,9 @@
             </div>
         </section>
         ---->
-                                    </div>
-                                    <!---- display code goes here.-->
-                                    <pre class="leading-6"><code data-language="html">
+                                                    </div>
+                                                    <!---- display code goes here.-->
+                                                    <pre class="leading-6"><code data-language="html">
         &lt;section class="flex flex-col items-center h-screen md:flex-row"&gt;
             &lt;div class="container mx-auto"&gt;
                 &lt;div class="flex justify-center px-2 py-6 "&gt;
@@ -924,58 +901,59 @@
             &lt;/div&gt;
         &lt;/section&gt;
                                     </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <!--- auth 4 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
-                <div class="rounded-xl" x-data="{ tab: 'preview4' }">
-                <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
-                    <div
-                        class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                        4
-                    </div>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'preview4'">
-                            Preview
-                        </button>
-                        <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
-                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
-                            @click="tab = 'code4'">
-                            Code
-                        </button>
-                        <!---- Copy Buton -->
-                        <button
-                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
-                            onclick="copyToClip(document.getElementById('authFour').innerHTML)" x-data="{}"
-                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" width="24"
-                                height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
-                                stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="8" y="8" width="12" height="12" rx="2" />
-                                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="lg:h-screen">
-                        <div class="border rounded-b-xl" x-show="tab === 'preview4'">
-                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
-                                src="./assets/sections/auth/auth-4.png" alt="">
-                        </div>
-                        <div class=" rounded-b-xl" x-show="tab === 'code4'">
-                            <div
-                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
-                                <div class="rounded-b-xl">
-                                    <div class="hidden" id="authFour">
-                                        <!----
+                            <div class="container py-8 mx-auto lg:max-w-5xl lg:py-16 lg:px-10 rounded-xl">
+                                <div class="rounded-xl" x-data="{ tab: 'preview4' }">
+                                    <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                                        <div
+                                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                                            4
+                                        </div>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'preview4'">
+                                            Preview
+                                        </button>
+                                        <button
+                                            :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'code4' }"
+                                            class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
+                                            @click="tab = 'code4'">
+                                            Code
+                                        </button>
+                                        <!---- Copy Buton -->
+                                        <button
+                                            class="inline-flex items-center justify-center w-full p-2 my-2 mt-2 ml-auto mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent shadow cursor-pointer rounded-xl font-lg hover:text-white focus:outline-none lg:w-auto hover:border-gray-700"
+                                            onclick="copyToClip(document.getElementById('authFour').innerHTML)"
+                                            x-data="{}"
+                                            @click="$dispatch('notice', {type: 'success', text: ' ✓ Block Copied To Clipboard!'})">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                class="icon icon-tabler icon-tabler-copy" width="24" height="24"
+                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none"
+                                                stroke-linecap="round" stroke-linejoin="round">
+                                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                <rect x="8" y="8" width="12" height="12" rx="2" />
+                                                <path
+                                                    d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    <div class="lg:h-screen">
+                                        <div class="border rounded-b-xl" x-show="tab === 'preview4'">
+                                            <img class="rounded-b-xl dark:opacity-50" loading="lazy"
+                                                src="./assets/sections/auth/auth-4.png" alt="">
+                                        </div>
+                                        <div class=" rounded-b-xl" x-show="tab === 'code4'">
+                                            <div
+                                                class="h-screen overflow-auto overflow-y-scroll bg-coolGray-900 text-blueGray-200 rounded-b-xl code-tab">
+                                                <div class="rounded-b-xl">
+                                                    <div class="hidden" id="authFour">
+                                                        <!----
                       <section class="text-gray-700 body-font">
             <div class="container px-8 pt-32 mx-auto lg:px-4">
             <div class="flex flex-col w-full mb-12 text-left lg:text-center">
@@ -1061,9 +1039,9 @@
             </div>
         </section>
             ---->
-                                    </div>
-                                    <!---- display code goes here.-->
-                                    <pre class="leading-6"><code data-language="html">
+                                                    </div>
+                                                    <!---- display code goes here.-->
+                                                    <pre class="leading-6"><code data-language="html">
           &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 pt-32 mx-auto lg:px-4"&gt;
             &lt;div class="flex flex-col w-full mb-12 text-left lg:text-center"&gt;
@@ -1153,18 +1131,17 @@
             &lt;/div&gt;
         &lt;/section&gt;
                                     </code></pre>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </section>
-
-
-
-
         <footer class="pt-10 border-t border-gray-800 body-font">
             <div
                 class="container flex flex-col flex-wrap items-center px-5 py-12 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
@@ -1202,6 +1179,7 @@
                 </span>
             </div>
         </footer>
+        <!---End Footer Section -->
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
         <script>
             function copyToClip(str) {

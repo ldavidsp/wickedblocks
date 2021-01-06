@@ -1,6 +1,7 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -13,6 +14,7 @@
         <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
+
     <body class="antialiased bg-blue-1300">
         <!----- Snackbar -->
         <div x-data="noticesHandler()"
@@ -66,152 +68,168 @@
         <!-- Dev tools -->
         <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
         </div>
-    <!---- sidebar -->
-    <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
-        @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
-        <div x-show.transition.opacity.duration.500="open" @click="open = false"
-            class="fixed inset-0 bg-opacity-25 bg-blue-1400">
-        </div>
-        <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
-            :class="{'translate-x-full': !open}">
-            <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
-                class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                    class="feather feather-x">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-            </button>
-            <div class="w-auto p-8 ">
-                <div class="w-64 h-screen mt-8 sm:mt-0">
-                    <nav class="mt-20 font-semibold">
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./left-headers.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <line x1="4" y1="4" x2="4" y2="20" />
-                                <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./centered-headers.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <line x1="12" y1="4" x2="12" y2="9" />
-                                <line x1="12" y1="15" x2="12" y2="20" />
-                                <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./right-headers.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round">
-                                <line x1="20" y1="4" x2="20" y2="20" />
-                                <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./auth.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                                <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Auth</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./pricing.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
-                                <circle cx="9" cy="9" r="2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Pricing</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./clients.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <circle cx="12" cy="7" r="4" />
-                                <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Clients</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./grids.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="4" y="4" width="6" height="5" rx="2" />
-                                <rect x="4" y="13" width="6" height="7" rx="2" />
-                                <rect x="14" y="4" width="6" height="7" rx="2" />
-                                <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Grids</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./forms.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                                <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Forms</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./gallery.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
-                                <line x1="15" y1="8" x2="15.01" y2="8" />
-                                <rect x="4" y="4" width="16" height="16" rx="3" />
-                                <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
-                                <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Gallery</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./navigation.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="4" y="4" width="16" height="16" rx="2" />
-                                <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Navigation</span>
-                        </a>
-                        <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
-                            href="./footers.html">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" stroke-width="2"
-                                stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <rect x="4" y="4" width="16" height="16" rx="2" />
-                                <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
-                            </svg>
-                            <span class="mx-4 font-medium tracking-tighter">Footers</span>
-                        </a>
-                    </nav>
+        <!---- sidebar -->
+        <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
+            @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
+            <div x-show.transition.opacity.duration.500="open" @click="open = false"
+                class="fixed inset-0 bg-opacity-25 bg-blue-1400">
+            </div>
+            <div class="fixed right-0 z-10 w-full h-screen max-w-xs overflow-y-scroll transition duration-300 transform border-l shadow-xl top-10 bg-blue-1300 border-blueGray-500 text-lightBlue-500"
+                :class="{'translate-x-full': !open}">
+                <button @click="open = false" x-ref="closeButton" :class="{'focus:outline-none': !usedKeyboard}"
+                    class="absolute top-0 right-0 p-2 mt-16 mr-6 transition duration-500 ease-in-out transform border-2 border-yellow-1000 hover:bg-yellow-1000 hover:text-blue-1400 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-x">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+                <div class="w-auto p-8 ">
+                    <div class="w-64 h-screen mt-8 sm:mt-0">
+                        <nav class="mt-20 font-semibold">
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./left-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="4" y1="4" x2="4" y2="20" />
+                                    <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./centered-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <line x1="12" y1="4" x2="12" y2="9" />
+                                    <line x1="12" y1="15" x2="12" y2="20" />
+                                    <rect x="6" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Centered Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./right-headers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round">
+                                    <line x1="20" y1="4" x2="20" y2="20" />
+                                    <rect x="4" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter"> Right Headers</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./auth.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                                    <path d="M20 12h-13l3 -3m0 6l-3 -3" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Auth</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./pricing.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path
+                                        d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                                    <circle cx="9" cy="9" r="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Pricing</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./clients.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <circle cx="12" cy="7" r="4" />
+                                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Clients</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./grids.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="6" height="5" rx="2" />
+                                    <rect x="4" y="13" width="6" height="7" rx="2" />
+                                    <rect x="14" y="4" width="6" height="7" rx="2" />
+                                    <rect x="14" y="15" width="6" height="5" rx="2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Grids</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./forms.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Forms</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./gallery.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" stroke="#FCE952" />
+                                    <line x1="15" y1="8" x2="15.01" y2="8" />
+                                    <rect x="4" y="4" width="16" height="16" rx="3" />
+                                    <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" stroke="#FCE952" />
+                                    <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Gallery</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./navigation.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="9" x2="20" y2="9" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Navigation</span>
+                            </a>
+                            <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
+                                href="./footers.html">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24"
+                                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <line x1="4" y1="15" x2="20" y2="15" stroke="#FCE952" />
+                                </svg>
+                                <span class="mx-4 font-medium tracking-tighter">Footers</span>
+                            </a>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <!----end sidebar -->
+        </section>
+        <!----end sidebar -->
 
         <!--- footer 1-->
         <section class="p-5 pt-32 lg:pt-10 lg:p-0">
             <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview1' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            1
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview1'">
@@ -238,8 +256,8 @@
                     </div>
                     <div class="lg:h-screen">
                         <div class="border rounded-b-xl" x-show="tab === 'preview1'">
-                            <img class="rounded-b-xl " loading="lazy"
-                                src="./assets/sections/footers/footer-1.png" alt="">
+                            <img class="rounded-b-xl " loading="lazy" src="./assets/sections/footers/footer-1.png"
+                                alt="">
                         </div>
                         <div class=" rounded-b-xl" x-show="tab === 'code1'">
                             <div
@@ -493,6 +511,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview2' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            2
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview2'">
@@ -745,6 +767,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview3' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            3
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview3'">
@@ -912,6 +938,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview4' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            4
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview4'">
@@ -1005,7 +1035,7 @@
                                         ----->
                                     </div>
                                     <!---- display code goes here.-->
-                                <pre class="leading-6"><code data-language="html">
+                                    <pre class="leading-6"><code data-language="html">
         &lt;div class="container w-full p-20 m-4 mx-auto mt-6 text-center bg-white border-2 border-dashed h-96 border-blueGray-300 rounded-xl"&gt;
             &lt;p class="mt-20 italic tracking-tighter text-md text-blueGray-500 title-font"&gt;
                 -- Content goes here --
@@ -1074,6 +1104,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview5' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            5
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview5'">
@@ -1319,7 +1353,7 @@
                     -->
                                     </div>
                                     <!---- display code goes here.-->
-                                <pre class="leading-6"><code data-language="html">
+                                    <pre class="leading-6"><code data-language="html">
          &lt;footer class="pt-20 mt-10 text-gray-700 border-t body-font "&gt;
             &lt;div class="container flex flex-col flex-wrap p-5 mx-auto md:items-center lg:items-start md:flex-row md:flex-no-wrap "&gt;
                 &lt;div class="flex flex-wrap w-full -mx-4 -mb-10 text-left "&gt;
@@ -1540,6 +1574,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview6' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            6
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview6'">
@@ -1756,6 +1794,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview7' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            7
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview7'">
@@ -1852,6 +1894,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview8' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            8
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview8'">
@@ -2026,6 +2072,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview9' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            9
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview9'">
@@ -2206,6 +2256,10 @@
             <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview10' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
+                        <div
+                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+                            10
+                        </div>
                         <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview10' }"
                             class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
                             @click="tab = 'preview10'">
@@ -2500,4 +2554,5 @@
         <script src="./rainbow-code/src/language/html.js"></script>
         <script src="./rainbow-code/src/language/numbers.js"></script>
     </body>
+
 </html>
