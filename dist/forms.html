@@ -1,7 +1,6 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
-
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -12,10 +11,8 @@
         <link rel="stylesheet" href="./css/tailwind.css" type="text/css" />
         <link rel="stylesheet" href="./css/wt.css" type="text/css" />
         <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
-
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
-
     <body class="antialiased bg-blue-1300">
         <!----- Snackbar -->
         <div x-data="noticesHandler()"
@@ -58,11 +55,9 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-
                     <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
                         @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
                         class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-4 md:w-auto font-lg focus:outline-none hover:text-blue-1400">
-
                         Quick Acces to Blockss
                     </button>
                 </nav>
@@ -99,7 +94,6 @@
                                     <line x1="4" y1="4" x2="4" y2="20" />
                                     <rect x="8" y="9" width="12" height="6" rx="2" stroke="#FCE952" />
                                 </svg>
-
                                 <span class="mx-4 font-medium tracking-tighter">Left Headers</span>
                             </a>
                             <a class="flex items-center px-4 py-2 mt-2 text-lg tracking-tighter transition duration-500 ease-in-out transform border-2 border-transparent text-blueGray-400 rounded-xl hover:text-blueGray-100 hover:border-gray-00 hover:bg-gray-900"
@@ -212,8 +206,29 @@
             </div>
         </section>
         <!----end sidebar -->
+         <!----Hero  -->
+        <section class=" bg-blue-1300 body-font">
+            <div class="container justify-center px-5 py-8 pt-32 mx-auto lg:px-24">
+                <div class="flex flex-col w-full mb-4 ">
+                    <h1
+                        class="text-6xl font-black leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-teal-1000 to-yellow-1000 lg:text-5xl xl:text-9xl md:text-4xl ">
+                        Forms.
+                    </h1>
+                </div>
+                <span class="px-4 py-2 text-left rounded-lg bg-coolGray-900 text-teal-1000">11 Blocks</span>
+                <div class="flex flex-col w-full mt-4 lg:text-center">
+                    <p class="text-xl font-normal leading-relaxed tracking-tight text-left text-blueGray-400 lg:w-1/2">
+                        <span class="font-semibold tracking-tighter uppercase text-teal-1000"> A web form or HTML form  </span>
+                       on a web page allows a user to enter data that is sent to a server for processing.
+                        Forms can resemble paper or database forms because web users fill out the forms using checkboxes, radio buttons, or text
+                        fields.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <!---- End Hero  -->
         <!--- form 1-->
-        <section class="p-5 pt-32 lg:pt-10 lg:p-0">
+        <section class="p-5 lg:p-0">
             <div class="container mx-auto lg:py-16 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview1' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
@@ -276,7 +291,6 @@
         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container px-8 pt-48 pb-24 mx-auto lg:px-4"&gt;
                 &lt;div class="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0"&gt;
-
                     &lt;div class="relative "&gt;
                         &lt;input type="email" id="email" name="email" placeholder="email"
                             class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
@@ -296,8 +310,8 @@
             </div>
         </section>
         <!--- form 2-->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview2' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -401,8 +415,8 @@
             </div>
         </section>
         <!--- form 3-->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview3' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -483,12 +497,10 @@
                         &lt;input type="email" id="email" name="email" placeholder="email"
                             class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
                     &lt;/div&gt;
-
                     &lt;button
                         class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Button&lt;/button&gt;
                     &lt;p class="mx-auto mt-3 text-xs "&gt;&lt;a href="#" class="inline-flex items-center font-semibold text-blue-700 md:mb-2 lg:mb-0 hover:text-blue-400 "&gt;
                         Sign in with  Twitter
-
                         &lt;svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20"
                             fill="currentColor"&gt;
                             &lt;path fill="none" d="M0 0h24v24H0z" /&gt;
@@ -507,8 +519,8 @@
             </div>
         </section>
         <!--- form 4 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview4' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -618,8 +630,8 @@
             </div>
         </section>
         <!--- form 5 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview5' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -716,7 +728,6 @@
                     &lt;/div&gt;
                     &lt;button
                         class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Button&lt;/button&gt;
-
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/section&gt;
@@ -730,8 +741,8 @@
             </div>
         </section>
         <!--- form 6 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview6' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -813,7 +824,6 @@
                         &lt;input type="name" id="name" name="name" placeholder="name"
                             class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
                     &lt;/div&gt;
-
                     &lt;div class="relative px-4 py-2 mb-4 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
                     &lt;label class="block"&gt;
                         &lt;select
@@ -825,14 +835,12 @@
                         &lt;/select&gt;
                     &lt;/label&gt;
                     &lt;/div&gt;
-
                     &lt;div class="relative "&gt;
                         &lt;textarea type="message" id="message" name="message" placeholder="message"
                             class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;&lt;/textarea&gt;
                     &lt;/div&gt;
                     &lt;button
                         class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Button&lt;/button&gt;
-
                 &lt;/div&gt;
             &lt;/div&gt;
         &lt;/section&gt;
@@ -846,8 +854,8 @@
             </div>
         </section>
         <!--- form 7 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview7' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -944,7 +952,6 @@
             &lt;div class="container px-8 pt-24 pb-24 mx-auto lg:px-4"&gt;
                 &lt;div
                     class="flex flex-col w-full p-8 mx-auto mt-10 border rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0"&gt;
-
                     &lt;div class="flex flex-wrap -m-2"&gt;
                         &lt;div class="w-1/2 p-2"&gt;
                             &lt;div class="relative"&gt;
@@ -957,17 +964,14 @@
                                 &lt;input type="name" id="name" name="name" placeholder="name"
                                     class="w-full px-4 py-2 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
                             &lt;/div&gt;
-
                         &lt;/div&gt;
                         &lt;div class="w-full p-2"&gt;
                             &lt;input type="email" id="email" name="email" placeholder="email"
                                 class="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
-
                         &lt;/div&gt;
                         &lt;div class="w-full p-2"&gt;
                             &lt;input type="password" id="password" name="password" placeholder="password"
                                 class="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
-
                         &lt;/div&gt;
                         &lt;div class="w-full p-2"&gt;
                             &lt;input type="password" id="password" name="password" placeholder=" password"
@@ -983,7 +987,6 @@
                             &lt;input type="password" id="password" name="password" placeholder="password"
                                 class="w-full px-4 py-2 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
                         &lt;/div&gt;
-
                         &lt;div class="w-full p-2 "&gt;
                             &lt;button
                                 class="w-full px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Button&lt;/button&gt;
@@ -1002,8 +1005,8 @@
             </div>
         </section>
         <!--- form 8 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview8' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -1129,8 +1132,8 @@
             </div>
         </section>
         <!--- form 9 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview9' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -1248,8 +1251,8 @@
             </div>
         </section>
         <!--- form 10 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview10' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -1348,7 +1351,6 @@
                                 &lt;input type="email" id="email" name="email" placeholder="email"
                                     class="w-full px-4 py-2 mb-4 mr-4 text-base text-blue-700 bg-gray-100 border-transparent rounded-lg focus:border-gray-500 focus:bg-white focus:ring-0"&gt;
                             &lt;/div&gt;
-
                             &lt;button
                                 class="px-8 py-2 font-semibold text-white transition duration-500 ease-in-out transform rounded-lg shadow-xl bg-gradient-to-r from-blue-700 hover:from-blue-600 to-blue-600 hover:to-blue-700 focus:ring focus:outline-none"&gt;Button&lt;/button&gt;
                             &lt;p class="mx-auto mt-3 text-xs text-gray-500"&gt;If there's a will there's a way.&lt;/p&gt;
@@ -1376,8 +1378,8 @@
             </div>
         </section>
         <!--- form 11 -->
-        <section class="p-5 lg:pt-10 lg:p-0">
-            <div class="container mx-auto lg:py-6 lg:px-20 rounded-xl">
+        <section class="p-5 lg:p-0">
+            <div class="container mx-auto lg:pb-6 lg:px-20 rounded-xl">
                 <div class="rounded-xl" x-data="{ tab: 'preview11' }">
                     <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
                         <div
@@ -1558,7 +1560,6 @@
             <p class="mb-4 text-sm font-semibold text-center text-white lg:mr-6 lg:mb-0">
                 Released under the MIT License Copyright 2021 © Michael Andreuzza
             </p>
-
             <span class="inline-flex items-center lg:ml-auto">
                 <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
                     <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
@@ -1633,5 +1634,4 @@
         <script src="./rainbow-code/src/language/html.js"></script>
         <script src="./rainbow-code/src/language/numbers.js"></script>
     </body>
-
 </html>

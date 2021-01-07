@@ -1,7 +1,6 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en" class="scroll">
-
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -20,7 +19,6 @@
         <meta name="theme-color" content="#010412">
         <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
     </head>
-
     <body class="antialiased bg-blue-1300">
         <!--- Opacitiy to nav style="backdrop-filter: saturate(180%) blur(5px) !important; background-color:  rgba(0, 0, 0, 0.30) !important;"-->
         <div class="fixed z-50 w-full text-gray-500 border-b border-blueGray-900 bg-blue-1300 lg:px-20">
@@ -46,16 +44,13 @@
                 </div>
                 <nav :class="{'flex': open, 'hidden': !open}"
                     class="flex-col flex-grow hidden px-5 pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
-
                     <button x-data="{usedKeyboard: false}" @keydown.window.tab="usedKeyboard = true"
                         @click="$dispatch('open-menu', { open: true })" :class="{'focus:outline-none': !usedKeyboard}"
                         class="items-center px-8 py-3 font-semibold text-white transition duration-500 ease-in-out transform bg-blueGray-700 rounded-xl hover:bg-teal-1000 md:ml-auto md:w-auto font-lg focus:outline-none hover:text-blue-1400">
                         Quick Acces to Blockss
                     </button>
-
-
                     <a class="inline-flex items-center p-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl md:w-auto font-lg focus:outline-none hover:text-yellow-1000 md:ml-4"
-                        href="https://github.com/michael-andreuzza/wickedblocks">
+                        href="https://github.com/michael-andreuzza/wickedblocks" target="">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github"
                             width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                             fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -63,6 +58,7 @@
                             <path
                                 d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
                         </svg>
+                                <div class="slottie hide" id="svg"></div>
 
                     </a>
                     <a class="inline-flex items-center p-3 font-semibold text-white transition duration-500 ease-in-out transform rounded-xl md:w-auto font-lg focus:outline-none hover:text-blue-1500"
@@ -74,16 +70,13 @@
                             <path
                                 d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
                         </svg>
-
                     </a>
-
                 </nav>
             </div>
         </div>
         <!-- Dev tools -->
         <div id="alpine-devtools" x-data="devtools('left')" x-show="alpines.length" x-init="start()">
         </div>
-
         <!---- sidebar -->
         <section x-data="slideout()" x-cloak @open-menu.window="open = $event.detail.open"
             @keydown.window.tab="usedKeyboard = true" @keydown.escape="open = false" x-init="init()">
@@ -258,104 +251,104 @@
                     </p>
                 </div>
                 <div class="flex flex-wrap justify-start lg:w-3/4">
-                    <a class="mr-2" href="#leftheaders">
+                    <a class="mr-2 " href="#leftheaders">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+
+
                             Left Headers
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                1 2</div>
 
                         </button>
                     </a>
-                    <a class="mr-2" href="#centeredheaders">
+                    <a class="mr-2 " href="#centeredheaders">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
                             Center Headers
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                15</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#rightheaders">
+                    <a class="mr-2 " href="#rightheaders">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
+
                             Right Headers
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                12</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#auth">
+                    <a class="mr-2 " href="#auth">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+
+
                             Authentication
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                4</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#price">
+                    <a class="mr-2 " href="#price">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
                             Pricing
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                6</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#clients">
+                    <a class="mr-2 " href="#clients">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
                             Clients
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                7</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#grids">
+                    <a class="mr-2 " href="#grids">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
                             Grids
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                16</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#forms">
+                    <a class="mr-2 " href="#forms">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+
+
                             Forms
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                11</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#gallery">
+                    <a class="mr-2 " href="#gallery">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
                             Gallery
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                13</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#nav">
+                    <a class="mr-2 " href="#nav">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white">
+
+
                             Navigation
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                8</div>
+
                         </button>
                     </a>
-                    <a class="mr-2" href="#footers">
+                    <a class="mr-2 " href="#footers">
                         <button
-                            class="inline-flex items-center justify-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-center text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+                            class="inline-flex items-center px-6 py-2 my-2 mt-2 text-lg font-medium tracking-tight text-left text-white transition duration-500 ease-in-out transform rounded-lg cursor-pointer bg-blueGray-800 lg:w-auto hover:bg-blueGray-600 focus:outline-none focus:ring focus:ring-blue-600 focus:ring-opacity-50 hover:text-white ">
+
+
                             Footers
-                            <div
-                                class="absolute top-0 right-0 inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-1 -mt-5 text-xs bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                                10</div>
+
                         </button>
                     </a>
                 </div>
@@ -367,13 +360,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">12 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">12 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         HEADERS
-
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Left Headers.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         This headers have text on the left side of the screen including zero to 2 call to action, on the
@@ -399,7 +391,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg shadow" alt="badge"
                         src="./assets/intros/left-header.svg">
                 </div>
@@ -408,15 +400,14 @@
         <!----Centered Headers-->
         <section class="text-left lg:pt-8" id="centeredheaders">
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
-
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">15 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">15 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         HEADERS
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Centered Headers.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         This headers have text on top of none, one or two call to action, sometimes there's an image or
@@ -442,7 +433,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg shadow" alt="badge"
                         src="./assets/intros/centered-header.svg">
                 </div>
@@ -453,12 +444,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">12 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">12 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         HEADERS
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Right Headers.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         This headers have text on the right side of the screen with one or two call to action, on the
@@ -483,7 +474,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg shadow" alt="badge"
                         src="./assets/intros/right-header.svg">
                 </div>
@@ -494,12 +485,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">4 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">4 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         Authentication
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Auth Components.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         Authentication/Authorization is used by a server when the server needs to know exactly who is
@@ -524,7 +515,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/auth.svg">
                 </div>
@@ -535,12 +526,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">6 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">6 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         E Commerce
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Pricing.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         The Pricing Table component is used to display price + features about your products. Cards and
@@ -565,7 +556,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/pricing.svg">
                 </div>
@@ -576,12 +567,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">7 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">7 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         TESTIMONIALS
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Clients.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         A website testimonial showcases the quality and success of a site’s products or services, this
@@ -611,7 +602,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/clients.svg">
                 </div>
@@ -622,12 +613,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">16 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">16 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         LAYOUT
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Flexbox Grids.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         The flex layout allows responsive elements within a container to be automatically arranged
@@ -652,7 +643,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/grids.svg">
                 </div>
@@ -663,12 +654,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">11 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">11 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         DATA
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Forms.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         The form allows for user input and t is an interactive page that mimics a paper document or
@@ -694,7 +685,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/form.svg">
                 </div>
@@ -705,12 +696,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">13 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">13 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         IMAGES
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Galleries.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         Galleries are a popular way of integrating images into a website, allowing users to see several
@@ -735,7 +726,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/gallery.svg">
                 </div>
@@ -746,12 +737,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">8 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">8 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         MENU
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Navigation.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         Navigation allows visitors to flow from one page to another without frustration.
@@ -778,7 +769,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/nav.svg">
                 </div>
@@ -789,12 +780,12 @@
             <div class="container flex flex-col items-center px-5 py-20 mx-auto text-left lg:px-24 md:flex-row ">
                 <div
                     class="flex flex-col items-center w-full pt-0 mb-16 text-center lg:text-left lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 md:items-start md:mb-0 ">
-                    <span class="px-4 py-2 ml-auto rounded-lg bg-coolGray-900 text-teal-1000">10 Blocks</span>
+                    <span class="px-4 py-2 mb-2 text-left rounded-lg lg:ml-auto bg-coolGray-900 text-teal-1000">10 Blocks</span>
                     <h2 class="w-full mb-1 text-xs font-semibold tracking-widest text-white text-centered lg:text-left">
                         SubMenu
                     </h2>
                     <h1
-                        class="justify-start mb-8 text-3xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
+                        class="justify-start mb-8 text-4xl font-bold leading-tight tracking-tighter text-left text-teal-1000 lg:text-5xl">
                         Footers.</h1>
                     <p class="mb-8 text-base leading-relaxed text-center text-white lg:text-left lg:text-1xl">
                         The website footer is the section of content at the very bottom of a web page. It typically
@@ -821,7 +812,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="w-5/6 lg:max-w-lg lg:w-full md:w-1/2">
+                <div class="w- lg:max-w-lg lg:w-full md:w-1/2">
                     <img class="object-cover object-center mx-auto rounded-lg" alt="badge"
                         src="./assets/intros/footer.svg">
                 </div>
@@ -844,7 +835,6 @@
                         <div class="relative mb-4">
                             <textarea id="message" name="message"
                                 class="w-full px-3 py-1 text-base leading-6 text-white transition-colors duration-200 ease-in-out border border-transparent rounded-lg shadow outline-none resize-none bg-blueGray-700 h-28 focus:border-blueGray-900 focus:ring-2 focus:ring-blueGray-600"></textarea>
-
                         </div>
                         <button type="submit"
                             class="w-full px-8 py-2 font-bold transition-colors duration-500 ease-in-out transform rounded-lg focus:outline-none bg-teal-1000 hover:bg-yellow-1000 text-blue-1000">Send
@@ -883,7 +873,6 @@
                 <p class="mb-4 text-sm font-semibold text-center text-white lg:mr-6 lg:mb-0">
                     Released under the MIT License Copyright 2021 © Michael Andreuzza
                 </p>
-
                 <span class="inline-flex items-center lg:ml-auto">
                     <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
                         <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
@@ -898,6 +887,7 @@
             </div>
         </footer>
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.5/lottie.min.js" defer></script>
         <script>
             // Sidebar
             function slideout() {
@@ -917,6 +907,29 @@
                 }
             }
         </script>
-    </body>
+        <script>
+            //lottie
 
+    const play = document.querySelector('button');
+
+    const svgContainer = document.getElementById('slottie');
+    const animItem = bodymovin.loadAnimation({
+        wrapper: svgContainer,
+        animType: 'slottie',
+        loop: false,
+        autoplay: false,
+        path: 'https://assets2.lottiefiles.com/packages/lf20_u4yrau.json'
+    });
+
+    play.addEventListener('click', () => {
+        svgContainer.classList.remove('hide');
+        animItem.goToAndPlay(0, true);
+    })
+
+    animItem.addEventListener('complete', () => {
+        svgContainer.classList.add('hide');
+
+    })
+        </script>
+    </body>
 </html>
