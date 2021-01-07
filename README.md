@@ -32,10 +32,19 @@ The blocks are written with only HTML and style with Tailwind CSS V2 as it says 
 ## Features.
 Right now, what you can do is:
 
+- 114 blocks.
 - See the code.
 - Copy the code to clipboard.
 
 Too many, right? Comming more soon.
+
+## Upcoming Features.
+ - Responsive.
+ - React code version.
+ - Vue code version.
+ - Open in codepen.
+ - Open in Tailwind Play ( If Adam opens the API )
+ - Donwload code.
 
 ## Clone the source locally.
 ```
