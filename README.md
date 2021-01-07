@@ -82,7 +82,7 @@ Navigate to the HTML file that you want see and it open it with the live browser
 
 ## Contribute.
 
-Let me fill up the file, and when is up it will be linked here and from the webiste. Obviusly.
+Read how to {Contributing](https://github.com/michael-andreuzza/wickedblocks/blob/master/contributing.md).
 
 ## License
 Released under the [MIT License](https://github.com/michael-andreuzza/wickedblocks/blob/master/LICENSE)Copyright 2021 Michael Andreuzza 
