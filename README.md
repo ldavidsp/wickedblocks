@@ -26,7 +26,7 @@ For example, this is a paragraph:
 ```
 
 ## Tech stack.
-The blocks are written with only HTML and style with Tailwind CSS V2 as it says on the site...and because that's the point of them.
+The blocks are written with only HTML and style with Tailwind CSS V2 as it says on the site...for navigation and other I used Alpine.js and because that's the point of them.
 
 ## Features.
 Right now, what you can do is:
