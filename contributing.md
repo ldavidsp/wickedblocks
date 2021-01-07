@@ -1,5 +1,5 @@
 
-# Contributing to CodeSandbox Client
+# Contributing to WickedBlocks 
 
 ## Table of Contents
 
@@ -7,7 +7,6 @@
 - [Code Organization](#code-organization)
 - [Setting Up the project locally](#setting-up-the-project-locally)
 - [Submitting a Pull Request](#submitting-a-pull-request)
-- [Add yourself as a contributor](#add-yourself-as-a-contributor)
 
 ## Code of Conduct
 
