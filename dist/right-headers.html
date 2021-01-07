@@ -1,6 +1,7 @@
 <!-- component -->
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -13,6 +14,7 @@
     <link href="./css/blackboard.css" rel="stylesheet" type="text/css">
     <!-- Uncomment for cdn tailwind (if you haven't built your tailwind.css yet) <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">-->
   </head>
+
   <body class="antialiased bg-blue-1300">
     <!----- Snackbar -->
     <div x-data="noticesHandler()" class="fixed inset-0 flex flex-col-reverse items-end justify-start w-screen h-screen"
@@ -214,9 +216,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview1' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            1
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              1
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview1' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview1'">
@@ -331,9 +333,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview2' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            2
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              2
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview2' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview2'">
@@ -452,9 +454,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview3' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            3
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              3
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview3' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview3'">
@@ -562,9 +564,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview4' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            4
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              4
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview4' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview4'">
@@ -679,9 +681,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview5' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            5
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              5
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview5' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview5'">
@@ -877,9 +879,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview6' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            6
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              6
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview6' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview6'">
@@ -988,9 +990,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview7' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            7
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              7
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview7' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview7'">
@@ -1066,7 +1068,7 @@
                           ---->
                   </div>
                   <!---- display code goes here.-->
-                <pre class="leading-6"><code data-language="html">
+                  <pre class="leading-6"><code data-language="html">
         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row"&gt;
                 &lt;div class="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0"&gt;
@@ -1124,9 +1126,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview8' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            8
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              8
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview8' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview8'">
@@ -1343,9 +1345,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview9' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            9
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              9
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview9' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview9'">
@@ -1439,7 +1441,7 @@
                                   ---->
                   </div>
                   <!---- display code goes here.-->
-                <pre class="leading-6"><code data-language="html">
+                  <pre class="leading-6"><code data-language="html">
         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row"&gt;
                 &lt;div class="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0"&gt;
@@ -1522,9 +1524,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview10' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            10
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              10
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview10' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview10'">
@@ -1598,7 +1600,7 @@
                                       ---->
                   </div>
                   <!---- display code goes here.-->
-                <pre class="leading-6"><code data-language="html">
+                  <pre class="leading-6"><code data-language="html">
         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row"&gt;
                 &lt;div class="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0"&gt;
@@ -1658,9 +1660,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview11' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            11
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              11
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview11' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview11'">
@@ -1795,7 +1797,7 @@
                                             ---->
                   </div>
                   <!---- display code goes here.-->
-                <pre class="leading-6"><code data-language="html">
+                  <pre class="leading-6"><code data-language="html">
         &lt;section class="text-gray-700 body-font"&gt;
             &lt;div class="container flex flex-col items-center px-5 py-16 mx-auto lg:px-20 lg:py-24 md:flex-row"&gt;
                 &lt;div class="w-5/6 mb-10 lg:max-w-lg lg:w-full md:w-1/2 md:mb-0"&gt;
@@ -1920,9 +1922,9 @@
         <div class="rounded-xl" x-data="{ tab: 'preview12' }">
           <div class="flex w-full p-4 text-white bg-blueGray-800 rounded-t-xl">
             <div
-                            class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
-                            12
-                        </div>
+              class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 my-4 mr-2 -mt-8 bg-gray-900 border-2 border-gray-700 rounded-full shadow text-teal-1000">
+              12
+            </div>
             <button :class="{ 'active font-bold bg-blueGray-600 text-white': tab === 'preview12' }"
               class="inline-flex items-center justify-center w-full px-6 py-2 my-2 mt-2 mr-2 font-semibold tracking-tighter text-center text-white transition duration-500 ease-in-out transform border-2 border-transparent rounded-lg cursor-pointer font-lg hover:text-white focus:outline-none lg:w-auto hover:border-blueGray-500"
               @click="tab = 'preview12'">
@@ -2054,9 +2056,10 @@
     <footer class="mt-10 border-t border-gray-800 body-font">
       <div
         class="container flex flex-col flex-wrap items-center px-5 py-6 mx-auto md:flex-row md:flex-no-wrap lg:px-20 ">
-        <p class="mb-4 text-sm font-bold text-center text-white lg:mb-0">
-          © 2020 WickedBlocks
+        <p class="mb-4 text-sm font-semibold text-center text-white lg:mr-6 lg:mb-0">
+          Released under the MIT License Copyright 2021 © Michael Andreuzza
         </p>
+
         <span class="inline-flex items-center lg:ml-auto">
           <p class="mb-4 text-sm font-bold text-center text-white sm:text-left lg:mb-0">
             <a href="https://twitter.com/mike_andreuzza" class="" rel="noopener noreferrer" target="_blank">
@@ -2131,4 +2134,5 @@
     <script src="./rainbow-code/src/language/html.js"></script>
     <script src="./rainbow-code/src/language/numbers.js"></script>
   </body>
+
 </html>

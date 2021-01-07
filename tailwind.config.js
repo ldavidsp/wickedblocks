@@ -6,7 +6,7 @@ const extendedColors = defaultColors;
 
 module.exports = {
  purge: {
-   enabled: true,
+   enabled: false,
    content: [
      './dist/**/*.html',
      './dist/*.html',
@@ -48,11 +48,12 @@ module.exports = {
       fuchsia:colors.fuchsia,
       rose:colors.rose,
         blue: {
-        1000: '#001141',
-        1100: '#000018',
-        1200: '#030C34',
-        1300: '#000012',
-        1400:'#01071B',
+          1000: '#001141',
+          1100: '#000018',
+          1200: '#030C34',
+          1300: '#000012',
+          1400:'#01071B',
+          1500: '#00acee',
         },
         yellow: {
         1000: '#FCE952',
