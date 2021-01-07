@@ -13,7 +13,7 @@ Because we ain't got time for that...so let's be productive and deploy our work 
 Superb, all working.
 
 ## Code Style.
- I have used Headwind for VS Code "as is", no configuration, nothing, nada, so the way to tody up the classes is the same as it comes ( Will link to this on the contributing File ), but I have probably messed up somewhere, because Headwind was quicker than me to move the class 1 or 2 spaces to left or right.
+ I have used Headwind for VS Code "as is", no configuration, nothing, nada, so the way to tidy up the classes is the original Headwing way to do it, but I have probably messed up somewhere, because Headwind was quicker than me to move the class 1 or 2 spaces to left or right.
 
 For example, this is a paragraph:
 
