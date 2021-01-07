@@ -36,12 +36,17 @@ Right now, what you can do is:
 
 Too many, right? Comming more soon.
 
-## Installation
+## Clone the source locally.
+```
+$ git clone https://github.com/michael-andreuzza/wickedblocks.git
+$ cd wickedblocks
+```
 
-Clone it or download it, not big deal here, then run:
+
+## Install depenencies.
 
 ```
-npm install
+$ npm install
 
 ```
 
