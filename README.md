@@ -29,6 +29,22 @@ For example, this is a paragraph:
 ## Tech stack.
 The blocks are written with only HTML and style with Tailwind CSS V2 as it says on the site...for navigation and other I used Alpine.js and because that's the point of them.
 
+
+## How to use WickedBlocks.
+- Navigato to https://blocks.wickedtemplates.com/
+- Choose the block/section that you neadd for your project.
+- Visualize the markup, HTML by selecting the tab "code".
+- Click on the copy icon.
+- Paste into your project.
+
+*The sections are having the same padding, you can go ahead to change it to yours. I personally would recommend to use px-5 lg:px-20 or lg:px-24 on all your sections. so you can have a nice white space and consistence.
+
+*The sections when you copy them are commented, remember to remove the arrows wrapping the markup.
+
+Example of website layout using only the blocks on codepen.
+- https://codepen.io/MichaelAndreuzza/pen/wvzpByO
+
+
 ## Features.
 Right now, what you can do is:
 
