@@ -73,6 +73,7 @@ $ cd wickedblocks
 
 ```
 $ npm install
+$ npm start
 
 ```
 
