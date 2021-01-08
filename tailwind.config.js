@@ -5,13 +5,13 @@ const allColors = require(`tailwindcss/colors`);
 const extendedColors = defaultColors;
 
 module.exports = {
- purge: {
-   enabled: false,
-   content: [
-     './dist/**/*.html',
-     './dist/*.html',
-    './src/**/*.js',
-   ],
+  purge: {
+    enabled: false,
+    content: [
+      './public/**/*.html',
+      './public/*.html',
+      './src/**/*.js',
+    ],
   },
   darkMode: 'media', // or 'media' or 'class'
   theme: {
@@ -20,8 +20,8 @@ module.exports = {
         DEFAULT: '0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24)',
       },
       height: {
-       threescreen: '75vh',
-      halfscreen: '50vh',
+        threescreen: '75vh',
+        halfscreen: '50vh',
       },
       colors: {
       transparent: 'transparent',
@@ -71,7 +71,6 @@ module.exports = {
     extend: {},
   },
   plugins: [
-        require('@tailwindcss/typography'),
-
+    require('@tailwindcss/typography'),
   ],
 }
